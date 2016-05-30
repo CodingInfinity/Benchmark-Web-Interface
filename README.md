@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/CodingInfinity/Benchmark-Web-Interface.svg?branch=develop)](https://travis-ci.org/CodingInfinity/Benchmark-Web-Interface)
