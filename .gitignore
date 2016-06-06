@@ -249,3 +249,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+# TypeScript Jetbrains
+src/**/*.js
+src/**/*.js.map
+
