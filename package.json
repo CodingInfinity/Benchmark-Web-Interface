@@ -4,9 +4,10 @@
   "description": "Management console for the benchmark service",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
-    "test": "karma start",
+    "test": "karma start && npm run coveralls",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -28,6 +29,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
