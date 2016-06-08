@@ -3,4 +3,5 @@
 [![devDependency Status](https://david-dm.org/CodingInfinity/Benchmark-Web-Interface/dev-status.svg)](https://david-dm.org/CodingInfinity/Benchmark-Web-Interface#info=devDependencies)
 [![Coverage Status](https://coveralls.io/repos/github/CodingInfinity/Benchmark-Web-Interface/badge.svg?branch=develop)](https://coveralls.io/github/CodingInfinity/Benchmark-Web-Interface?branch=develop)
 [![bitHound Overall Score](https://www.bithound.io/github/CodingInfinity/Benchmark-Web-Interface/badges/score.svg)](https://www.bithound.io/github/CodingInfinity/Benchmark-Web-Interface)
+[![Stories in Ready](https://badge.waffle.io/CodingInfinity/Benchmark-Web-Interface.png?label=ready&title=Ready)](http://waffle.io/CodingInfinity/Benchmark-Web-Interface)
 [![MIT License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/CodingInfinity/Benchmark-Web-Interface/blob/develop/LICENSE)
