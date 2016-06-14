@@ -1,0 +1,40 @@
+import {Injectable, provide} from "@angular/core";
+import {URLSearchParams, Headers, Response, Http} from "@angular/http";
+import {Observable} from "rxjs/Rx";
+
+@Injectable()
+export class AuthenticationService {
+
+  constructor(private http: Http) { }
+
+  authenticate(username: string, password: string) {
+
+    let headers: Headers = new Headers();
+    let body: URLSearchParams = new URLSearchParams();
+
+    headers.append('Authorization', 'Basic YWNtZTphY21lc2VjcmV0');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    body.append('grant_type', 'password');
+    body.append('username', username);
+    body.append('password', password);
+    body.append('scope', 'read write');
+
+    this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers})
+      .subscribe((res:Response) => {
+        localStorage.setItem('token', JSON.stringify(res.json()));
+      });
+    return true;
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    return Observable.of(true);
+  }
+
+  authenticated() :boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  hasRole(): boolean {return true}
+  hasRoles(): boolean {return true}
+}

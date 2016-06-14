@@ -1,23 +1,36 @@
-'use strict';
-
 import { Component } from '@angular/core';
+import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
 import {Router, ROUTER_DIRECTIVES} from '@angular/router'
 
 import {MaterializeDirective} from 'angular2-materialize';
+import {AuthenticationService} from "../../services/authentication.service";
+
 
 @Component({
     selector: 'login',
     template: require('./login.component.html'),
     directives: [
-      MaterializeDirective, 
-      ROUTER_DIRECTIVES
+      MaterializeDirective,
+      ROUTER_DIRECTIVES,
+      FORM_DIRECTIVES
     ]
 })
 export class LoginComponent {
 
-    constructor(private router: Router) {}
+  private form: ControlGroup;
 
-    register() {
-        this.router.navigate(['/register']);
-    }
+  constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {
+    this.form = fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  register() {
+      this.router.navigate(['/register']);
+  }
+
+  login(value: any) {
+    this.auth.authenticate(value.username, value.password);
+  }
 }
