@@ -3,7 +3,7 @@ import {AuthenticationService} from "./authentication.service";
 
 export class SecureComponent implements OnActivate {
 
-  private authorities: string[] = [];
+  protected authorities: string[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
 

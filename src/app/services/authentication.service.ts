@@ -35,6 +35,23 @@ export class AuthenticationService {
     return !!localStorage.getItem('token');
   }
 
-  hasRole(): boolean {return true}
-  hasRoles(): boolean {return true}
+  hasRole(auth: string): boolean {
+    let userRoles: string[] = JSON.parse(localStorage.getItem('user_token'))["authorities"];
+    for(let role in userRoles){
+      if(auth.localeCompare(role)){
+        return true;
+      }
+    }
+    return false;
+
+  }
+  
+  hasRoles(authorities: string[]): boolean {
+    for (let auth in authorities) {
+      if(this.hasRole(auth) == true){
+        return true;
+      }
+    }
+    return false;
+  }
 }

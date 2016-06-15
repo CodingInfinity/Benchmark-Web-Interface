@@ -9,8 +9,9 @@ import {AuthenticationService} from "../../services/authentication.service";
   template: require('./home.component.html'),
 })
 export class HomeComponent extends SecureComponent {
-  
+
     constructor(router:Router, authenticationService:AuthenticationService) {
       super(router, authenticationService);
+      this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
     }
 }

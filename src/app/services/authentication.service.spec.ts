@@ -28,7 +28,7 @@ describe('Authentication Service', () => {
     inject([XHRBackend, AuthenticationService], (mockbackend, service) => {
 
       expect(service.authenticated()).toBeFalsy();
-      
+
       mockbackend.connections.subscribe(
         (connection: MockConnection) => {
           connection.mockRespond(new Response(
@@ -44,11 +44,11 @@ describe('Authentication Service', () => {
           ))
         }
       );
-      
+
       service.authenticate('user','password');
 
       expect(service.authenticated()).toBeTruthy();
-      
+
   }));
 
   it ('should be defined', () => {
@@ -67,5 +67,20 @@ describe('Authentication Service', () => {
     expect(service.authenticated()).toBeFalsy();
   });
 
+  it('user has access to this route', () =>{
+    let user_token: string = '{"username": "fabio","firstName": "Fabio","lastName": "Loreggian","email": "admin@localhost","activated": true,"langKey": "en", "authorities": ["ROLE_USER","ROLE_ADMIN"]}';
+    localStorage.setItem("user_token", user_token);
+    expect(service.hasRoles(['ROLE_USER, ROLE_ADMIN'])).toBeTruthy();
+  });
+
+  it('user has denied access to this route', () =>{
+    let user_token: string = '{"username": "fabio","firstName": "Fabio","lastName": "Loreggian","email": "admin@localhost","activated": true,"langKey": "en", "authorities": ["ROLE_USER"]}';
+    localStorage.setItem("user_token", user_token);
+    expect(service.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
+  });
+
+  it('user hasnt logged in, therefore has no access to the route', () =>{
+    expect(service.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
+  });
 
 });
