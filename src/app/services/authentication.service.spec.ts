@@ -25,7 +25,7 @@ describe('Authentication Service', () => {
   }));
 
   it ('token should be set in local storage for successful login',
-    inject([XHRBackend, AuthenticationService], (mockbackend, service) => {
+    inject([XHRBackend, AuthenticationService], (mockbackend: MockBackend, service: AuthenticationService) => {
 
       expect(service.authenticated()).toBeFalsy();
 
@@ -82,5 +82,4 @@ describe('Authentication Service', () => {
   it('user hasnt logged in, therefore has no access to the route', () =>{
     expect(service.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
   });
-
 });

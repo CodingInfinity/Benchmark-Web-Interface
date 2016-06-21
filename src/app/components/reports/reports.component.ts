@@ -4,16 +4,15 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
 import { MaterializeDirective } from 'angular2-materialize';
 
-
 @Component({
-  selector: 'home',
-  template: require('./home.component.html'),
+  selector: 'report',
+  template: require('./reports.component.html'),
   directives: [MaterializeDirective]
 })
-export class HomeComponent extends SecureComponent {
+export class ReportComponent extends SecureComponent {
 
-    constructor(router:Router, authenticationService:AuthenticationService) {
-      super(router, authenticationService);
-      this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-    }
+  constructor(router:Router, authenticationService:AuthenticationService) {
+    super(router, authenticationService);
+    this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
+  }
 }
