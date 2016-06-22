@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-import 'rxjs/Rx'; 
+import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {Injectable, Inject, Optional, OpaqueToken} from '@angular/core';
 import {Http, Headers, Response, RequestOptionsArgs} from '@angular/http';
@@ -14,13 +14,13 @@ export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
 
 @Injectable()
 export class Client {
-    private http: Http = null; 
-    private baseUrl: string = undefined; 
-    private jsonParseReviver: (key: string, value: any) => any = undefined; 
+    private http: Http = null;
+    private baseUrl: string = undefined;
+    private jsonParseReviver: (key: string, value: any) => any = undefined;
 
     constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
-        this.http = http; 
-        this.baseUrl = baseUrl ? baseUrl : "http://localhost:8081"; 
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "http://localhost:8081";
         this.jsonParseReviver = jsonParseReviver;
     }
 
@@ -29,91 +29,37 @@ export class Client {
      * @return OK
      */
     getAccountUsingGET(): Observable<Profile> {
-        var url = this.baseUrl + "/api/account?"; 
+        var url = this.baseUrl + "/api/account?";
 
         var content = "";
-        
+
         return this.http.request(url, {
             body: content,
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processGetAccountUsingGET(response);
         });
     }
 
-    private processGetAccountUsingGET(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: Profile = null; 
-            result200 = data === "" ? null : <Profile>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
 
     /**
      * saveAccount
      * @request request
      * @return OK
      */
-    saveAccountUsingPOST(request: UpdateUserRequest): Observable<string> {
-        var url = this.baseUrl + "/api/account?"; 
+    saveAccountUsingPOST(request: UpdateUserRequest): Observable<any> {
+        var url = this.baseUrl + "/api/account?";
 
         var content = JSON.stringify(request);
-        
+
         return this.http.request(url, {
             body: content,
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processSaveAccountUsingPOST(response);
         });
-    }
-
-    private processSaveAccountUsingPOST(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: string = null; 
-            result200 = data === "" ? null : <string>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "201") {
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
     }
 
     /**
@@ -122,95 +68,39 @@ export class Client {
      * @return OK
      */
     changePasswordUsingPOST(request: ChangePasswordRequest): Observable<any> {
-        var url = this.baseUrl + "/api/account/change_password?"; 
+        var url = this.baseUrl + "/api/account/change_password?";
 
         var content = JSON.stringify(request);
-        
+
         return this.http.request(url, {
             body: content,
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processChangePasswordUsingPOST(response);
         });
     }
 
-    private processChangePasswordUsingPOST(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: any = null; 
-            result200 = data === "" ? null : <any>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "201") {
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
 
     /**
      * finishPasswordReset
      * @request request
      * @return OK
      */
-    finishPasswordResetUsingPOST(request: CompletePasswordResetRequest): Observable<string> {
-        var url = this.baseUrl + "/api/account/reset_password/finish?"; 
+    finishPasswordResetUsingPOST(request: CompletePasswordResetRequest): Observable<any> {
+        var url = this.baseUrl + "/api/account/reset_password/finish?";
 
         var content = JSON.stringify(request);
-        
+
         return this.http.request(url, {
             body: content,
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processFinishPasswordResetUsingPOST(response);
         });
     }
 
-    private processFinishPasswordResetUsingPOST(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: string = null; 
-            result200 = data === "" ? null : <string>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "201") {
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
 
     /**
      * requestPasswordReset
@@ -218,140 +108,61 @@ export class Client {
      * @return OK
      */
     requestPasswordResetUsingPOST(request: RequestPasswordResetRequest): Observable<any> {
-        var url = this.baseUrl + "/api/account/reset_password/init?"; 
+        var url = this.baseUrl + "/api/account/reset_password/init?";
 
         var content = JSON.stringify(request);
-        
+
         return this.http.request(url, {
             body: content,
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processRequestPasswordResetUsingPOST(response);
         });
     }
 
-    private processRequestPasswordResetUsingPOST(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: any = null; 
-            result200 = data === "" ? null : <any>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "201") {
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
-
-    /**
+     /**
      * activateAccount
      * @key key
      * @return OK
      */
     activateAccountUsingGET(key: string): Observable<any> {
-        var url = this.baseUrl + "/api/activate?"; 
+        var url = this.baseUrl + "/api/activate?";
 
         if (key === undefined || key === null)
             throw new Error("The parameter 'key' must be defined.");
         else
-            url += "key=" + encodeURIComponent("" + key) + "&"; 
+            url += "key=" + encodeURIComponent("" + key) + "&";
 
         var content = "";
-        
+
         return this.http.request(url, {
             body: content,
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processActivateAccountUsingGET(response);
         });
     }
 
-    private processActivateAccountUsingGET(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
 
-        if (status === "200") {
-            var result200: any = null; 
-            result200 = data === "" ? null : <any>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
 
     /**
      * isAuthenticated
      * @return OK
      */
-    isAuthenticatedUsingGET(): Observable<string> {
-        var url = this.baseUrl + "/api/authenticate?"; 
+    isAuthenticatedUsingGET(): Observable<any> {
+        var url = this.baseUrl + "/api/authenticate?";
 
         var content = "";
-        
+
         return this.http.request(url, {
             body: content,
             method: "get",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processIsAuthenticatedUsingGET(response);
         });
-    }
-
-    private processIsAuthenticatedUsingGET(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: string = null; 
-            result200 = data === "" ? null : <string>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
     }
 
     /**
@@ -360,48 +171,20 @@ export class Client {
      * @return OK
      */
     registerAccountUsingPOST(request: CreateUnmanagedUserRequest): Observable<any> {
-        var url = this.baseUrl + "/api/register?"; 
+        var url = this.baseUrl + "/api/register?";
 
         var content = JSON.stringify(request);
-        
+
         return this.http.request(url, {
             body: content,
             method: "post",
             headers: new Headers({
                 "Content-Type": "application/json; charset=UTF-8"
             })
-        }).map((response) => {
-            return this.processRegisterAccountUsingPOST(response);
         });
     }
-
-    private processRegisterAccountUsingPOST(response: Response) {
-        var data = response.text();
-        var status = response.status.toString(); 
-
-        if (status === "200") {
-            var result200: any = null; 
-            result200 = data === "" ? null : <any>JSON.parse(data, this.jsonParseReviver);
-            return result200; 
-        }
-        else
-        if (status === "201") {
-        }
-        else
-        if (status === "401") {
-        }
-        else
-        if (status === "403") {
-        }
-        else
-        if (status === "404") {
-        }
-        else
-        {
-            throw "error_no_callback_for_the_received_http_status"; 
-        }
-    }
 }
+
 
 export interface RequestPasswordResetRequest {
     email: string;
