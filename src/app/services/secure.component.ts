@@ -5,7 +5,7 @@ export class SecureComponent implements OnActivate {
 
   protected authorities: string[] = [];
 
-  constructor(protected router: Router, protected authenticationService: AuthenticationService) {
+  constructor(protected router: Router) {
 
   }
   home() {
@@ -13,9 +13,9 @@ export class SecureComponent implements OnActivate {
   }
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-    if (!this.authenticationService.authenticated()) {
+    if (!AuthenticationService.authenticated()) {
       this.router.navigateByUrl('/login');
-    } else if (!this.authenticationService.hasRoles(this.authorities)) {
+    } else if (!AuthenticationService.hasRoles(this.authorities)) {
       this.router.navigateByUrl('/accessDenied');
     }
   }

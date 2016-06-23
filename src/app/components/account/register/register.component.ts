@@ -17,7 +17,7 @@ export class RegisterAccountComponent implements OnActivate{
   private form: ControlGroup;
   private passwords: any;
 
-  constructor(private router: Router, private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn, private auth: AuthenticationService) {
+  constructor(private router: Router, private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn) {
     this.form = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -60,7 +60,7 @@ export class RegisterAccountComponent implements OnActivate{
   }
 
   routerOnActivate(curr:RouteSegment){
-    if(this.auth.authenticated()){
+    if(AuthenticationService.authenticated()){
       this.router.navigate(['/home']);
     }
   }

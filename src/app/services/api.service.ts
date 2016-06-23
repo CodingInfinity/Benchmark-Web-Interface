@@ -1,7 +1,7 @@
 ﻿import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {Injectable, Inject, Optional, OpaqueToken} from '@angular/core';
-import {Http, Headers, Response, RequestOptionsArgs} from '@angular/http';
+import {Http, Headers, Response, RequestOptionsArgs, URLSearchParams} from '@angular/http';
 
 export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
@@ -287,6 +287,45 @@ export class Client {
       })
     });
   }
+
+  authenticate(username: string, password: string) {
+
+    let headers: Headers = new Headers();
+    let body: URLSearchParams = new URLSearchParams();
+
+    headers.append('Authorization', 'Basic YWNtZTphY21lc2VjcmV0');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    body.append('grant_type', 'password');
+    body.append('username', username);
+    body.append('password', password);
+    body.append('scope', 'read write');
+
+    this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers})
+      .subscribe((res:Response) => {
+        console.log(res);
+        localStorage.setItem('token', JSON.stringify(res.json()));
+
+        //When logged in, get the user_token
+        this.getUserUsingGET(username).subscribe((response)=>{
+          console.log("Response here:");
+          console.log(response);
+          localStorage.setItem('user_token', JSON.stringify(response.json()));
+        },(err)=>{
+          console.log("Exception Caught:");
+          console.log(err);
+          var message = err.json()["message"];
+          console.log(message);
+        });
+
+      },(err)=>{
+        var message = err.json()["error_description"];
+        console.log(message);
+      });
+
+
+    return true;
+  }
+
 }
 
 

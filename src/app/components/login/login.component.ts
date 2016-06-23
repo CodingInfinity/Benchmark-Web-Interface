@@ -4,6 +4,8 @@ import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/rout
 
 import {MaterializeDirective} from 'angular2-materialize';
 import {AuthenticationService} from "../../services/authentication.service";
+import {Http} from "@angular/http";
+import {Client} from "../../services/api.service";
 
 
 @Component({
@@ -19,7 +21,7 @@ export class LoginComponent implements OnActivate{
 
   private form: ControlGroup;
 
-  constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {
+  constructor(private router: Router, private client: Client, private fb: FormBuilder) {
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -31,11 +33,11 @@ export class LoginComponent implements OnActivate{
   }
 
   login(value: any) {
-    this.auth.authenticate(value.username, value.password);
+    this.client.authenticate(value.username, value.password);
   }
 
   routerOnActivate(curr:RouteSegment){
-    if(this.auth.authenticated()){
+    if(AuthenticationService.authenticated()){
       this.router.navigate(['/home']);
     }
   }
