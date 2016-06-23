@@ -16,4 +16,9 @@ export class HomeComponent extends SecureComponent {
       super(router, authenticationService);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
     }
+
+    logout(){
+      this.authenticationService.logout();
+      this.router.navigate(['/login']);
+    }
 }

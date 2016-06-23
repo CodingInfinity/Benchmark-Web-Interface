@@ -4,10 +4,11 @@ import { ROUTER_PROVIDERS } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { HTTP_PROVIDERS, Http } from "@angular/http";
 import { AuthenticationService } from "./app/services/authentication.service";
-import {Client} from "./app/services/api.service";
+import { Client} from "./app/services/api.service";
+import { ValidatorsOwn} from "./app/components/validators.own";
 
 
 if (process.env.ENV === 'production') {
   enableProdMode();
 }
-bootstrap(AppComponent,  [ROUTER_PROVIDERS, HTTP_PROVIDERS, AuthenticationService, Client]);
+bootstrap(AppComponent,  [ROUTER_PROVIDERS, HTTP_PROVIDERS, AuthenticationService, Client, ValidatorsOwn]);

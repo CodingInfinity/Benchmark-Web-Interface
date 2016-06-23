@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
-import {Router, ROUTER_DIRECTIVES} from '@angular/router'
+import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
 
 import {MaterializeDirective} from 'angular2-materialize';
 import {AuthenticationService} from "../../services/authentication.service";
@@ -15,7 +15,7 @@ import {AuthenticationService} from "../../services/authentication.service";
       FORM_DIRECTIVES
     ]
 })
-export class LoginComponent {
+export class LoginComponent implements OnActivate{
 
   private form: ControlGroup;
 
@@ -32,5 +32,11 @@ export class LoginComponent {
 
   login(value: any) {
     this.auth.authenticate(value.username, value.password);
+  }
+
+  routerOnActivate(curr:RouteSegment){
+    if(this.auth.authenticated()){
+      this.router.navigate(['/home']);
+    }
   }
 }

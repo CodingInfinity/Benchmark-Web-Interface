@@ -1,11 +1,13 @@
 import {Injectable, provide} from "@angular/core";
 import {URLSearchParams, Headers, Response, Http} from "@angular/http";
 import {Observable} from "rxjs/Rx";
+import {Client} from "./api.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private api: Client, private router: Router) { }
 
   authenticate(username: string, password: string) {
 
@@ -20,15 +22,35 @@ export class AuthenticationService {
     body.append('scope', 'read write');
 
     this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers})
-      .subscribe((res:Response) => {
-        localStorage.setItem('token', JSON.stringify(res.json()));
+    .subscribe((res:Response) => {
+      console.log(res);
+      localStorage.setItem('token', JSON.stringify(res.json()));
+
+      //When logged in, get the user_token
+      this.api.getUserUsingGET(username).subscribe((response)=>{
+        console.log("Response here:");
+        console.log(response);
+        localStorage.setItem('user_token', JSON.stringify(response.json()));
+        this.router.navigate(['/home']);
+      },(err)=>{
+        console.log("Exception Caught:");
+        console.log(err);
+        var message = err.json()["message"];
+        console.log(message);
       });
+
+    },(err)=>{
+      var message = err.json()["error_description"];
+      console.log(message);
+    });
+
+
     return true;
   }
 
   logout() {
     localStorage.removeItem('token');
-    return Observable.of(true);
+    localStorage.removeItem('user_token');
   }
 
   authenticated() :boolean {
@@ -36,6 +58,9 @@ export class AuthenticationService {
   }
 
   hasRole(auth: string): boolean {
+    if(!localStorage.getItem('user_token')){
+      return false;
+    }
     let userRoles: string[] = JSON.parse(localStorage.getItem('user_token'))["authorities"];
     for(let role in userRoles){
       if(auth.localeCompare(role)){
@@ -43,9 +68,8 @@ export class AuthenticationService {
       }
     }
     return false;
-
   }
-  
+
   hasRoles(authorities: string[]): boolean {
     for (let auth in authorities) {
       if(this.hasRole(auth) == true){

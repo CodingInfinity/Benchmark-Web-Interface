@@ -4,11 +4,11 @@
             <div class="card">
                 <div class="card-image">
                     <img src="header.png">
-                    <span class="card-title">Welcome Back</span>
+                    <span class="card-title">Login</span>
                 </div>
                 <div class="card-content">
                     <div class="row">
-                        <form [ngFormModel]="form" (submit)="login(form.value)" class="col s12">
+                        <form [ngFormModel]="form" (submit)="form.valid && login(form.value)" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input id="username" type="text" class="validate" ngControl="username">
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button class="btn waves-effect waves-light btn-large col m3 offset-m2" type="submit">Login
+                                <button class="btn waves-effect waves-light btn-large col m3 offset-m2" [disabled]='!form.valid' type="submit">Login
                                     <i class="material-icons right">send</i>
                                 </button>
                                 <a class="btn waves-effect waves-light btn-large col m3 offset-m2" [routerLink]="['/register']">Register

@@ -401,10 +401,256 @@ export class Client {
             throw "error_no_callback_for_the_received_http_status"; 
         }
     }
+
+    /**
+     * getAllUsers
+     * @return OK
+     */
+    getAllUsersUsingGET(): Observable<UserDTO[]> {
+        var url = this.baseUrl + "/api/users?"; 
+
+        var content = "";
+        
+        return this.http.request(url, {
+            body: content,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processGetAllUsersUsingGET(response);
+        });
+    }
+
+    private processGetAllUsersUsingGET(response: Response) {
+        var data = response.text();
+        var status = response.status.toString(); 
+
+        if (status === "200") {
+            var result200: UserDTO[] = null; 
+            result200 = data === "" ? null : <UserDTO[]>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        if (status === "401") {
+        }
+        else
+        if (status === "403") {
+        }
+        else
+        if (status === "404") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
+
+    /**
+     * createUser
+     * @request request
+     * @return OK
+     */
+    createUserUsingPOST(request: CreateManagedUserRequest): Observable<any> {
+        var url = this.baseUrl + "/api/users?"; 
+
+        var content = JSON.stringify(request);
+        
+        return this.http.request(url, {
+            body: content,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processCreateUserUsingPOST(response);
+        });
+    }
+
+    private processCreateUserUsingPOST(response: Response) {
+        var data = response.text();
+        var status = response.status.toString(); 
+
+        if (status === "200") {
+            var result200: any = null; 
+            result200 = data === "" ? null : <any>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        if (status === "201") {
+        }
+        else
+        if (status === "401") {
+        }
+        else
+        if (status === "403") {
+        }
+        else
+        if (status === "404") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
+
+    /**
+     * updateUser
+     * @request request
+     * @return OK
+     */
+    updateUserUsingPUT(request: UpdateUserRequest): Observable<UserDTO> {
+        var url = this.baseUrl + "/api/users?"; 
+
+        var content = JSON.stringify(request);
+        
+        return this.http.request(url, {
+            body: content,
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processUpdateUserUsingPUT(response);
+        });
+    }
+
+    private processUpdateUserUsingPUT(response: Response) {
+        var data = response.text();
+        var status = response.status.toString(); 
+
+        if (status === "200") {
+            var result200: UserDTO = null; 
+            result200 = data === "" ? null : <UserDTO>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        if (status === "201") {
+        }
+        else
+        if (status === "401") {
+        }
+        else
+        if (status === "403") {
+        }
+        else
+        if (status === "404") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
+
+    /**
+     * getUser
+     * @login login
+     * @return OK
+     */
+    getUserUsingGET(login: string): Observable<UserDTO> {
+        var url = this.baseUrl + "/api/users/{login}?"; 
+
+        if (login === undefined || login === null)
+            throw new Error("The parameter 'login' must be defined.");
+        url = url.replace("{login}", encodeURIComponent("" + login)); 
+
+        var content = "";
+        
+        return this.http.request(url, {
+            body: content,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processGetUserUsingGET(response);
+        });
+    }
+
+    private processGetUserUsingGET(response: Response) {
+        var data = response.text();
+        var status = response.status.toString(); 
+
+        if (status === "200") {
+            var result200: UserDTO = null; 
+            result200 = data === "" ? null : <UserDTO>JSON.parse(data, this.jsonParseReviver);
+            return result200; 
+        }
+        else
+        if (status === "401") {
+        }
+        else
+        if (status === "403") {
+        }
+        else
+        if (status === "404") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
+
+    /**
+     * deleteUser
+     * @login login
+     * @return OK
+     */
+    deleteUserUsingDELETE(login: string): Observable<void> {
+        var url = this.baseUrl + "/api/users/{login}?"; 
+
+        if (login === undefined || login === null)
+            throw new Error("The parameter 'login' must be defined.");
+        url = url.replace("{login}", encodeURIComponent("" + login)); 
+
+        var content = "";
+        
+        return this.http.request(url, {
+            body: content,
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8"
+            })
+        }).map((response) => {
+            return this.processDeleteUserUsingDELETE(response);
+        });
+    }
+
+    private processDeleteUserUsingDELETE(response: Response) {
+        var data = response.text();
+        var status = response.status.toString(); 
+
+        if (status === "200") {
+        }
+        else
+        if (status === "401") {
+        }
+        else
+        if (status === "204") {
+        }
+        else
+        if (status === "403") {
+        }
+        else
+        {
+            throw "error_no_callback_for_the_received_http_status"; 
+        }
+    }
 }
 
 export interface RequestPasswordResetRequest {
     email: string;
+}
+
+export interface UserDTO {
+    activated: boolean;
+    authorities: string[];
+    email: string;
+    firstName: string;
+    id: number;
+    langKey: string;
+    lastName: string;
+    login: string;
 }
 
 export interface CompletePasswordResetRequest {
@@ -428,6 +674,14 @@ export interface UpdateUserRequest {
 
 export interface Profile {
     activated: boolean;
+    authorities: string[];
+    email: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+}
+
+export interface CreateManagedUserRequest {
     authorities: string[];
     email: string;
     firstName: string;

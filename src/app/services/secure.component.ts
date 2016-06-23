@@ -9,9 +9,9 @@ export class SecureComponent implements OnActivate {
 
   }
   home() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
-  
+
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
     if (!this.authenticationService.authenticated()) {
       this.router.navigateByUrl('/login');
