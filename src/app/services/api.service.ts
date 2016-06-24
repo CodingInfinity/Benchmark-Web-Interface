@@ -288,7 +288,7 @@ export class Client {
     });
   }
 
-  authenticate(username: string, password: string) {
+  authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();
     let body: URLSearchParams = new URLSearchParams();
@@ -300,30 +300,8 @@ export class Client {
     body.append('password', password);
     body.append('scope', 'read write');
 
-    this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers})
-      .subscribe((res:Response) => {
-        console.log(res);
-        localStorage.setItem('token', JSON.stringify(res.json()));
+    return this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers});   
 
-        //When logged in, get the user_token
-        this.getUserUsingGET(username).subscribe((response)=>{
-          console.log("Response here:");
-          console.log(response);
-          localStorage.setItem('user_token', JSON.stringify(response.json()));
-        },(err)=>{
-          console.log("Exception Caught:");
-          console.log(err);
-          var message = err.json()["message"];
-          console.log(message);
-        });
-
-      },(err)=>{
-        var message = err.json()["error_description"];
-        console.log(message);
-      });
-
-
-    return true;
   }
 
 }

@@ -7,6 +7,12 @@
                     <span class="card-title">Register New Account</span>
                 </div>
                 <div class="card-content">
+                    <div class="row" *ngIf="hasError">
+                      <div class="card-panel red">
+                        <span class="white-text">{{errorMessage}}</span>
+                      </div>
+                    </div>
+
                     <div class="row">
                         <form [ngFormModel]="form" (submit)="form.valid && register(form.value)" class="col s12">
                             <div class="row">

@@ -7,10 +7,11 @@ import {
 import {MockBackend, MockConnection} from "@angular/http/testing";
 
 import { AuthenticationService } from "./authentication.service";
+import {Client} from "./api.service";
 
 describe('Authentication Service', () => {
 
-  let mockbackend : MockBackend, service: AuthenticationService;
+  let mockbackend : MockBackend, service: AuthenticationService, client: Client;
 
   beforeEachProviders(() => {
     return [
@@ -20,14 +21,16 @@ describe('Authentication Service', () => {
     ];
   });
 
-  beforeEach(inject([AuthenticationService], (_service: AuthenticationService) => {
+  beforeEach(inject([AuthenticationService, Client], (_service: AuthenticationService) => {
     service = _service;
+  },(_client:Client)=>{
+    client = _client;
   }));
 
   it ('token should be set in local storage for successful login',
     inject([XHRBackend, AuthenticationService], (mockbackend: MockBackend, service: AuthenticationService) => {
 
-      expect(service.authenticated()).toBeFalsy();
+      expect(AuthenticationService.authenticated()).toBeFalsy();
 
       mockbackend.connections.subscribe(
         (connection: MockConnection) => {
@@ -45,9 +48,9 @@ describe('Authentication Service', () => {
         }
       );
 
-      service.authenticate('user','password');
+      client.authenticate('user','password');
 
-      expect(service.authenticated()).toBeTruthy();
+      expect(AuthenticationService.authenticated()).toBeTruthy();
 
   }));
 
@@ -57,29 +60,29 @@ describe('Authentication Service', () => {
 
   it ('should remove token from local storage upon logout', () => {
     localStorage.setItem('token','testdata');
-    service.logout();
+    AuthenticationService.logout();
     expect(!!localStorage.getItem('token')).toBeFalsy();
   });
 
   it ('should not be authenticated after logout', () => {
     localStorage.setItem('token','testdata');
-    service.logout();
-    expect(service.authenticated()).toBeFalsy();
+    AuthenticationService.logout();
+    expect(AuthenticationService.authenticated()).toBeFalsy();
   });
 
   it('user has access to this route', () =>{
     let user_token: string = '{"username": "fabio","firstName": "Fabio","lastName": "Loreggian","email": "admin@localhost","activated": true,"langKey": "en", "authorities": ["ROLE_USER","ROLE_ADMIN"]}';
     localStorage.setItem("user_token", user_token);
-    expect(service.hasRoles(['ROLE_USER, ROLE_ADMIN'])).toBeTruthy();
+    expect(AuthenticationService.hasRoles(['ROLE_USER, ROLE_ADMIN'])).toBeTruthy();
   });
 
   it('user has denied access to this route', () =>{
     let user_token: string = '{"username": "fabio","firstName": "Fabio","lastName": "Loreggian","email": "admin@localhost","activated": true,"langKey": "en", "authorities": ["ROLE_USER"]}';
     localStorage.setItem("user_token", user_token);
-    expect(service.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
+    expect(AuthenticationService.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
   });
 
   it('user hasnt logged in, therefore has no access to the route', () =>{
-    expect(service.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
+    expect(AuthenticationService.hasRoles(['ROLE_ADMIN'])).toBeFalsy();
   });
 });

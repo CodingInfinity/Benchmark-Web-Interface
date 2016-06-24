@@ -7,17 +7,19 @@ import {Router, ROUTER_DIRECTIVES, RouteSegment, OnActivate} from '@angular/rout
 import {Client, CreateUnmanagedUserRequest} from "../../../services/api.service";
 import {ValidatorsOwn} from "../../validators.own";
 import {AuthenticationService} from "../../../services/authentication.service";
+import {BaseComponent} from "../../base.component";
 
 @Component({
     selector: 'registerAccount',
     template: require('./register.component.html'),
     directives: [MaterializeDirective]
 })
-export class RegisterAccountComponent implements OnActivate{
+export class RegisterAccountComponent extends BaseComponent implements OnActivate{
   private form: ControlGroup;
   private passwords: any;
 
   constructor(private router: Router, private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn) {
+    super();
     this.form = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -50,12 +52,10 @@ export class RegisterAccountComponent implements OnActivate{
 
     this.api.registerAccountUsingPOST(user).subscribe(
     (response)=>{
-      console.log("Response here:");
-      console.log(response);
       this.router.navigate(['/home']);
     },(err)=>{
-      console.log("Exception Caught:");
-      console.log(err);
+      this.errorMessage = err.json()["message"];
+      this.hasError = true;
     });
   }
 

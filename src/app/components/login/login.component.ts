@@ -4,8 +4,9 @@ import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/rout
 
 import {MaterializeDirective} from 'angular2-materialize';
 import {AuthenticationService} from "../../services/authentication.service";
-import {Http} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import {Client} from "../../services/api.service";
+import {BaseComponent} from "../base.component";
 
 
 @Component({
@@ -17,11 +18,12 @@ import {Client} from "../../services/api.service";
       FORM_DIRECTIVES
     ]
 })
-export class LoginComponent implements OnActivate{
+export class LoginComponent extends BaseComponent implements OnActivate {
 
   private form: ControlGroup;
 
   constructor(private router: Router, private client: Client, private fb: FormBuilder) {
+    super();
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -33,7 +35,25 @@ export class LoginComponent implements OnActivate{
   }
 
   login(value: any) {
-    this.client.authenticate(value.username, value.password);
+    this.client.authenticate(value.username, value.password).subscribe((res:Response) => {
+      localStorage.setItem('token', JSON.stringify(res.json()));
+
+      //When logged in, get the user_token
+      this.client.getUserUsingGET(value.username).subscribe((response)=>{
+        localStorage.setItem('user_token', JSON.stringify(response.json()));
+        this.hasError = false;
+        this.router.navigate(['/home']);
+      },(err)=>{
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        console.log(this.errorMessage);
+      });
+
+    },(err)=>{
+      this.errorMessage = err.json()["error_description"];
+      this.hasError = true;
+      console.log(this.errorMessage);
+    });
   }
 
   routerOnActivate(curr:RouteSegment){

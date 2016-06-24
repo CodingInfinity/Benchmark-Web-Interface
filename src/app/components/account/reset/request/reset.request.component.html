@@ -7,22 +7,34 @@
                     <span class="card-title">Reset Account Password</span>
                 </div>
                 <div class="card-content">
+                    <div class="row" *ngIf="hasError">
+                        <div class="card-panel red">
+                            <span class="white-text">{{errorMessage}}</span>
+                        </div>
+                    </div>
+
+                  <div class="row" *ngIf="emailSent">
+                    <div class="card-panel green">
+                      <span class="white-text">An email has been sent to {{email}}</span>
+                    </div>
+                  </div>
+
                     <div class="row">
-                      <form [ngFormModel]="form" (submit)="form.valid && reset_password_init(form.value)" class="col s12">
-                            <div class="row">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="email" type="email" class="validate" ngControl="email">
-                                        <label for="email">Email</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row right-align">
-                                <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid' type="submit" name="action">Reset
-                                    <i class="material-icons right">send</i>
-                                </button>
-                            </div>
-                        </form>
+                        <form [ngFormModel]="form" (submit)="form.valid && reset_password_init(form.value)" class="col s12">
+                              <div class="row">
+                                  <div class="row">
+                                      <div class="input-field col s12">
+                                          <input id="email" type="email" class="validate" ngControl="email">
+                                          <label for="email">Email</label>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row right-align">
+                                  <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid' type="submit" name="action">Reset
+                                      <i class="material-icons right">send</i>
+                                  </button>
+                              </div>
+                          </form>
                     </div>
                 </div>
             </div>

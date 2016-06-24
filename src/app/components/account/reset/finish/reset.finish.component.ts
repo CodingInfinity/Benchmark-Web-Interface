@@ -6,16 +6,18 @@ import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/rout
 import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
 import {Client, CompletePasswordResetRequest} from "../../../../services/api.service";
 import {ValidatorsOwn} from "../../../validators.own";
+import {BaseComponent} from "../../../base.component";
 
 @Component({
   selector: 'resetRequest',
   template: require('./reset.finish.component.html'),
   directives: [MaterializeDirective]
 })
-export class ResetFinishComponent implements OnActivate{
+export class ResetFinishComponent extends BaseComponent implements OnActivate{
   private key: string;
   private form: ControlGroup;
   constructor(private router: Router,  private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn) {
+    super();
     this.form = fb.group({
       password: ['', Validators.required],
       confirmPassword:  ['', Validators.required]
@@ -29,13 +31,11 @@ export class ResetFinishComponent implements OnActivate{
     };
 
     this.api.finishPasswordResetUsingPOST(passResetFinish).subscribe(
-      (response)=>{
-        console.log("Response here:");
-        console.log(response);
+      (response)=>{        
         this.router.navigate(['/login']);
       },(err)=>{
-        console.log("Exception Caught:");
-        console.log(err);
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
       });
 
   }

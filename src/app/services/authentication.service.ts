@@ -4,9 +4,7 @@ import {
   RequestOptions, ConnectionBackend, XHRBackend
 } from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {Client} from "./api.service";
 import {Router} from "@angular/router";
-import {AuthHttp} from "./AuthHttp";
 
 @Injectable()
 export class AuthenticationService extends Http {
