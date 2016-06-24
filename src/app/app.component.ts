@@ -13,6 +13,8 @@ import { RegisterAccountComponent } from './components/account/register/register
 import { HomeComponent} from "./components/home/home.component";
 import { ReportComponent} from "./components/reports/reports.component";
 import { ActivateAccountComponent} from "./components/account/activate/activate.component";
+import {LogoutComponent} from "./components/logout/logout.component";
+import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
 
 @Component({
   selector: 'my-app',
@@ -27,6 +29,7 @@ import { ActivateAccountComponent} from "./components/account/activate/activate.
     { path: '/', component: HomeComponent},
     { path: '/home', component: HomeComponent},
     { path: '/login', component: LoginComponent },
+    { path: '/logout', component: LogoutComponent },
     { path: '/activate/:key', component: ActivateAccountComponent },
     { path: '/register', component: RegisterAccountComponent },
     { path: '/reset', component: ResetRequestComponent },
