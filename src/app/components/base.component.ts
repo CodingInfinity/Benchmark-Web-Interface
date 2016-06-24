@@ -1,9 +1,4 @@
 export class BaseComponent{
-  protected errorMessage: string;
-  protected hasError: boolean;
-
-  constructor(){
-    this.hasError = false;
-    this.errorMessage = "";
-  }
+  protected errorMessage: string = "";
+  protected hasError: boolean = false;
 }
