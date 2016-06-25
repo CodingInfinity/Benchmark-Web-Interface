@@ -12,12 +12,11 @@
                             <span class="white-text">{{errorMessage}}</span>
                         </div>
                     </div>
-
-                  <div class="row" *ngIf="emailSent">
-                    <div class="card-panel green">
-                      <span class="white-text">An email has been sent to {{email}}</span>
+                    <div class="row" *ngIf="showMessage">
+                      <div class="card-panel green">
+                        <span class="white-text">{{message}}</span>
+                      </div>
                     </div>
-                  </div>
 
                     <div class="row">
                         <form [ngFormModel]="form" (submit)="form.valid && reset_password_init(form.value)" class="col s12">

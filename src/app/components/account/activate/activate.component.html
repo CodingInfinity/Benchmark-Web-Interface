@@ -12,6 +12,11 @@
                         <span class="white-text">{{errorMessage}}</span>
                       </div>
                     </div>
+                    <div class="row" *ngIf="showMessage">
+                      <div class="card-panel green">
+                        <span class="white-text">{{message}}</span>
+                      </div>
+                    </div>
                     <div class="row">
                       <span *ngIf="activated == 0" class="card-title">Your Account was successfully activated</span>
                       <span *ngIf="activated == 2" class="card-title">There was an error activating this account</span>

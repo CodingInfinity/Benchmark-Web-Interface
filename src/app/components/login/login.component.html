@@ -12,6 +12,11 @@
                         <span class="white-text">{{errorMessage}}</span>
                       </div>
                     </div>
+                    <div class="row" *ngIf="showMessage">
+                      <div class="card-panel green">
+                        <span class="white-text">{{message}}</span>
+                      </div>
+                    </div>
                     <div class="row">
                         <form [ngFormModel]="form" (submit)="form.valid && login(form.value)" class="col s12">
                             <div class="row">

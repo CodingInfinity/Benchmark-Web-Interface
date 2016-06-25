@@ -52,10 +52,13 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
 
     this.api.registerAccountUsingPOST(user).subscribe(
     (response)=>{
-      this.router.navigate(['/home']);
+      this.showMessage = true;
+      this.hasError = false;
+      this.message = "You have successfully registered! An email confirmation has been sent to " + user.email;
     },(err)=>{
       this.errorMessage = err.json()["message"];
       this.hasError = true;
+        this.showMessage = false;
     });
   }
 
