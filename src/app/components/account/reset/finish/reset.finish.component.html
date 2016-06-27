@@ -7,24 +7,34 @@
                     <span class="card-title">Reset Account Password</span>
                 </div>
                 <div class="card-content">
+                    <div class="row" *ngIf="hasError">
+                      <div class="card-panel red">
+                        <span class="white-text">{{errorMessage}}</span>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="showMessage">
+                      <div class="card-panel green">
+                        <span class="white-text">{{message}}</span>
+                      </div>
+                    </div>
                     <div class="row">
-                        <form class="col s12">
+                        <form [ngFormModel]="form" (submit)="form.valid && reset_password_finish(form.value)" class="col s12">
                             <div class="row">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="password" type="text" class="validate">
+                                        <input id="password" type="password" class="validate" ngControl="password">
                                         <label for="password">New Password</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="confirmPassword" type="text" class="validate">
-                                        <label for="confirmPassword">Confirm New Password</label>
+                                        <input id="confirmPassword" type="password" [ngClass]="setPasswordClass()" ngControl="confirmPassword">
+                                        <label for="confirmPassword" data-error="Passwords do not match!">Confirm New Password</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row right-align">
-                                <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Reset
+                                <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid' type="submit" name="action">Reset
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
