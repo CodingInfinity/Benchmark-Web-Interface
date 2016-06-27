@@ -1,11 +1,13 @@
+<header>
+  <navigation ></navigation>
+</header>
 <main>
   <div materialize class="flex-panel">
     <div class="row">
-      <div class="col s12 m8 offset-m2 l8 offset-l2">
+      <div class="col s12 m8 offset-m2 l6 offset-l3">
         <div class="card">
-          <div class="card-image">
-            <img src="header.png">
-            <span class="card-title">Welcome Back</span>
+          <div class="card-panel indigo darken-1">
+            <span class="card-title white-text">Profile</span>
           </div>
           <div class="card-content">
             <div class="row" *ngIf="hasError">
@@ -19,7 +21,46 @@
               </div>
             </div>
             <div class="row">
-              <h3>You are logged in</h3>
+              <div class="collection indigo" *ngIf="!nameChange && !emailChange">
+                <a href="javascript:;" (click)="editNameSelect()" class="collection-item"><span class="black-text"><b>Name</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{firstname}} {{lastname}}</span></a>
+                <a href="javascript:;" (click)="editEmailSelect()" class="collection-item"><span class="black-text"><b>Email</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{email}}</span></a>
+              </div>
+            </div>
+            <div class="row" *ngIf="nameChange">
+              <form [ngFormModel]="nameForm" (submit)="editName(nameForm.value)" class="col s12">
+                <div class="row">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="firstName" type="text" class="validate" value="{{firstname}}" required ngControl="firstName">
+                      <label class="active" for="firstName">First Name</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="lastName" type="text" class="validate" value="{{lastname}}" required ngControl="lastName">
+                      <label class="active" for="lastName">Last Name</label>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit">Edit
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
+            </div>
+            <div class="row" *ngIf="emailChange">
+              <form [ngFormModel]="emailForm" (submit)="editEmail(emailForm.value)" class="col s12">
+                <div class="row">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate" value="{{email}}" ngControl="email">
+                      <label class="active" for="email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit">Edit
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
             </div>
           </div>
 
@@ -28,3 +69,5 @@
     </div>
   </div>
 </main>
+<footer></footer>
+

@@ -58,7 +58,7 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
     },(err)=>{
       this.errorMessage = err.json()["message"];
       this.hasError = true;
-        this.showMessage = false;
+      this.showMessage = false;
     });
   }
 
