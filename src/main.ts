@@ -3,7 +3,7 @@ import { enableProdMode, provide } from '@angular/core';
 import { ROUTER_PROVIDERS } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { HTTP_PROVIDERS } from "@angular/http";
-import {AUTH_PROVIDERS, AuthenticationService} from "./app/services/authentication.service";
+import { AUTH_PROVIDERS} from "./app/services/authentication.service";
 import { Client} from "./app/services/api.service";
 import { ValidatorsOwn} from "./app/components/validators.own";
 
