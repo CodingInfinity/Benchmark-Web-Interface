@@ -1,12 +1,13 @@
 <nav class="top-nav indigo">
   <div class="nav-wrapper">
     <div class="container"><a materialize="sideNav" href="#" data-activates="slide-out" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
-    <a class="brand-logo">Benchmark Service</a>
+    <a [routerLink]="['/home']" class="brand-logo">Benchmark Service</a>
+    <!--<a [routerLink]="['/logout']" class="right brand-logo">Logout</a>-->
   </div>
 </nav>
 <ul id="slide-out" class="side-nav fixed z-depth-3">
   <li class="logo">
-    <a href="" class="indigo white-text">Benchmark Service</a>
+    <a class="indigo white-text">Navigation</a>
   </li>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
     <li>
@@ -43,8 +44,8 @@
       <div class="collapsible-header"><i class="material-icons">perm_identity</i>Account</div>
       <div class="collapsible-body">
         <ul>
-          <li><a href="#!">Profile</a></li>
-          <li><a [routerLink]="['/logout']">Logout</a></li>
+          <li><a [routerLink]="['/profile']" >Profile</a></li>
+          <li><a [routerLink]="['/logout']" >Logout</a></li>
         </ul>
       </div>
     </li>

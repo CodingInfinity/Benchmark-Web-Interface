@@ -15,6 +15,7 @@ import { ReportComponent} from "./components/reports/reports.component";
 import { ActivateAccountComponent} from "./components/account/activate/activate.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
+import {ProfileComponent} from "./components/account/profile/profile.component";
 
 @Component({
   selector: 'my-app',
@@ -34,7 +35,8 @@ import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload
     { path: '/register', component: RegisterAccountComponent },
     { path: '/reset', component: ResetRequestComponent },
     { path: '/reset_finish/:key', component: ResetFinishComponent },
-    { path: '/report', component: ReportComponent }
+    { path: '/report', component: ReportComponent },
+    { path: '/profile', component: ProfileComponent }
 ])
 export class AppComponent {
  constructor(private router: Router) {}
