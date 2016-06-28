@@ -54,13 +54,12 @@ export class LoginComponent extends BaseComponent implements OnActivate {
       },(err)=>{
         this.errorMessage = err.json()["message"];
         this.hasError = true;
-        console.log(this.errorMessage);
+        this.client.logout();
       });
 
     },(err)=>{
       this.errorMessage = err.json()["error_description"];
       this.hasError = true;
-      console.log(this.errorMessage);
     });
   }
 
