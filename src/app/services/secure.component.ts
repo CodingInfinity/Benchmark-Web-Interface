@@ -1,12 +1,13 @@
 import {Router, OnActivate, RouteSegment, RouteTree} from "@angular/router";
 import {AuthenticationService} from "./authentication.service";
 import {BaseComponent} from "../components/base.component";
+import {Client} from "./api.service";
 
 export class SecureComponent extends BaseComponent implements OnActivate {
 
   protected authorities: string[] = [];
 
-  constructor(protected router: Router) {
+  constructor(protected router: Router, protected client: Client) {
     super();
   }
   home() {
@@ -14,9 +15,9 @@ export class SecureComponent extends BaseComponent implements OnActivate {
   }
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-    if (!AuthenticationService.authenticated()) {
+    if (!this.client.authenticated()) {
       this.router.navigateByUrl('/login');
-    } else if (!AuthenticationService.hasRoles(this.authorities)) {
+    } else if (!this.client.hasRoles(this.authorities)) {
       this.router.navigateByUrl('/accessDenied');
     }
   }

@@ -63,7 +63,7 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
   }
 
   routerOnActivate(curr:RouteSegment){
-    if(AuthenticationService.authenticated()){
+    if(this.api.authenticated()){
       this.router.navigate(['/home']);
     }
   }

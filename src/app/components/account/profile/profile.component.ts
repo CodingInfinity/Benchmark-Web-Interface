@@ -31,8 +31,8 @@ export class ProfileComponent extends SecureComponent {
     private emailForm: ControlGroup;
 
 
-    constructor(router:Router, private client: Client, private fb: FormBuilder) {
-      super(router);
+    constructor(router:Router, protected client: Client, private fb: FormBuilder) {
+      super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.nameForm = fb.group({
         firstName: ['', Validators.required],
@@ -97,7 +97,7 @@ export class ProfileComponent extends SecureComponent {
         },
         (err)=>{
           console.log(err.json());
-          this.errorMessage = err.json()["message"];
+          this.errorMessage = err.json()["error_description"];
           this.hasError = true;
           this.showMessage = false;
         });

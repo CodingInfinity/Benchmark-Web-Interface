@@ -13,35 +13,16 @@ export class AuthenticationService extends Http {
     super(backend, defaultOptions);
   }
 
-  static logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_token');
-  }
-
-  static authenticated() :boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  static hasRole(auth: string): boolean {
-    if(!localStorage.getItem('user_token')){
+  static authenticatedAndIsTokenExpired() :boolean {
+    if(!localStorage.getItem('token')){
       return false;
     }
-    let userRoles: string[] = JSON.parse(localStorage.getItem('user_token'))["authorities"];
-    for(let role in userRoles){
-      if(auth.localeCompare(role)){
-        return true;
-      }
+    var dateNow = Date.now();
+    var expiryDate = Number.parseFloat(localStorage.getItem('token_expires'));
+    if(dateNow > expiryDate){
+      return false;
     }
-    return false;
-  }
-
-  static hasRoles(authorities: string[]): boolean {
-    for (let auth in authorities) {
-      if(this.hasRole(auth) == true){
-        return true;
-      }
-    }
-    return false;
+    return true;
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -50,6 +31,11 @@ export class AuthenticationService extends Http {
   public post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
     return this._request(RequestMethod.Post, url, body, options);
   }
+
+  public super_post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+    return super.post(url, body, options);
+  }
+
   public put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
     return this._request(RequestMethod.Put, url, body, options);
   }
@@ -82,7 +68,7 @@ export class AuthenticationService extends Http {
       options.headers = new Headers();
     }
 
-    if (AuthenticationService.authenticated()) {
+    if (AuthenticationService.authenticatedAndIsTokenExpired()) {
       options.headers.set("Authorization", "Bearer " + JSON.parse(localStorage.getItem('token'))['access_token']);
     }
 
