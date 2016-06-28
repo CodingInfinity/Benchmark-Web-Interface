@@ -24,6 +24,7 @@
               <div class="collection indigo" *ngIf="!nameChange && !emailChange">
                 <a href="javascript:;" (click)="editNameSelect()" class="collection-item"><span class="black-text"><b>Name</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{firstname}} {{lastname}}</span></a>
                 <a href="javascript:;" (click)="editEmailSelect()" class="collection-item"><span class="black-text"><b>Email</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{email}}</span></a>
+                <a href="javascript:;" (click)="editPasswordSelect()" class="collection-item"><span class="black-text"><b>Password</b></span><span class="grey-text right"><i class="material-icons right">send</i></span></a>
               </div>
             </div>
             <div class="row" *ngIf="nameChange">
@@ -54,6 +55,27 @@
                     <div class="input-field col s12">
                       <input id="email" type="email" class="validate" value="{{email}}" ngControl="email">
                       <label class="active" for="email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit">Edit
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
+            </div>
+            <div class="row" *ngIf="passwordChange">
+              <form [ngFormModel]="passwordForm" (submit)="passwordForm.valid && editPassword(passwordForm.value)" class="col s12">
+                <div class="row">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate" ngControl="password">
+                      <label for="password">New Password</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="confirmPassword" type="password" [ngClass]="setPasswordClass()" ngControl="confirmPassword">
+                      <label for="confirmPassword" data-error="Passwords do not match!">Confirm New Password</label>
                     </div>
                   </div>
                 </div>

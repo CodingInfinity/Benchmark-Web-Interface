@@ -6,6 +6,7 @@ import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
 import {Client,UpdateUserRequest} from "../../../services/api.service";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
+import {ValidatorsOwn} from "../../validators.own";
 
 
 
@@ -26,12 +27,14 @@ export class ProfileComponent extends SecureComponent {
     private email: string;
     private nameChange: boolean = false;
     private emailChange: boolean = false;
+    private passwordChange: boolean = false;
 
     private nameForm: ControlGroup;
     private emailForm: ControlGroup;
+    private passwordForm: ControlGroup;
 
 
-    constructor(router:Router, protected client: Client, private fb: FormBuilder) {
+    constructor(router:Router, protected client: Client, private fb: FormBuilder, private validators: ValidatorsOwn) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.nameForm = fb.group({
@@ -41,6 +44,10 @@ export class ProfileComponent extends SecureComponent {
       this.emailForm = fb.group({
         email: ['', Validators.required]
       });
+      this.passwordForm = fb.group({
+        password: ['', Validators.required],
+        confirmPassword:  ['', Validators.required]
+      },{validator: this.validators.matchingPasswords('password', 'confirmPassword')});
     }
 
     routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
@@ -54,11 +61,19 @@ export class ProfileComponent extends SecureComponent {
     editNameSelect(){
       this.nameChange = true;
       this.emailChange = false;
+      this.passwordChange = false;
     }
 
     editEmailSelect(){
       this.nameChange = false;
       this.emailChange = true;
+      this.passwordChange = false;
+    }
+
+    editPasswordSelect(){
+      this.nameChange =false;
+      this.emailChange =false;
+      this.passwordChange = true;
     }
 
     editName(value: any){
@@ -82,6 +97,10 @@ export class ProfileComponent extends SecureComponent {
       this.sendUpdateRequest();
     }
 
+    editPassword(value:any){
+      this.passwordChange = false;
+
+    }
     sendUpdateRequest(){
       var updatedUser: UpdateUserRequest = {
         email: this.email,
@@ -102,4 +121,11 @@ export class ProfileComponent extends SecureComponent {
           this.showMessage = false;
         });
     }
+    setPasswordClass() {
+      if(this.passwordForm.controls['password'].value ==""){return;}
+      return {
+        invalid: !this.passwordForm.valid,
+        valid: this.passwordForm.valid
+    }
+  }
 }
