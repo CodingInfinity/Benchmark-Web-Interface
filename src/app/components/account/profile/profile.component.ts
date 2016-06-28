@@ -4,7 +4,7 @@ import { MaterializeDirective } from "angular2-materialize";
 import {NavigationComponent} from "../../navigation/navigation.component";
 import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
-import {Client,UpdateUserRequest} from "../../../services/api.service";
+import {Client, UpdateUserRequest, ChangePasswordRequest} from "../../../services/api.service";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 import {ValidatorsOwn} from "../../validators.own";
 
@@ -100,14 +100,33 @@ export class ProfileComponent extends SecureComponent {
 
     editPassword(value:any){
       this.passwordChange = false;
+      var password :ChangePasswordRequest = {
+        password: value.password
+      };
+
+      console.log(password);
+
+      this.client.changePasswordUsingPOST(password).subscribe(
+        (response)=>{
+          this.showMessage = true;
+          this.hasError = false;
+          this.message = "You have successfully changed your password!";
+        },
+        (err)=>{
+          console.log(err.json());
+          this.errorMessage = err.json()["message"];
+          this.hasError = true;
+          this.showMessage = false;
+        });
 
     }
+
     sendUpdateRequest(){
       var updatedUser: UpdateUserRequest = {
         email: this.email,
         firstName: this.firstname,
         lastName: this.lastname
-      }
+      };
 
       console.log(updatedUser);
 
@@ -116,10 +135,10 @@ export class ProfileComponent extends SecureComponent {
           this.showMessage = true;
           this.hasError = false;
           this.message = "You have successfully edited your profile!";
-         
+
           this.client.getAccountUsingGET().subscribe((response)=>{
             localStorage.setItem('user_token', JSON.stringify(response.json()));
-            this.hasError = false;            
+            this.hasError = false;
           },(err)=>{
             this.errorMessage = err.json()["message"];
             this.hasError = true;
@@ -128,16 +147,18 @@ export class ProfileComponent extends SecureComponent {
         },
         (err)=>{
           console.log(err.json());
-          this.errorMessage = err.json()["message"] + err.json()["error_description"];
+          this.errorMessage = err.json()["message"];
           this.hasError = true;
           this.showMessage = false;
         });
     }
-    setPasswordClass() {
+
+    setPasswordClass(){
       if(this.passwordForm.controls['password'].value ==""){return;}
       return {
         invalid: !this.passwordForm.valid,
         valid: this.passwordForm.valid
+      }
     }
   }
-}
+
