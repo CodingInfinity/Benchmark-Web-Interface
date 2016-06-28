@@ -39,7 +39,6 @@ export class LoginComponent extends BaseComponent implements OnActivate {
       localStorage.setItem('token', JSON.stringify(res.json()));
 
       var expiresIn = Number.parseFloat(res.json()["expires_in"]);
-      console.log(expiresIn);
       var dateNow = Date.now();
       var expiryDate = dateNow + (expiresIn * 1000);
 
@@ -47,7 +46,7 @@ export class LoginComponent extends BaseComponent implements OnActivate {
 
 
       //When logged in, get the user_token
-      this.client.getUserUsingGET(value.username).subscribe((response)=>{
+      this.client.getAccountUsingGET().subscribe((response)=>{
         localStorage.setItem('user_token', JSON.stringify(response.json()));
         this.hasError = false;
         this.router.navigate(['/home']);

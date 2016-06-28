@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="collection indigo" *ngIf="!nameChange && !emailChange">
+              <div class="collection indigo">
                 <a href="javascript:;" (click)="editNameSelect()" class="collection-item"><span class="black-text"><b>Name</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{firstname}} {{lastname}}</span></a>
                 <a href="javascript:;" (click)="editEmailSelect()" class="collection-item"><span class="black-text"><b>Email</b></span><span class="grey-text right"><i class="material-icons right">send</i>{{email}}</span></a>
                 <a href="javascript:;" (click)="editPasswordSelect()" class="collection-item"><span class="black-text"><b>Password</b></span><span class="grey-text right"><i class="material-icons right">send</i></span></a>
@@ -79,9 +79,12 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit">Edit
-                  <i class="material-icons right">send</i>
-                </button>
+                <div class="row">
+                  <button class="btn waves-effect waves-light" type="submit">Edit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+
               </form>
             </div>
           </div>

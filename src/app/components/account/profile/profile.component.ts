@@ -77,13 +77,14 @@ export class ProfileComponent extends SecureComponent {
     }
 
     editName(value: any){
+      console.log(value);
       this.nameChange = false;
-      if(this.firstname != value.firstname){
-        this.firstname = value.firstname;
+      if(this.firstname != value.firstName && value.firstName){
+        this.firstname = value.firstName;
       }
 
-      if(this.lastname != value.lastname){
-        this.lastname = value.lastname;
+      if(this.lastname != value.lastName && value.lastName){
+        this.lastname = value.lastName;
       }
       this.sendUpdateRequest();
     }
@@ -91,7 +92,7 @@ export class ProfileComponent extends SecureComponent {
     editEmail(value:any){
       console.log(value);
       this.emailChange = false;
-      if(this.email != value.email){
+      if(this.email != value.email && value.email){
         this.email = value.email;
       }
       this.sendUpdateRequest();
@@ -108,15 +109,26 @@ export class ProfileComponent extends SecureComponent {
         lastName: this.lastname
       }
 
-      this.client.updateUserUsingPUT(updatedUser).subscribe(
+      console.log(updatedUser);
+
+      this.client.saveAccountUsingPOST(updatedUser).subscribe(
         (response)=>{
           this.showMessage = true;
           this.hasError = false;
           this.message = "You have successfully edited your profile!";
+         
+          this.client.getAccountUsingGET().subscribe((response)=>{
+            localStorage.setItem('user_token', JSON.stringify(response.json()));
+            this.hasError = false;            
+          },(err)=>{
+            this.errorMessage = err.json()["message"];
+            this.hasError = true;
+            this.client.logout();
+          });
         },
         (err)=>{
           console.log(err.json());
-          this.errorMessage = err.json()["error_description"];
+          this.errorMessage = err.json()["message"] + err.json()["error_description"];
           this.hasError = true;
           this.showMessage = false;
         });
