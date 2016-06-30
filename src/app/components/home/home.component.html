@@ -21,6 +21,27 @@
                 <span class="white-text">{{message}}</span>
               </div>
             </div>
+            <div class="card-panel row">
+              <span class="card-title black-text">Upload File with Metadata Example</span>
+              <form [ngFormModel]="form" class="col s12" (submit)="onSubmit(form.value)">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="metadata" type="text" class="validate" ngControl="metadata">
+                    <label for="metadata">Metadata</label>
+                  </div>
+                </div>
+                <upload (filesChange)="onFilesSelect($event)"></upload>
+
+                <!--Multiple file upload-->
+                <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->
+
+                <button class="btn waves-effect waves-light right" type="submit">Submit
+                  <i class="material-icons right">send</i>
+                </button>
+              </form>
+
+            </div>
+
           </div>
         </div>
       </div>
