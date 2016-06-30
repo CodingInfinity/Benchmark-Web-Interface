@@ -25,16 +25,34 @@ export class UsersComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+    this.getAllUsers();
+  }
+
+  deleteUser(user:any){
+    this.client.deleteUserUsingDELETE(user.login).subscribe(
+      (response)=>{
+        this.hasError = false;
+        this.getAllUsers();
+      },
+      (err)=>{
+        console.log(err.json());
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        this.showMessage = false;
+      });;
+  }
+
+  getAllUsers(){
     this.client.getAllUsersUsingGET().subscribe(
       (response)=>{
-      this.users = response.json();
-      this.hasError = false;
-    },
-    (err)=>{
-      console.log(err.json());
-      this.errorMessage = err.json()["message"];
-      this.hasError = true;
-      this.showMessage = false;
-    });;
+        this.users = response.json();
+        this.hasError = false;
+      },
+      (err)=>{
+        console.log(err.json());
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        this.showMessage = false;
+      });;
   }
 }
