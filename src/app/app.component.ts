@@ -36,7 +36,8 @@ import {ProfileComponent} from "./components/account/profile/profile.component";
     { path: '/reset', component: ResetRequestComponent },
     { path: '/reset_finish/:key', component: ResetFinishComponent },
     { path: '/report', component: ReportComponent },
-    { path: '/profile', component: ProfileComponent }
+    { path: '/profile', component: ProfileComponent },
+    { path: '/users', component: UsersComponent }
 ])
 export class AppComponent {
  constructor(private router: Router) {}

@@ -27,7 +27,7 @@ export class UsersComponent extends SecureComponent {
     super.routerOnActivate(curr, prev, currTree, prevTree);
     this.client.getAllUsersUsingGET().subscribe(
       (response)=>{
-        
+
       this.showMessage = true;
       this.hasError = false;
     },
