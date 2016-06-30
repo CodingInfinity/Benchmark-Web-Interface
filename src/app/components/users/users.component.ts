@@ -20,7 +20,7 @@ export class UsersComponent extends SecureComponent {
   private users: any;
   constructor(router:Router, protected client: Client) {
     super(router, client);
-    this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
+    this.authorities = ["ROLE_ADMIN"];
   }
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
