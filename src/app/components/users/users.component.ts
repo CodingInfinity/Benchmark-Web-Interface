@@ -25,5 +25,17 @@ export class UsersComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+    this.client.getAllUsersUsingGET().subscribe(
+      (response)=>{
+        
+      this.showMessage = true;
+      this.hasError = false;
+    },
+    (err)=>{
+      console.log(err.json());
+      this.errorMessage = err.json()["message"];
+      this.hasError = true;
+      this.showMessage = false;
+    });;
   }
 }
