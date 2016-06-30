@@ -150,6 +150,9 @@ export class ProfileComponent extends SecureComponent {
           this.errorMessage = err.json()["message"];
           this.hasError = true;
           this.showMessage = false;
+          this.firstname =  JSON.parse(localStorage.getItem("user_token"))["firstName"];
+          this.lastname =  JSON.parse(localStorage.getItem("user_token"))["lastName"];
+          this.email =  JSON.parse(localStorage.getItem("user_token"))["email"];
         });
     }
 
