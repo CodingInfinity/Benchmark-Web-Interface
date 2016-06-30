@@ -16,6 +16,7 @@ import { ActivateAccountComponent} from "./components/account/activate/activate.
 import {LogoutComponent} from "./components/logout/logout.component";
 import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ProfileComponent} from "./components/account/profile/profile.component";
+import {UsersComponent} from "./components/users/users.component";
 
 @Component({
   selector: 'my-app',
