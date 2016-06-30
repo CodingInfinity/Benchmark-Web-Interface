@@ -17,18 +17,17 @@ import {Client} from "../../services/api.service";
     ]
   })
 export class UsersComponent extends SecureComponent {
-
+  private users: any;
   constructor(router:Router, protected client: Client) {
     super(router, client);
-    this.authorities = ["ROLE_ADMIN"];
+    this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
   }
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
     this.client.getAllUsersUsingGET().subscribe(
       (response)=>{
-
-      this.showMessage = true;
+      this.users = response.json();
       this.hasError = false;
     },
     (err)=>{
