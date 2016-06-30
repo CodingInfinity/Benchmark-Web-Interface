@@ -58,12 +58,12 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
     },(err)=>{
       this.errorMessage = err.json()["message"];
       this.hasError = true;
-        this.showMessage = false;
+      this.showMessage = false;
     });
   }
 
   routerOnActivate(curr:RouteSegment){
-    if(AuthenticationService.authenticated()){
+    if(this.api.authenticated()){
       this.router.navigate(['/home']);
     }
   }

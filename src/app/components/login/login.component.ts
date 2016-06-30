@@ -38,26 +38,32 @@ export class LoginComponent extends BaseComponent implements OnActivate {
     this.client.authenticate(value.username, value.password).subscribe((res:Response) => {
       localStorage.setItem('token', JSON.stringify(res.json()));
 
+      var expiresIn = Number.parseFloat(res.json()["expires_in"]);
+      var dateNow = Date.now();
+      var expiryDate = dateNow + (expiresIn * 1000);
+
+      localStorage.setItem('token_expires', expiryDate.toString());
+
+
       //When logged in, get the user_token
-      this.client.getUserUsingGET(value.username).subscribe((response)=>{
+      this.client.getAccountUsingGET().subscribe((response)=>{
         localStorage.setItem('user_token', JSON.stringify(response.json()));
         this.hasError = false;
         this.router.navigate(['/home']);
       },(err)=>{
         this.errorMessage = err.json()["message"];
         this.hasError = true;
-        console.log(this.errorMessage);
+        this.client.logout();
       });
 
     },(err)=>{
       this.errorMessage = err.json()["error_description"];
       this.hasError = true;
-      console.log(this.errorMessage);
     });
   }
 
   routerOnActivate(curr:RouteSegment){
-    if(AuthenticationService.authenticated()){
+    if(this.client.authenticated()){
       this.router.navigate(['/home']);
     }
   }

@@ -20,8 +20,8 @@ import { FooterComponent } from "../footer/footer.component";
 })
 export class HomeComponent extends SecureComponent {
 
-    constructor(router:Router, private client: Client) {
-      super(router);
+    constructor(router:Router, protected client: Client) {
+      super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
     }
 }

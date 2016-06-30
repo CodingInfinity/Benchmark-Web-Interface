@@ -2,6 +2,7 @@
 import {Observable} from 'rxjs/Observable';
 import {Injectable, Inject, Optional, OpaqueToken} from '@angular/core';
 import {Http, Headers, Response, RequestOptionsArgs, URLSearchParams} from '@angular/http';
+import {Router} from "@angular/router";
 
 export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
@@ -9,11 +10,13 @@ export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
 @Injectable()
 export class Client {
   private http: Http = null;
+  private router: Router = null;
   private baseUrl: string = undefined;
   private jsonParseReviver: (key: string, value: any) => any = undefined;
 
-  constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
+  constructor(@Inject(Http) http: Http, @Inject(Router) router: Router, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
     this.http = http;
+    this.router = router;
     this.baseUrl = baseUrl ? baseUrl : "http://localhost:8081";
     this.jsonParseReviver = jsonParseReviver;
   }
@@ -300,8 +303,78 @@ export class Client {
     body.append('password', password);
     body.append('scope', 'read write');
 
-    return this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers});   
+    return this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers});
 
+  }
+
+  refresh(){
+    console.log("Calling refresh");
+    var refreshToken = JSON.parse(localStorage.getItem('token'))['refresh_token'];
+    console.log(refreshToken);
+
+    let headers: Headers = new Headers();
+    let body: URLSearchParams = new URLSearchParams();
+
+    headers.append('Authorization', 'Basic YWNtZTphY21lc2VjcmV0');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    body.append('grant_type', 'refresh_token');
+    body.append('refresh_token', refreshToken);
+
+    this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers}).subscribe(
+      (res)=>{
+        localStorage.setItem('token', JSON.stringify(res.json()));
+
+        var expiresIn = Number.parseFloat(res.json()["expires_in"]);
+        console.log(expiresIn);
+        var dateNow = Date.now();
+        var expiryDate = dateNow + (expiresIn * 1000);
+
+        localStorage.setItem('token_expires', expiryDate.toString());
+      },(err)=>{
+        console.log(err);
+        this.router.navigate(['/logout']);
+      }
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('token_expires');
+  }
+
+  authenticated() :boolean {
+    if(!localStorage.getItem('token')){
+      return false;
+    }
+    var dateNow = Date.now();
+    var expiryDate = Number.parseFloat(localStorage.getItem('token_expires'));
+    if(dateNow > expiryDate){
+      this.refresh();
+    }
+    return true;
+  }
+
+  hasRole(auth: string): boolean {
+    if(!localStorage.getItem('user_token')){
+      return false;
+    }
+    let userRoles: string[] = JSON.parse(localStorage.getItem('user_token'))["authorities"];
+    for(let role in userRoles){
+      if(auth.localeCompare(role)){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasRoles(authorities: string[]): boolean {
+    for (let auth in authorities) {
+      if(this.hasRole(auth) == true){
+        return true;
+      }
+    }
+    return false;
   }
 
 }
