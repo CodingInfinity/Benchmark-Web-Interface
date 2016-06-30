@@ -360,8 +360,8 @@ export class Client {
       return false;
     }
     let userRoles: string[] = JSON.parse(localStorage.getItem('user_token'))["authorities"];
-    for(let role in userRoles){
-      if(auth.localeCompare(role)){
+    for(var role of userRoles){
+      if(auth == role){
         return true;
       }
     }
@@ -369,7 +369,7 @@ export class Client {
   }
 
   hasRoles(authorities: string[]): boolean {
-    for (let auth in authorities) {
+    for (let auth of authorities) {
       if(this.hasRole(auth) == true){
         return true;
       }
