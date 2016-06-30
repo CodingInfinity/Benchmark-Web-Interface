@@ -17,6 +17,7 @@ import {LogoutComponent} from "./components/logout/logout.component";
 import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ProfileComponent} from "./components/account/profile/profile.component";
 import {UsersComponent} from "./components/users/users.component";
+import {CreateComponent} from "./components/users/create/create.component";
 
 @Component({
   selector: 'my-app',
@@ -38,7 +39,8 @@ import {UsersComponent} from "./components/users/users.component";
     { path: '/reset_finish/:key', component: ResetFinishComponent },
     { path: '/report', component: ReportComponent },
     { path: '/profile', component: ProfileComponent },
-    { path: '/users', component: UsersComponent }
+    { path: '/users', component: UsersComponent },
+    { path: '/create', component: CreateComponent }
 ])
 export class AppComponent {
  constructor(private router: Router) {}
