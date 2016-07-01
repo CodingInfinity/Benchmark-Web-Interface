@@ -48,26 +48,22 @@
                       <label for="username">Username</label>
                     </div>
                   </div>
-                  <div ngControlGroup="passwords">
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="password" type="password" class="validate" ngControl="password">
-                        <label for="password">Password</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field col s12">
-                        <input id="confirmPassword" type="password" [ngClass]="setPasswordClass()" ngControl="confirmPassword">
-                        <label for="confirmPassword" data-error="Passwords do not match!">Confirm Password</label>
-                      </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <select multiple materialize="material_select" (change)="roleChange($event) " required>
+                        <option value="0" disabled selected>Choose your option</option>
+                        <option value="ROLE_ADMIN" >Admin</option>
+                        <option value="ROLE_USER" >User</option>
+                        <option value="ROLE_ANONYMOUS" >Anonymous</option>
+                      </select>
+                      <label>Select the roles for the user</label>
                     </div>
                   </div>
-
-                </div>
-                <div class="row right-align">
-                  <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid || !passwords.valid' type="submit" name="action">Register
-                    <i class="material-icons right">send</i>
-                  </button>
+                  <div class="row right-align">
+                    <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid' type="submit" name="action">Register
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>

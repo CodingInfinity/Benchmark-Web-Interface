@@ -1,5 +1,5 @@
 import { provide } from "@angular/core";
-import {beforeEachProviders, inject, injectAsync} from "@angular/core/testing";
+import {beforeEachProviders, inject} from "@angular/core/testing";
 import {
   BaseRequestOptions, RequestOptions, Http, XHRBackend, ResponseOptions, Response,
   HTTP_PROVIDERS

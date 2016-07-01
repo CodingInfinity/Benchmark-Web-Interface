@@ -14,7 +14,7 @@ import { HomeComponent} from "./components/home/home.component";
 import { ReportComponent} from "./components/reports/reports.component";
 import { ActivateAccountComponent} from "./components/account/activate/activate.component";
 import {LogoutComponent} from "./components/logout/logout.component";
-import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
+//import {DataSetUploadComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ProfileComponent} from "./components/account/profile/profile.component";
 import {UsersComponent} from "./components/users/users.component";
 import {CreateComponent} from "./components/users/create/create.component";

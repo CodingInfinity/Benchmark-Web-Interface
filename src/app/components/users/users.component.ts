@@ -32,6 +32,8 @@ export class UsersComponent extends SecureComponent {
     this.client.deleteUserUsingDELETE(user.login).subscribe(
       (response)=>{
         this.hasError = false;
+        this.showMessage = true;
+        this.message = user.firstName + " " + user.lastName + " has been successfully deleted!";
         this.getAllUsers();
       },
       (err)=>{
