@@ -9,8 +9,8 @@
           <div class="card-panel indigo darken-1">
             <span class="card-title white-text">All Users</span>
             <form class="form-inline">
-              <input ng-model="query" type="text"
-                     placeholder="Search" autofocus>
+              <input ng-model="query" type="text" #listFilter (keyup)="0"
+                     placeholder="Search"/>
             </form>
           </div>
           <div class="card-content">
@@ -24,7 +24,7 @@
                 <span class="white-text">{{message}}</span>
               </div>
             </div>
-            <div class="card-panel row" *ngFor="let user of users">
+            <div class="card-panel row" *ngFor="let user of users | Search:listFilter.value">
               <span class="card-title black-text">{{user.firstName}} {{user.lastName}}</span>
               <p><strong>Username:</strong> {{user.login}}</p>
               <p><strong>Email:</strong> {{user.email}}</p>

@@ -5,11 +5,13 @@ import {NavigationComponent} from "../navigation/navigation.component";
 import {FooterComponent} from "../footer/footer.component";
 import {SecureComponent} from "../../services/secure.component";
 import {Client} from "../../services/api.service";
+import {SearchPipe} from "../../Pipes/SearchPipe.pipe";
 
 @Component({
   selector: 'users',
    template: require('./users.component.html'),
    styles: [require('./users.component.css')],
+   pipes: [SearchPipe],
    directives: [
       MaterializeDirective,
       NavigationComponent,
