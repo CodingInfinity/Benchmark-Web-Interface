@@ -5,13 +5,11 @@ import {NavigationComponent} from "../navigation/navigation.component";
 import {FooterComponent} from "../footer/footer.component";
 import {SecureComponent} from "../../services/secure.component";
 import {Client} from "../../services/api.service";
-import {SearchPipe} from "../../Pipes/SearchPipe.pipe";
 
 @Component({
   selector: 'users',
    template: require('./users.component.html'),
    styles: [require('./users.component.css')],
-   pipes: [SearchPipe],
    directives: [
       MaterializeDirective,
       NavigationComponent,
@@ -20,6 +18,7 @@ import {SearchPipe} from "../../Pipes/SearchPipe.pipe";
   })
 export class UsersComponent extends SecureComponent {
   private users: any;
+  private filteredUsers: any = this.users;
   constructor(router:Router, protected client: Client) {
     super(router, client);
     this.authorities = ["ROLE_ADMIN"];
@@ -43,7 +42,7 @@ export class UsersComponent extends SecureComponent {
         this.errorMessage = err.json()["message"];
         this.hasError = true;
         this.showMessage = false;
-      });;
+      });
   }
 
   getAllUsers(){
@@ -57,6 +56,16 @@ export class UsersComponent extends SecureComponent {
         this.errorMessage = err.json()["message"];
         this.hasError = true;
         this.showMessage = false;
-      });;
+      });
+  }
+
+  public onKeypress(searchText:string):any {
+    console.log(searchText);
+    this.filteredUsers = this.users;
+    if (searchText=="") {
+      this.filteredUsers = this.users;
+    } else {
+      this.filteredUsers = this.users.filter(users => users.firstName.indexOf(searchText) != -1);
+    }
   }
 }
