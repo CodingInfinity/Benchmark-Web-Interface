@@ -65,7 +65,10 @@ export class UsersComponent extends SecureComponent {
     if (searchText=="") {
       this.filteredUsers = this.users;
     } else {
-      this.filteredUsers = this.users.filter(users => users.firstName.indexOf(searchText) != -1);
+      this.filteredUsers = this.users.filter(users => (users.firstName.indexOf(searchText)
+      &&users.login.indexOf(searchText)
+      &&users.lastName.indexOf(searchText)
+      &&users.email.indexOf(searchText)) != -1);
     }
   }
 }
