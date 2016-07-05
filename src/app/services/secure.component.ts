@@ -18,7 +18,7 @@ export class SecureComponent extends BaseComponent implements OnActivate {
     if (!this.client.authenticated()) {
       this.router.navigateByUrl('/login');
     } else if (!this.client.hasRoles(this.authorities)) {
-      this.router.navigateByUrl('/accessDenied');
+      this.router.navigateByUrl('/');
     }
   }
 }

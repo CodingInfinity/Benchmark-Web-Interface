@@ -18,23 +18,60 @@ import {Client} from "../../services/api.service";
   })
 export class UsersComponent extends SecureComponent {
   private users: any;
+  private filteredUsers: any = this.users;
   constructor(router:Router, protected client: Client) {
     super(router, client);
-    this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
+    this.authorities = ["ROLE_ADMIN"];
   }
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+    this.getAllUsers();
+
+  }
+
+  deleteUser(user:any){
+    this.client.deleteUserUsingDELETE(user.login).subscribe(
+      (response)=>{
+        this.hasError = false;
+        this.showMessage = true;
+        this.message = user.firstName + " " + user.lastName + " has been successfully deleted!";
+        this.getAllUsers();
+      },
+      (err)=>{
+        console.log(err.json());
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        this.showMessage = false;
+      });
+  }
+
+  getAllUsers(){
     this.client.getAllUsersUsingGET().subscribe(
       (response)=>{
-      this.users = response.json();
-      this.hasError = false;
-    },
-    (err)=>{
-      console.log(err.json());
-      this.errorMessage = err.json()["message"];
-      this.hasError = true;
-      this.showMessage = false;
-    });;
+        this.users = response.json();
+        this.filteredUsers = this.users;
+        this.hasError = false;
+      },
+      (err)=>{
+        console.log(err.json());
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        this.showMessage = false;
+      });
+  }
+
+  public onKeypress(searchText:string):any {
+    this.filteredUsers = this.users;
+    if (searchText=="") {
+      this.filteredUsers = this.users;
+    } else {
+      this.filteredUsers = this.users.filter((users:any) => {
+        return users.firstName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.login.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.lastName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.email.toLowerCase().indexOf(searchText.toLowerCase()) != -1;
+      });
+    }
   }
 }
