@@ -27,6 +27,7 @@ export class UsersComponent extends SecureComponent {
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
     this.getAllUsers();
+
   }
 
   deleteUser(user:any){
@@ -49,6 +50,7 @@ export class UsersComponent extends SecureComponent {
     this.client.getAllUsersUsingGET().subscribe(
       (response)=>{
         this.users = response.json();
+        this.filteredUsers = this.users;
         this.hasError = false;
       },
       (err)=>{
@@ -60,15 +62,16 @@ export class UsersComponent extends SecureComponent {
   }
 
   public onKeypress(searchText:string):any {
-    console.log(searchText);
     this.filteredUsers = this.users;
     if (searchText=="") {
       this.filteredUsers = this.users;
     } else {
-      this.filteredUsers = this.users.filter(users => (users.firstName.indexOf(searchText)
-      &&users.login.indexOf(searchText)
-      &&users.lastName.indexOf(searchText)
-      &&users.email.indexOf(searchText)) != -1);
+      this.filteredUsers = this.users.filter((users:any) => {
+        return users.firstName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.login.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.lastName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
+        users.email.toLowerCase().indexOf(searchText.toLowerCase()) != -1;
+      });
     }
   }
 }
