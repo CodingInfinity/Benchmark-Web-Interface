@@ -8,7 +8,7 @@ export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
 
 @Injectable()
-export class Client {
+export class APIService {
   private http: Http = null;
   private router: Router = null;
   private baseUrl: string = undefined;

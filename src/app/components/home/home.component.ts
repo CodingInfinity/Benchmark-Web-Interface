@@ -2,16 +2,16 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { MaterializeDirective } from "angular2-materialize";
 
-import { Client } from "../../services/api.service";
+import { APIService } from "../../services/api.service";
 import { SecureComponent } from "../../services/secure.component";
 
 import { NavigationComponent } from "../navigation/navigation.component";
 import { FooterComponent } from "../footer/footer.component";
 import { UploadComponent} from "../upload/upload.component";
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
-import {ValidatorsOwn} from "../validators.own";
-import {resolve} from "url";
-import {FileUploadService} from "../../services/file.upload.service";
+import { ControlGroup, FormBuilder, Validators} from "@angular/common";
+import { ValidatorsOwn} from "../validators.own";
+import { FileUploadService} from "../../services/file.upload.service";
+import { FileBrowserComponent} from "../files/browser/file.browser.component";
 
 @Component({
   selector: 'home',
@@ -21,7 +21,8 @@ import {FileUploadService} from "../../services/file.upload.service";
     MaterializeDirective,
     NavigationComponent,
     FooterComponent,
-    UploadComponent
+    UploadComponent,
+    FileBrowserComponent
   ]
 })
 export class HomeComponent extends SecureComponent {
@@ -32,7 +33,7 @@ export class HomeComponent extends SecureComponent {
     private totalFileSize: any = 0;
     private uploadedFileSize: any = 0;
 
-    constructor(router:Router, protected client: Client, private fb: FormBuilder, private validators: ValidatorsOwn, private fileUpload: FileUploadService) {
+    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorsOwn, private fileUpload: FileUploadService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.form = fb.group({

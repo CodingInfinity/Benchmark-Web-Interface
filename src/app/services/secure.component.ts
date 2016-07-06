@@ -1,13 +1,13 @@
 import {Router, OnActivate, RouteSegment, RouteTree} from "@angular/router";
 import {AuthenticationService} from "./authentication.service";
 import {BaseComponent} from "../components/base.component";
-import {Client} from "./api.service";
+import {APIService} from "./api.service";
 
 export class SecureComponent extends BaseComponent implements OnActivate {
 
   protected authorities: string[] = [];
 
-  constructor(protected router: Router, protected client: Client) {
+  constructor(protected router: Router, protected client: APIService) {
     super();
   }
   home() {

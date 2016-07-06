@@ -36,7 +36,7 @@
                     <label for="description">Description</label>
                   </div>
                 </div>
-                <upload  type="multi" (filesChange)="onFilesSelect($event)"></upload>
+                <upload type="multi" (filesChange)="onFilesSelect($event)"></upload>
 
                 <!--Multiple file upload-->
                 <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->
@@ -51,8 +51,9 @@
                 </div>
                 <p class="right">{{uploadedFileSize}} / {{totalFileSize}}MB</p>
               </div>
-
-
+            </div>
+            <div class="row">
+              <filebrowser url="Hello world :DD"></filebrowser>
             </div>
           </div>
         </div>

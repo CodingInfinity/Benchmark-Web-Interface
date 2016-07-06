@@ -4,7 +4,7 @@ import { MaterializeDirective } from "angular2-materialize";
 import {NavigationComponent} from "../../navigation/navigation.component";
 import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
-import {Client, UpdateUserRequest, ChangePasswordRequest} from "../../../services/api.service";
+import {APIService, UpdateUserRequest, ChangePasswordRequest} from "../../../services/api.service";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 import {ValidatorsOwn} from "../../validators.own";
 
@@ -34,7 +34,7 @@ export class ProfileComponent extends SecureComponent {
     private passwordForm: ControlGroup;
 
 
-    constructor(router:Router, protected client: Client, private fb: FormBuilder, private validators: ValidatorsOwn) {
+    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorsOwn) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.nameForm = fb.group({

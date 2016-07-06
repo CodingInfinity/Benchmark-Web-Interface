@@ -4,7 +4,7 @@ import { MaterializeDirective } from "angular2-materialize";
 import {NavigationComponent} from "../navigation/navigation.component";
 import {FooterComponent} from "../footer/footer.component";
 import {SecureComponent} from "../../services/secure.component";
-import {Client} from "../../services/api.service";
+import {APIService} from "../../services/api.service";
 
 @Component({
   selector: 'users',
@@ -19,7 +19,7 @@ import {Client} from "../../services/api.service";
 export class UsersComponent extends SecureComponent {
   private users: any;
   private filteredUsers: any = this.users;
-  constructor(router:Router, protected client: Client) {
+  constructor(router:Router, protected client: APIService) {
     super(router, client);
     this.authorities = ["ROLE_ADMIN"];
   }

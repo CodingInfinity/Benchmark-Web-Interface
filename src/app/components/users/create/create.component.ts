@@ -4,7 +4,7 @@ import { MaterializeDirective } from "angular2-materialize";
 import {NavigationComponent} from "../../navigation/navigation.component";
 import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
-import {Client, CreateManagedUserRequest} from "../../../services/api.service";
+import {APIService, CreateManagedUserRequest} from "../../../services/api.service";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 
 @Component({
@@ -22,7 +22,7 @@ export class CreateComponent extends SecureComponent {
   private form: ControlGroup;
   private roles: Array<string> = [];
 
-  constructor(router:Router, protected client: Client, private fb: FormBuilder, private api: Client){
+  constructor(router:Router, protected client: APIService, private fb: FormBuilder, private api: APIService){
     super(router, client);
     this.authorities = ["ROLE_ADMIN"];
     this.form = fb.group({

@@ -3,7 +3,7 @@
 import { Component } from '@angular/core';
 import { MaterializeDirective } from 'angular2-materialize';
 import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
-import {Client} from "../../../services/api.service";
+import {APIService} from "../../../services/api.service";
 import {BaseComponent} from "../../base.component";
 
 @Component({
@@ -17,7 +17,7 @@ export class ActivateAccountComponent extends BaseComponent implements OnActivat
   private key: string;
   private activated: number;
 
-  constructor(private router: Router, private api: Client) {
+  constructor(private router: Router, private api: APIService) {
     super();
     this.activated = -1;
   }

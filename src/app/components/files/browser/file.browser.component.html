@@ -1,0 +1,33 @@
+<div class="row card">
+  <div class="card-content row">
+    <span class="card-title">File Browser</span>
+
+    <!--Current inode is a file-->
+    <div *ngIf="currentInode.fileType">
+      <file class="left" name="{{currentInode.name}}" inode_id="{{currentInode.id}}" fileType="{{currentInode.fileType}}"></file>
+    </div>
+
+    <!--Current inode is a folder-->
+    <div *ngIf="!currentInode.fileType">
+      <div class="row" style="padding: 0 0.75rem;">
+        <folder name="{{home.name}}" inode_id="{{home.id}}" type="home" (click)="goHome()"></folder>
+      </div>
+      <div class="row">
+        <div class="col" style="padding: 0 0.75rem;" *ngIf="currentInode.previous">
+          <folder name="{{currentInode.previous.name}}" inode_id="{{currentInode.previous.id}}" type="back"(click)="changeDir(currentInode.previous.id)"></folder>
+        </div>
+        <div *ngFor="let inode of currentInode.nodeList">
+
+          <div class="col" *ngIf="inode.fileType">
+            <file name="{{inode.name}}" inode_id="{{inode.id}}" fileType="{{inode.fileType}}"></file>
+          </div>
+
+          <div class="col" *ngIf="!inode.fileType">
+            <folder name="{{inode.name}}" inode_id="{{inode.id}}" (click)="changeDir(inode.id)"></folder>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

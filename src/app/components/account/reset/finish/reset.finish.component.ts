@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { MaterializeDirective } from 'angular2-materialize';
 import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
 import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
-import {Client, CompletePasswordResetRequest} from "../../../../services/api.service";
+import {APIService, CompletePasswordResetRequest} from "../../../../services/api.service";
 import {ValidatorsOwn} from "../../../validators.own";
 import {BaseComponent} from "../../../base.component";
 
@@ -16,7 +16,7 @@ import {BaseComponent} from "../../../base.component";
 export class ResetFinishComponent extends BaseComponent implements OnActivate{
   private key: string;
   private form: ControlGroup;
-  constructor(private router: Router,  private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn) {
+  constructor(private router: Router, private fb: FormBuilder, private api: APIService, private validators: ValidatorsOwn) {
     super();
     this.form = fb.group({
       password: ['', Validators.required],

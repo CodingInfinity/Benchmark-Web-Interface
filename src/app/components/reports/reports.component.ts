@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {SecureComponent} from "../../services/secure.component";
 import {Router} from "@angular/router";
 import { MaterializeDirective } from 'angular2-materialize';
-import {Client} from "../../services/api.service";
+import {APIService} from "../../services/api.service";
 
 @Component({
   selector: 'report',
@@ -11,7 +11,7 @@ import {Client} from "../../services/api.service";
 })
 export class ReportComponent extends SecureComponent {
 
-  constructor(router:Router, client: Client) {
+  constructor(router:Router, client: APIService) {
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
   }

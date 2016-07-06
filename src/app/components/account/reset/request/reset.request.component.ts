@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { MaterializeDirective } from 'angular2-materialize';
 import {Router, ROUTER_DIRECTIVES} from '@angular/router'
 import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
-import {Client, RequestPasswordResetRequest} from "../../../../services/api.service";
+import {APIService, RequestPasswordResetRequest} from "../../../../services/api.service";
 import {BaseComponent} from "../../../base.component";
 
 @Component({
@@ -14,7 +14,7 @@ import {BaseComponent} from "../../../base.component";
 })
 export class ResetRequestComponent extends BaseComponent{
   private form: ControlGroup;
-  constructor(private router: Router, private fb: FormBuilder, private api: Client) {
+  constructor(private router: Router, private fb: FormBuilder, private api: APIService) {
     super();
     this.showMessage = false;
     this.form = fb.group({

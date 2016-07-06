@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { MaterializeDirective } from 'angular2-materialize';
 import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
 import {Router, ROUTER_DIRECTIVES, RouteSegment, OnActivate} from '@angular/router'
-import {Client, CreateUnmanagedUserRequest} from "../../../services/api.service";
+import {APIService, CreateUnmanagedUserRequest} from "../../../services/api.service";
 import {ValidatorsOwn} from "../../validators.own";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {BaseComponent} from "../../base.component";
@@ -18,7 +18,7 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
   private form: ControlGroup;
   private passwords: any;
 
-  constructor(private router: Router, private fb: FormBuilder, private api: Client, private validators: ValidatorsOwn) {
+  constructor(private router: Router, private fb: FormBuilder, private api: APIService, private validators: ValidatorsOwn) {
     super();
     this.form = fb.group({
       firstName: ['', Validators.required],

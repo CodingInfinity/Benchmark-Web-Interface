@@ -7,24 +7,24 @@ import {
 import {MockBackend, MockConnection} from "@angular/http/testing";
 
 import { AuthenticationService } from "./authentication.service";
-import {Client} from "./api.service";
+import {APIService} from "./api.service";
 import {Router} from "@angular/router";
 
 describe('Authentication Service', () => {
   /*
-  let mockbackend : MockBackend, client: Client;
+  let mockbackend : MockBackend, client: APIService;
 
 
   beforeEachProviders(() =>
     [
       HTTP_PROVIDERS,
-      Client
+      APIService
     ]
   );
 
 
 
-  beforeEach(inject([Client], (_client: Client) => {
+  beforeEach(inject([APIService], (_client: APIService) => {
     this.client = _client;
   }));
 

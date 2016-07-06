@@ -5,7 +5,7 @@ import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/rout
 import {MaterializeDirective} from 'angular2-materialize';
 import {AuthenticationService} from "../../services/authentication.service";
 import {Http, Response} from "@angular/http";
-import {Client} from "../../services/api.service";
+import {APIService} from "../../services/api.service";
 import {BaseComponent} from "../base.component";
 
 
@@ -22,7 +22,7 @@ export class LoginComponent extends BaseComponent implements OnActivate {
 
   private form: ControlGroup;
 
-  constructor(private router: Router, private client: Client, private fb: FormBuilder) {
+  constructor(private router: Router, private client: APIService, private fb: FormBuilder) {
     super();
     this.form = fb.group({
       username: ['', Validators.required],
