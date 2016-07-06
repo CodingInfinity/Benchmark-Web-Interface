@@ -375,8 +375,7 @@ export class Client {
       }
     }
     return false;
-  }
-
+  } 
 }
 
 

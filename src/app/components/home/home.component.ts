@@ -10,6 +10,8 @@ import { FooterComponent } from "../footer/footer.component";
 import { UploadComponent} from "../upload/upload.component";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 import {ValidatorsOwn} from "../validators.own";
+import {resolve} from "url";
+import {FileUploadService} from "../../services/file.upload.service";
 
 @Component({
   selector: 'home',
@@ -24,23 +26,48 @@ import {ValidatorsOwn} from "../validators.own";
 })
 export class HomeComponent extends SecureComponent {
     private form: ControlGroup;
-    private fileExample:any = null;
-    constructor(router:Router, protected client: Client, private fb: FormBuilder, private validators: ValidatorsOwn) {
+    private fileList:FileList = null;
+    private uploadProgress: number = 0;
+    private uploadInProgress: boolean = false;
+    private totalFileSize: any = 0;
+    private uploadedFileSize: any = 0;
+
+    constructor(router:Router, protected client: Client, private fb: FormBuilder, private validators: ValidatorsOwn, private fileUpload: FileUploadService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.form = fb.group({
-        metadata: ['', Validators.required]
+        name: ['', Validators.required],
+        description: ['', Validators.required],
       });
     }
 
-  onFilesSelect(value:any){
-    this.fileExample = value;
+  onFilesSelect(value:FileList){
+    this.fileList = value;
+    for(var i=0; i < this.fileList.length; i++){
+      this.totalFileSize += this.fileList[i].size;
+    }
+    this.totalFileSize /= (1000*1000);
+    this.totalFileSize = this.totalFileSize.toFixed(2);
   }
 
   onSubmit(value:any){
-    console.log(value);
-    console.log(this.fileExample);
-    this.showMessage = true;
-    this.message = "SUCCESS: " + value.metadata + " [" + this.fileExample[0].name+"]";
+    this.uploadInProgress = true;
+    let categories: Array<number> = [1,2];
+    this.fileUpload.getObserver().subscribe(progress => {
+      this.uploadProgress = progress;
+      this.uploadedFileSize = (this.totalFileSize * (progress/100.0)).toFixed(2);
+      console.log(this.uploadedFileSize);
+      if(progress == 100){
+        this.showMessage = true;
+        this.message = "Your file has been successfully uploaded";
+        this.uploadInProgress = false;
+      }
+    });
+
+    try{
+      this.fileUpload.uploadFiles(value.name, value.description, categories, this.fileList, "http://localhost:8081/api/repo/algorithm");
+    }catch(error){
+      console.log(error);
+    }
   }
 }

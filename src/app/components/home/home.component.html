@@ -26,19 +26,33 @@
               <form [ngFormModel]="form" class="col s12" (submit)="onSubmit(form.value)">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="metadata" type="text" class="validate" ngControl="metadata">
-                    <label for="metadata">Metadata</label>
+                    <input id="name" type="text" class="validate" ngControl="name">
+                    <label for="name">Name</label>
                   </div>
                 </div>
-                <upload (filesChange)="onFilesSelect($event)"></upload>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="description" type="text" class="validate" ngControl="description">
+                    <label for="description">Description</label>
+                  </div>
+                </div>
+                <upload  type="multi" (filesChange)="onFilesSelect($event)"></upload>
 
                 <!--Multiple file upload-->
                 <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->
 
-                <button class="btn waves-effect waves-light right" type="submit">Submit
+                <button class="btn waves-effect waves-light right" *ngIf="!uploadInProgress" type="submit">Submit
                   <i class="material-icons right">send</i>
                 </button>
               </form>
+              <div *ngIf="uploadInProgress">
+                <div class="progress" >
+                  <div class="determinate" style.width="{{uploadProgress}}%"></div>
+                </div>
+                <p class="right">{{uploadedFileSize}} / {{totalFileSize}}MB</p>
+              </div>
+
+
             </div>
           </div>
         </div>
