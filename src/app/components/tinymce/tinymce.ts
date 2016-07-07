@@ -12,8 +12,6 @@ declare var tinymce: any;
   outputs: ["contentChanged"]
 })
 
-
-
 export class EditorComponent {
 
   private elementRef: ElementRef;

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import {Router, RouteSegment, RouteTree} from "@angular/router";
 import { MaterializeDirective } from "angular2-materialize";
 import {NavigationComponent} from "../../navigation/navigation.component";
-import {EditorComponent} from "../../../tinymce/tinymce";
+import {EditorComponent} from "../../tinymce/tinymce";
 import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
 import {Client, CreateManagedUserRequest} from "../../../services/api.service";
