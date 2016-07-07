@@ -23,8 +23,8 @@ import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 export class CreateDatasetComponent extends SecureComponent {
   private form: ControlGroup;
   tinyModel="Default";
-
   constructor(router:Router, protected client: APIService, private fb: FormBuilder){
+
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
     this.form = fb.group({

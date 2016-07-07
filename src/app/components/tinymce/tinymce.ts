@@ -62,9 +62,6 @@ export class EditorComponent {
   ngOnDestroy() {
     //destroy cloned elements
     tinymce.get(this.elementID).remove();
-
-    var elem = document.getElementById(this.elementID);
-    elem.parentElement.removeChild(elem);
   }
 
 
