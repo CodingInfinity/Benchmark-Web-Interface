@@ -25,6 +25,7 @@ export class FileBrowserComponent implements OnInit{
   private fileStructure: any;
   private selectedFile: any;
   private home: any;
+  private breadcrumbs:Array<any>;
   private fileSelect: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private router: Router) {
@@ -47,7 +48,8 @@ export class FileBrowserComponent implements OnInit{
                   '{"id": 234, "name": "fabio.png", "fileType": "image/png", "contents": "QEFCQ0RFRkc="}' +
                 ']},' +
               '{"id": 5748, "name": "main.cpp", "fileType": "application/pdf","contents": "QEFCQ0RFRkc="},' +
-              '{"id": 4567, "name": "index.html", "fileType": "text/html","contents": "QEFCQ0RFRkc=" }' +
+              '{"id": 4567, "name": "index.html", "fileType": "text/html","contents": "QEFCQ0RFRkc=" },' +
+              '{"id": 134467,"name": "/var5","nodeList": []}' +
             ']},' +
           '{"id": 78, "name": "public", "nodeList": ' +
             '[' +
@@ -57,17 +59,28 @@ export class FileBrowserComponent implements OnInit{
             '[' +
               '{"id": 890,"name": "temp.dat","fileType": "text/plain","contents": "QEFCQ0RFRkc=" }' +
             ']},' +
-          '{"id": 124457,"name": "/var","nodeList": []}' +
+          '{"id": 124457,"name": "/var","nodeList": []},' +
+          '{"id": 124458,"name": "/var1","nodeList": []},' +
+          '{"id": 124459,"name": "/var2","nodeList": []},' +
+          '{"id": 124450,"name": "/var3","nodeList": []},' +
+          '{"id": 124447,"name": "/var4","nodeList": []},' +
+          '{"id": 124467,"name": "/var5","nodeList": []},' +
+          '{"id": 124477,"name": "/var6","nodeList": []},' +
+          '{"id": 124487,"name": "/var7","nodeList": []},' +
+          '{"id": 124497,"name": "/var8","nodeList": []},' +
+          '{"id": 124557,"name": "/var9","nodeList": []},' +
+          '{"id": 124857,"name": "/var10","nodeList": []},' +
+          '{"id": 124957,"name": "/var11","nodeList": []}' +
         ']' +
       '}';
 
     var response2 = '{"id":1, "name": "test.java", "fileType": "text/java", "contents": "helloworld"}';
 
-    this.fileStructure = JSON.parse(response2);
-    console.log(this.fileStructure);
+    this.fileStructure = JSON.parse(response);
     this.currentInode = this.fileStructure;
     this.selectedFile = null;
     this.home = this.fileStructure;
+    this.breadcrumbs = [this.home];
   }
 
   changeDir(inodeId: number){
@@ -76,17 +89,42 @@ export class FileBrowserComponent implements OnInit{
         var previous = this.currentInode;
         this.currentInode = inode;
         this.currentInode.previous = previous;
-        return;
       }
     }
     if(this.currentInode.previous.id == inodeId){
       this.currentInode = this.currentInode.previous;
     }
+    this.getBreadcrumbs();
+  }
+
+  changeDirWithINode(inode:any){
+    this.currentInode = inode;
+    this.getBreadcrumbs();
   }
 
   goHome(){
     this.currentInode = this.home;
+    this.breadcrumbs = [this.home];
   }
+
+  getBreadcrumbs(){
+    let trail:Array<string> = [];
+    this.getTrailRecursive(this.currentInode, trail);
+    this.breadcrumbs = trail.reverse();
+  }
+
+  private getTrailRecursive(inode:any, arr:Array<string>){
+    if(inode.previous){
+      arr.push(inode);
+      this.getTrailRecursive(inode.previous, arr);
+      return;
+    }
+    if(!inode.previous){
+      arr.push(this.home);
+      return;
+    }
+  }
+
 }
 
 

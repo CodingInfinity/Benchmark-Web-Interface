@@ -14,6 +14,11 @@ export class FileComponent{
   public inode_id: number;
   public name: string;
   public fileType: string;
+
+  fileClicked(){
+    console.log("File Clicked");
+  }
+
 }
 
 

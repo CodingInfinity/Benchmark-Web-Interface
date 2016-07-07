@@ -1,6 +1,13 @@
 <div class="row card">
   <div class="card-content row">
-    <span class="card-title">File Browser</span>
+    <nav class="col teal">
+      <div class="nav-wrapper">
+        <a class="brand-logo left col">File Browser</a>
+        <div class="col right">
+            <a *ngFor="let crumb of breadcrumbs" href="javascript:" (click)="changeDirWithINode(crumb)" class="breadcrumb">{{crumb.name}}</a>
+        </div>
+      </div>
+    </nav>
 
     <!--Current inode is a file-->
     <div *ngIf="currentInode.fileType">
@@ -9,9 +16,6 @@
 
     <!--Current inode is a folder-->
     <div *ngIf="!currentInode.fileType">
-      <div class="row" style="padding: 0 0.75rem;">
-        <folder name="{{home.name}}" inode_id="{{home.id}}" type="home" (click)="goHome()"></folder>
-      </div>
       <div class="row">
         <div class="col" style="padding: 0 0.75rem;" *ngIf="currentInode.previous">
           <folder name="{{currentInode.previous.name}}" inode_id="{{currentInode.previous.id}}" type="back"(click)="changeDir(currentInode.previous.id)"></folder>
