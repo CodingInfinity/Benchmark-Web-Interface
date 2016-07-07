@@ -12,6 +12,7 @@ import { ControlGroup, FormBuilder, Validators} from "@angular/common";
 import { ValidatorsOwn} from "../validators.own";
 import { FileUploadService} from "../../services/file.upload.service";
 import { FileBrowserComponent} from "../files/browser/file.browser.component";
+import {EditorComponent} from "../tinymce/tinymce";
 
 @Component({
   selector: 'home',
@@ -22,16 +23,19 @@ import { FileBrowserComponent} from "../files/browser/file.browser.component";
     NavigationComponent,
     FooterComponent,
     UploadComponent,
+    EditorComponent,
     FileBrowserComponent
   ]
 })
 export class HomeComponent extends SecureComponent {
     private form: ControlGroup;
     private fileList:FileList = null;
+    private descriptionHtml: string;
     private uploadProgress: number = 0;
     private uploadInProgress: boolean = false;
     private totalFileSize: any = 0;
     private uploadedFileSize: any = 0;
+    tinyModel="Default";
 
     constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorsOwn, private fileUpload: FileUploadService) {
       super(router, client);
@@ -51,6 +55,10 @@ export class HomeComponent extends SecureComponent {
     this.totalFileSize = this.totalFileSize.toFixed(2);
   }
 
+  editorContentChanged(value:any){
+    this.descriptionHtml = value;
+  }
+
   onSubmit(value:any){
     this.uploadInProgress = true;
     let categories: Array<number> = [1,2];
@@ -66,7 +74,7 @@ export class HomeComponent extends SecureComponent {
     });
 
     try{
-      this.fileUpload.uploadFiles(value.name, value.description, categories, this.fileList, "http://localhost:8081/api/repo/algorithm");
+      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, categories, this.fileList, "http://localhost:8081/api/repo/algorithm");
     }catch(error){
       console.log(error);
     }

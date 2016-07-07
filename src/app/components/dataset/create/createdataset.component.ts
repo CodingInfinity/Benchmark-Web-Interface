@@ -5,7 +5,7 @@ import {NavigationComponent} from "../../navigation/navigation.component";
 import {EditorComponent} from "../../tinymce/tinymce";
 import {FooterComponent} from "../../footer/footer.component";
 import {SecureComponent} from "../../../services/secure.component";
-import {Client, CreateManagedUserRequest} from "../../../services/api.service";
+import {APIService} from "../../../services/api.service";
 import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 
 @Component({
@@ -24,7 +24,7 @@ export class CreateDatasetComponent extends SecureComponent {
   private form: ControlGroup;
   tinyModel="Default";
 
-  constructor(router:Router, protected client: Client, private fb: FormBuilder, private api: Client){
+  constructor(router:Router, protected client: APIService, private fb: FormBuilder){
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
     this.form = fb.group({

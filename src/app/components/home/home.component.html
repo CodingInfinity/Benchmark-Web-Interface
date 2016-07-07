@@ -31,10 +31,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="input-field col s12">
-                    <input id="description" type="text" class="validate" ngControl="description">
-                    <label for="description">Description</label>
-                  </div>
+                  <editor (contentChanged)="editorContentChanged($event)"></editor>
                 </div>
                 <upload type="multi" (filesChange)="onFilesSelect($event)"></upload>
 
