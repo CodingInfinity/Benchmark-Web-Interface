@@ -59,18 +59,7 @@ export class FileBrowserComponent implements OnInit{
             '[' +
               '{"id": 890,"name": "temp.dat","fileType": "text/plain","contents": "QEFCQ0RFRkc=" }' +
             ']},' +
-          '{"id": 124457,"name": "/var","nodeList": []},' +
-          '{"id": 124458,"name": "/var1","nodeList": []},' +
-          '{"id": 124459,"name": "/var2","nodeList": []},' +
-          '{"id": 124450,"name": "/var3","nodeList": []},' +
-          '{"id": 124447,"name": "/var4","nodeList": []},' +
-          '{"id": 124467,"name": "/var5","nodeList": []},' +
-          '{"id": 124477,"name": "/var6","nodeList": []},' +
-          '{"id": 124487,"name": "/var7","nodeList": []},' +
-          '{"id": 124497,"name": "/var8","nodeList": []},' +
-          '{"id": 124557,"name": "/var9","nodeList": []},' +
-          '{"id": 124857,"name": "/var10","nodeList": []},' +
-          '{"id": 124957,"name": "/var11","nodeList": []}' +
+          '{"id": 124457,"name": "/var","nodeList": []}' +
         ']' +
       '}';
 
