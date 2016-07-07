@@ -18,6 +18,7 @@ import {LogoutComponent} from "./components/logout/logout.component";
 import {ProfileComponent} from "./components/account/profile/profile.component";
 import {UsersComponent} from "./components/users/users.component";
 import {CreateComponent} from "./components/users/create/create.component";
+import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
 
 @Component({
   selector: 'my-app',
@@ -40,7 +41,8 @@ import {CreateComponent} from "./components/users/create/create.component";
     { path: '/report', component: ReportComponent },
     { path: '/profile', component: ProfileComponent },
     { path: '/users', component: UsersComponent },
-    { path: '/create', component: CreateComponent }
+    { path: '/create', component: CreateComponent },
+    { path: '/createdataset', component: CreateDatasetComponent }
 ])
 export class AppComponent {
  constructor(private router: Router) {}
