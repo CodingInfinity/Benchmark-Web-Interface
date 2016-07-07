@@ -70,16 +70,16 @@ export class EditorComponent {
   }
 
 
-  tinyMCESetup(ed) {
+  tinyMCESetup(ed:any) {
     ed.on('keyup', this.tinyMCEOnKeyup.bind(this));
   }
 
-  tinyMCEOnKeyup(e) {
+  tinyMCEOnKeyup(e:any) {
     this.contentChanged.emit(tinymce.get(this.elementID).getContent());
   }
 
 
-  set mceContent(content) {
+  set mceContent(content:any) {
     this.htmlContent = content;
   }
 }
