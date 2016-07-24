@@ -182,6 +182,23 @@ export class APIService {
   }
 
   /**
+   * getAllCategories 
+   * @return OK
+   */
+  getAllCategoriesUsingGET(): Observable<any>{
+    var url = this.baseUrl + "/api/repo/category/dataset/{id}?";
+    
+    var content = "";
+    
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+  /**
    * getAllUsers
    * @return OK
    */
@@ -375,7 +392,7 @@ export class APIService {
       }
     }
     return false;
-  } 
+  }
 }
 
 

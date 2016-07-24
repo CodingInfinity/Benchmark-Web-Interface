@@ -18,6 +18,8 @@ import {APIService} from "../../services/api.service";
 })
 
 export class CategoriesComponent extends SecureComponent {
+  private categories: any;
+  private filteredCategories: any;
   constructor(router:Router, protected client: APIService) {
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
@@ -25,5 +27,20 @@ export class CategoriesComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+  }
+
+  getAllCategories(){
+    this.client.getAllCategoriesUsingGET().subscribe(
+      (response)=>{
+        this.categories = response.json();
+        this.filteredCategories = this.categories;
+        this.hasError = false;
+      },
+      (err)=>{
+        console.log(err.json());
+        this.errorMessage = err.json()["message"];
+        this.hasError = true;
+        this.showMessage = false;
+      });
   }
 }

@@ -7,10 +7,7 @@
       <div class="col s12 m8 offset-m2 l8 offset-l2">
         <div class="card">
           <div class="card-panel indigo darken-1">
-            <span class="card-title white-text">All Catagories</span>
-            <form class="form-inline">
-              <input placeholder="Search..." type="text" [ngModel]="searchText" (ngModelChange)="onKeypress($event)">
-            </form>
+            <span class="card-title white-text">All Dataset Categories</span>
           </div>
           <div class="card-content">
             <div class="row" *ngIf="hasError">
@@ -23,9 +20,8 @@
                 <span class="white-text">{{message}}</span>
               </div>
             </div>
-            <div class="card-panel row" *ngFor="let category of filteredCategories">
+            <div class="card-panel row" *ngFor="let category of categories">
               <span class="card-title black-text">{{category.name}}</span>
-              <p><strong>Description:</strong> {{category.description}}</p>
               <div class="row">
                 <button (click)="deleteUser(category)" class="btn waves-effect waves-light btn-large col m3 offset-m2" style="top: 20px;">Delete Category
                   <i class="material-icons right">send</i>
