@@ -31,7 +31,7 @@ export class AlgorithmCategoriesComponent extends SecureComponent {
   }
 
   getAllCategories(){
-    this.client.getAllCategoriesUsingGET().subscribe(
+    this.client.getAllAlgorithmCategoriesUsingGET().subscribe(
       (response)=>{
         this.categories = response.json();
         this.filteredCategories = this.categories;
