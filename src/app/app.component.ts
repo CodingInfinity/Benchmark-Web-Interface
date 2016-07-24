@@ -19,6 +19,7 @@ import {UsersComponent} from "./components/users/users.component";
 import {CreateComponent} from "./components/users/create/create.component";
 import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
 import {CategoriesComponent} from "./components/category/viewcategory.component";
+import {AlgorithmCategoriesComponent} from "./components/category/algorithm/algorithmcategory.component";
 
 @Component({
   selector: 'my-app',
@@ -43,7 +44,8 @@ import {CategoriesComponent} from "./components/category/viewcategory.component"
     { path: '/users', component: UsersComponent },
     { path: '/create', component: CreateComponent },
     { path: '/createdataset', component: CreateDatasetComponent },
-    { path: '/categories', component: CategoriesComponent}
+    { path: '/categories', component: CategoriesComponent},
+    { path: '/algorithmcategories', component: AlgorithmCategoriesComponent}
 ])
 export class AppComponent {
  constructor(private router: Router) {}
