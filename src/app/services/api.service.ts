@@ -186,12 +186,10 @@ export class APIService {
    * @return OK
    */
   getAllDatasetCategoriesUsingGET(): Observable<any>{
-    var url = this.baseUrl + "/api/repo/category/dataset/{id}?";
+    var url = this.baseUrl + "/api/repo/category/dataset/all";
 
-    var content = "";
 
     return this.http.request(url, {
-      body: content,
       method: "get",
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8"
@@ -203,12 +201,10 @@ export class APIService {
    * @return OK
    */
   getAllAlgorithmCategoriesUsingGET(): Observable<any>{
-    var url = this.baseUrl + "/api/repo/category/algorithm/{id}?";
+    var url = this.baseUrl + "/api/repo/category/algorithm/all";
 
-    var content = "";
 
     return this.http.request(url, {
-      body: content,
       method: "get",
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8"

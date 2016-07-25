@@ -28,12 +28,14 @@ export class AlgorithmCategoriesComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+    this.getAllCategories();
   }
 
   getAllCategories(){
     this.client.getAllAlgorithmCategoriesUsingGET().subscribe(
       (response)=>{
         this.categories = response.json();
+        console.log(this.categories);
         this.filteredCategories = this.categories;
         this.hasError = false;
       },

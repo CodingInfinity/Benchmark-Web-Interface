@@ -27,6 +27,7 @@ export class CategoriesComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
     super.routerOnActivate(curr, prev, currTree, prevTree);
+    this.getAllCategories();
   }
 
   getAllCategories(){
