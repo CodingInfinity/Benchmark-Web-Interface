@@ -9,6 +9,74 @@
           <div class="card-panel indigo darken-1">
             <span class="card-title white-text">Create Experiment</span>
           </div>
+
+          <div class="card-content">
+            <div class="row" *ngIf="hasError">
+              <div class="card-panel red">
+                <span class="white-text">{{errorMessage}}</span>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showMessage">
+              <div class="card-panel green">
+                <span class="white-text">{{message}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <select multiple materialize="material_select" (change)="roleChange($event) " required>
+                <option value="0" disabled selected>Choose your dataset</option>
+
+              </select>
+              <label>Select the Dataset</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <select multiple materialize="material_select" (change)="roleChange($event) " required>
+                <option value="0" disabled selected>Choose your algorithm</option>
+
+              </select>
+              <label>Select the Algorithm</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <form action="#">
+                <p class="range-field">
+                  <span>Probe Interval</span>
+                  <input type="range" id="probe" min="0" max="100" />
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <form action="#">
+                <p class="range-field">
+                  <span>Timeout Interval</span>
+                  <input type="range" id="timeout" min="0" max="100" />
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <form action="#">
+                <p class="range-field">
+                  <span>Jobs</span>
+                  <input type="range" id="jobs" min="0" max="10" />
+                </p>
+              </form>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

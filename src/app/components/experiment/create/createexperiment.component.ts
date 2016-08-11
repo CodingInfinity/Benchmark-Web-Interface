@@ -21,6 +21,7 @@ import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 })
 
 export class CreateExperimentComponent extends SecureComponent {
+  private datasets: Array<string> = [];
   constructor(router:Router, protected client: APIService){
 
     super(router, client);
@@ -29,5 +30,20 @@ export class CreateExperimentComponent extends SecureComponent {
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
     super.routerOnActivate(curr, prev, currTree, prevTree);
+  }
+
+  roleChange(value:any){
+    for(var option of value.target){
+      if(option.selected && !option.disabled){
+        if(!this.datasets.includes(option.value)){
+          this.datasets.push(option.value);
+        }
+      }else if(!option.selected && !option.disabled){
+        if(this.datasets.includes(option.value)){
+          var index = this.datasets.indexOf(option.value)
+          this.datasets.splice(index,1);
+        }
+      }
+    }
   }
 }
