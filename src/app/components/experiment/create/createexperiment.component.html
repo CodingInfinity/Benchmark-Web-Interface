@@ -23,7 +23,9 @@
               </div>
             </div>
           </div>
-
+      <div class = "row">
+        <form class="col s12">
+        <div class = "row">
           <div class="row">
             <div class="input-field col s12">
               <select multiple materialize="material_select" (change)="roleChange($event) " required>
@@ -46,37 +48,39 @@
 
           <div class="row">
             <div class="input-field col s12">
-              <form action="#">
                 <p class="range-field">
                   <span>Probe Interval</span>
                   <input type="range" id="probe" min="0" max="100" />
                 </p>
-              </form>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <form action="#">
                 <p class="range-field">
                   <span>Timeout Interval</span>
                   <input type="range" id="timeout" min="0" max="100" />
                 </p>
-              </form>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <form action="#">
                 <p class="range-field">
                   <span>Jobs</span>
                   <input type="range" id="jobs" min="0" max="10" />
                 </p>
-              </form>
             </div>
           </div>
 
+          <div class="row right-align">
+            <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+        </form>
+        </div>
         </div>
       </div>
     </div>
