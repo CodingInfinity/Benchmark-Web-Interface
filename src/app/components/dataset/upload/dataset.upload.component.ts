@@ -12,9 +12,9 @@ import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {FileUploadService} from "../../../services/file.upload.service";
 
 @Component({
-  selector: 'uploadalgorithm',
-  template: require('./algorithm.upload.component.html'),
-  styles: [require('./algorithm.upload.component.css')],
+  selector: 'uploaddataset',
+  template: require('./dataset.upload.component.html'),
+  styles: [require('./dataset.upload.component.css')],
   directives: [
     MaterializeDirective,
     NavigationComponent,
@@ -24,7 +24,7 @@ import {FileUploadService} from "../../../services/file.upload.service";
   ]
 })
 
-export class UploadAlgorithmComponent extends SecureComponent {
+export class UploadDatasetComponent extends SecureComponent {
 
   private form: ControlGroup;
   private fileList:FileList = null;
@@ -87,7 +87,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
     });
 
     try{
-      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList, "http://localhost:8081/api/repo/algorithm");
+      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList, "http://localhost:8081/api/repo/dataset");
     }catch(error){
       console.log(error);
     }
@@ -112,7 +112,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
     super.routerOnActivate(curr, prev, currTree, prevTree);
     //When the api call for all algorithm categories has been implemented, then we get the data here
-    this.client.getAllAlgorithmCategoriesGET().subscribe((res) =>{
+    this.client.getAllDatasetCategoriesGET().subscribe((res) =>{
       this.categories = res.json();
       console.log(this.categories);
     },(err) =>{

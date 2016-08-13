@@ -19,6 +19,7 @@ import {UsersComponent} from "./components/users/users.component";
 import {CreateComponent} from "./components/users/create/create.component";
 import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
 import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.upload.component";
+import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload.component";
 
 @Component({
   selector: 'my-app',
@@ -43,7 +44,8 @@ import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.
     { path: '/users', component: UsersComponent },
     { path: '/create', component: CreateComponent },
     { path: '/createdataset', component: CreateDatasetComponent },
-    { path: '/uploadalgorithm', component: UploadAlgorithmComponent }
+    { path: '/uploadalgorithm', component: UploadAlgorithmComponent },
+    { path: '/uploaddataset', component: UploadDatasetComponent },
 ])
 export class AppComponent {
  constructor(private router: Router) {}
