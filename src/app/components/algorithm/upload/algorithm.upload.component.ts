@@ -34,7 +34,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
   private totalFileSize: any = 0;
   private uploadedFileSize: any = 0;
   private categoriesChosen: Array<number> = [];
-  private categories: any = 0;
+  private categories: Array<Object>;
 
   tinyModel="Default";
 
@@ -44,6 +44,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
     this.form = fb.group({
       name: ['', Validators.required],
     });
+    //this.categories = JSON.parse("[{'id':'1','name':'hello'}]");
 
   }
 
@@ -113,7 +114,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
     super.routerOnActivate(curr, prev, currTree, prevTree);
     //When the api call for all algorithm categories has been implemented, then we get the data here
     this.client.getAllAlgorithmCategoriesGET().subscribe((res) =>{
-      this.categories = res.json();
+      this.categories = JSON.parse(res.text());
       console.log(this.categories);
     },(err) =>{
       this.hasError = true;
@@ -121,5 +122,5 @@ export class UploadAlgorithmComponent extends SecureComponent {
     });
   }
 
-
 }
+

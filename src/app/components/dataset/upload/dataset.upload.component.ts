@@ -34,7 +34,7 @@ export class UploadDatasetComponent extends SecureComponent {
   private totalFileSize: any = 0;
   private uploadedFileSize: any = 0;
   private categoriesChosen: Array<number> = [];
-  private categories: any = 0;
+  private categories: Array<Object>;
 
   tinyModel="Default";
 
