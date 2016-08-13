@@ -32,10 +32,10 @@
       <div class="collapsible-header"><i class="material-icons">folder</i>Data Set</div>
       <div class="collapsible-body">
         <ul>
-          <li><a [routerLink]="['/uploaddataset']">Upload Data Set</a></li>
-          <li><a [routerLink]="['/createdataset']">Create New Data Set</a></li>
+          <li><a [routerLink]="['/upload/dataset']">Upload Data Set</a></li>
+          <li><a href="#!">Create New Data Set</a></li>
           <li><a href="#!">View User Data Sets</a></li>
-          <li><a href="#!">View All Data Sets</a></li>
+          <li><a [routerLink]="['/view/all/datasets']">View All Data Sets</a></li>
         </ul>
       </div>
     </li>
@@ -43,9 +43,9 @@
       <div class="collapsible-header"><i class="material-icons">code</i>Algorithms</div>
       <div class="collapsible-body">
         <ul>
-          <li><a [routerLink]="['/uploadalgorithm']">Upload Algorithm</a></li>
+          <li><a [routerLink]="['/upload/algorithm']">Upload Algorithm</a></li>
           <li><a href="#!">View User Algorithms</a></li>
-          <li><a href="#!">View All Algorithms</a></li>
+          <li><a [routerLink]="['/view/all/algorithms']">View All Algorithms</a></li>
         </ul>
       </div>
     </li>
