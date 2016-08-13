@@ -41,7 +41,7 @@
                 <div class="row">
                   <editor (contentChanged)="editorContentChanged($event)"></editor>
                 </div>
-                <upload type="multi" (filesChange)="onFilesSelect($event)"></upload>
+                <upload (filesChange)="onFilesSelect($event)"></upload>
 
                 <!--Multiple file upload-->
                 <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->

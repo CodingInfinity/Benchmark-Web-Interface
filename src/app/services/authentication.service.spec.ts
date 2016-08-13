@@ -33,7 +33,7 @@ describe('Authentication Service', () => {
     //inject([XHRBackend], (mockbackend: MockBackend) => {
     ()=>{
 
-      expect(AuthenticationService.authenticatedAndIsTokenExpired()).toBeFalsy();
+      expect(AuthenticationService.authenticatedAndIsNotTokenExpired()).toBeFalsy();
 
       //Mocking the backend
       /*mockbackend.connections.subscribe(
@@ -64,7 +64,7 @@ describe('Authentication Service', () => {
 
       localStorage.setItem('token', token);
 
-      expect(AuthenticationService.authenticatedAndIsTokenExpired()).toBeTruthy();
+      expect(AuthenticationService.authenticatedAndIsNotTokenExpired()).toBeTruthy();
 
   });
 
@@ -77,7 +77,7 @@ describe('Authentication Service', () => {
   it ('should not be authenticated after logout', () => {
     localStorage.setItem('token','testdata');
     client.logout();
-    expect(AuthenticationService.authenticatedAndIsTokenExpired()).toBeFalsy();
+    expect(AuthenticationService.authenticatedAndIsNotTokenExpired()).toBeFalsy();
   });
 
   it('user has access to this route', () =>{

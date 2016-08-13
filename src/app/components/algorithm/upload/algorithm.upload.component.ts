@@ -8,7 +8,7 @@ import {FooterComponent} from "../../footer/footer.component";
 import {EditorComponent} from "../../tinymce/tinymce";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService} from "../../../services/api.service";
-import {FormBuilder, Validators, ControlGroup} from "@angular/common";
+import {FormBuilder, Validators, ControlGroup, Control} from "@angular/common";
 import {FileUploadService} from "../../../services/file.upload.service";
 
 @Component({
@@ -88,7 +88,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
     });
 
     try{
-      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList, "http://localhost:8081/api/repo/algorithm");
+      this.fileUpload.uploadFile(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList[0], "http://localhost:8081/api/repo/algorithm");
     }catch(error){
       console.log(error);
     }

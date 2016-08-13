@@ -13,7 +13,7 @@ export class AuthenticationService extends Http {
     super(backend, defaultOptions);
   }
 
-  static authenticatedAndIsTokenExpired() :boolean {
+  static authenticatedAndIsNotTokenExpired() :boolean {
     if(!localStorage.getItem('token')){
       return false;
     }
@@ -68,7 +68,7 @@ export class AuthenticationService extends Http {
       options.headers = new Headers();
     }
 
-    if (AuthenticationService.authenticatedAndIsTokenExpired()) {
+    if (AuthenticationService.authenticatedAndIsNotTokenExpired()) {
       options.headers.set("Authorization", "Bearer " + JSON.parse(localStorage.getItem('token'))['access_token']);
     }
 

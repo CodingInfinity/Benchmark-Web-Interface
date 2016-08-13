@@ -87,7 +87,7 @@ export class UploadDatasetComponent extends SecureComponent {
     });
 
     try{
-      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList, "http://localhost:8081/api/repo/dataset");
+      this.fileUpload.uploadFile(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList[0], "http://localhost:8081/api/repo/dataset");
     }catch(error){
       console.log(error);
     }
