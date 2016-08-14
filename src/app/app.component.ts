@@ -20,6 +20,11 @@ import {CreateComponent} from "./components/users/create/create.component";
 import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 
+import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.upload.component";
+import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload.component";
+import {ViewAllAlgorithmsComponent} from "./components/algorithm/view/all/algorithm.view.all.component";
+import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
+
 @Component({
   selector: 'my-app',
   template: require('./app.component.html'),
@@ -41,9 +46,13 @@ import {CreateExperimentComponent} from "./components/experiment/create/createex
     { path: '/report', component: ReportComponent },
     { path: '/profile', component: ProfileComponent },
     { path: '/users', component: UsersComponent },
-    { path: '/create', component: CreateComponent },
-    { path: '/createdataset', component: CreateDatasetComponent },
-    { path: 'createexperiment', component: CreateExperimentComponent}
+    { path: '/create/user', component: CreateComponent },
+    { path: '/create/experiment', component: CreateExperimentComponent},
+    { path: '/create/dataset', component: CreateDatasetComponent },
+    { path: '/upload/algorithm', component: UploadAlgorithmComponent },
+    { path: '/upload/dataset', component: UploadDatasetComponent },
+    { path: '/view/all/algorithms', component: ViewAllAlgorithmsComponent },
+    { path: '/view/all/datasets', component: ViewAllDatasetsComponent },
 ])
 export class AppComponent {
  constructor(private router: Router) {}

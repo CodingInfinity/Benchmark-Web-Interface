@@ -12,7 +12,7 @@ import { ControlGroup, FormBuilder, Validators} from "@angular/common";
 import { ValidatorsOwn} from "../validators.own";
 import { FileUploadService} from "../../services/file.upload.service";
 import { FileBrowserComponent} from "../files/browser/file.browser.component";
-import {EditorComponent} from "../tinymce/tinymce";
+import { EditorComponent} from "../tinymce/tinymce";
 
 @Component({
   selector: 'home',
