@@ -13,9 +13,9 @@ import {FileUploadService} from "../../../../services/file.upload.service";
 
 
 @Component({
-  selector: 'viewallalgorithms',
-  template: require('./algorithm.view.all.component.html'),
-  styles: [require('./algorithm.view.all.component.css')],
+  selector: 'viewuserdatasets',
+  template: require('./dataset.view.user.component.html'),
+  styles: [require('./dataset.view.user.component.css')],
   directives: [
     MaterializeDirective,
     NavigationComponent,
@@ -25,12 +25,12 @@ import {FileUploadService} from "../../../../services/file.upload.service";
   ]
 })
 
-export class ViewAllAlgorithmsComponent extends SecureComponent {
-  private algorithms: Array<Object>;
+export class ViewUsersDatasetsComponent extends SecureComponent {
+  private datasets: Array<Object>;
   constructor(router:Router, protected client: APIService, private fb: FormBuilder, private fileUpload: FileUploadService){
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-    this.getAllAlgorithms();
+    this.getUserDatasets();
   }
 
 
@@ -38,14 +38,14 @@ export class ViewAllAlgorithmsComponent extends SecureComponent {
     super.routerOnActivate(curr, prev, currTree, prevTree);
   }
 
-  getAllAlgorithms(){
-    this.client.getAllAlgorithmsGET().subscribe((res)=>{
-      this.algorithms = JSON.parse(res.text());
-      console.log(this.algorithms);
+  getUserDatasets(){
+    this.client.getUsersDatasetsGET().subscribe((res)=>{
+      this.datasets = JSON.parse(res.text());
+      console.log(this.datasets);
 
     },(err)=>{
       this.hasError = true;
-      this.errorMessage = err.json()['message'];
+      this.errorMessage = err.json();
     })
   }
 

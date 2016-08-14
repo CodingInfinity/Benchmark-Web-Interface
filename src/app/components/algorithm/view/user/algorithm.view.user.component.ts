@@ -13,9 +13,9 @@ import {FileUploadService} from "../../../../services/file.upload.service";
 
 
 @Component({
-  selector: 'viewallalgorithms',
-  template: require('./algorithm.view.all.component.html'),
-  styles: [require('./algorithm.view.all.component.css')],
+  selector: 'viewuseralgorithms',
+  template: require('./algorithm.view.user.component.html'),
+  styles: [require('./algorithm.view.user.component.css')],
   directives: [
     MaterializeDirective,
     NavigationComponent,
@@ -25,12 +25,13 @@ import {FileUploadService} from "../../../../services/file.upload.service";
   ]
 })
 
-export class ViewAllAlgorithmsComponent extends SecureComponent {
+export class ViewUsersAlgorithmsComponent extends SecureComponent {
   private algorithms: Array<Object>;
   constructor(router:Router, protected client: APIService, private fb: FormBuilder, private fileUpload: FileUploadService){
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-    this.getAllAlgorithms();
+    this.getUserAlgorithms();
+
   }
 
 
@@ -38,8 +39,8 @@ export class ViewAllAlgorithmsComponent extends SecureComponent {
     super.routerOnActivate(curr, prev, currTree, prevTree);
   }
 
-  getAllAlgorithms(){
-    this.client.getAllAlgorithmsGET().subscribe((res)=>{
+  getUserAlgorithms(){
+    this.client.getUsersAlgorithmsGET().subscribe((res)=>{
       this.algorithms = JSON.parse(res.text());
       console.log(this.algorithms);
 
