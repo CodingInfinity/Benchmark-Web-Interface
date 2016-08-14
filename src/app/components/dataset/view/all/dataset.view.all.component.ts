@@ -30,22 +30,23 @@ export class ViewAllDatasetsComponent extends SecureComponent {
   constructor(router:Router, protected client: APIService, private fb: FormBuilder, private fileUpload: FileUploadService){
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
+    this.getAllDatasets();
+
   }
 
 
   routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
     super.routerOnActivate(curr, prev, currTree, prevTree);
-    this.getAllAlgorithms();
   }
 
-  getAllAlgorithms(){
+  getAllDatasets(){
     this.client.getAllDatasetsGET().subscribe((res)=>{
       this.datasets = JSON.parse(res.text());
       console.log(this.datasets);
 
     },(err)=>{
       this.hasError = true;
-      this.errorMessage = err.json();
+      this.errorMessage = err.json()['message'];
     })
   }
 

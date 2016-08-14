@@ -20,6 +20,11 @@ The `develop` branch is pre-production, and is where we push `feature/x` branche
 Most modern git clients support git flow. If you are however using the git CLI
 on *nix, please install the git flow plugin on your distribution.
 
+# General Description
+STUD
+
+For any additional information not covered here see pom.xml file or CONTRIBUTORS.md file.  
+
 # Sponsorships
 ## ZenHub 
 

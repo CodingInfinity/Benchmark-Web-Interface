@@ -22,6 +22,8 @@ import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.
 import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ViewAllAlgorithmsComponent} from "./components/algorithm/view/all/algorithm.view.all.component";
 import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
+import {ViewUsersAlgorithmsComponent} from "./components/algorithm/view/user/algorithm.view.user.component";
+import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 
 @Component({
   selector: 'my-app',
@@ -50,6 +52,8 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
     { path: '/upload/dataset', component: UploadDatasetComponent },
     { path: '/view/all/algorithms', component: ViewAllAlgorithmsComponent },
     { path: '/view/all/datasets', component: ViewAllDatasetsComponent },
+    { path: '/view/user/algorithms', component: ViewUsersAlgorithmsComponent },
+    { path: '/view/user/datasets', component: ViewUsersDatasetsComponent },
 ])
 export class AppComponent {
  constructor(private router: Router) {}
