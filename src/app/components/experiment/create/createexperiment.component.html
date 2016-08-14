@@ -1,0 +1,111 @@
+<header>
+  <navigation ></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel indigo darken-1">
+            <span class="card-title white-text">Create Experiment</span>
+          </div>
+
+          <div class="card-content">
+            <div class="row" *ngIf="hasError">
+              <div class="card-panel red">
+                <span class="white-text">{{errorMessage}}</span>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showMessage">
+              <div class="card-panel green">
+                <span class="white-text">{{message}}</span>
+              </div>
+            </div>
+          </div>
+          <div class = "row">
+            <form [ngFormModel]="form" (submit)="form.valid && submitForm(form.value)" class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="measurement" multiple materialize="material_select" (change)="measurementChange($event)" required >
+                    <option value="-1" disabled selected>Choose your measurement type</option>
+                    <option value="0"> CPU </option>
+                    <option value="1"> Memory </option>
+                    <option value="2"> Wall Time </option>
+                  </select>
+                  <label>Select the measurement type</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="algorithm" materialize="material_select" (change)="languageChange($event) " required >
+                    <option value="-1" disabled selected>Choose your lanuage</option>
+                    <option value="0"> Java </option>
+                    <option value="1"> C++ </option>
+                    <option value="2"> Python </option>
+                  </select>
+                  <label>Select the Algorithm</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="dataset" multiple materialize="material_select" (change)="datasetChange($event) " required >
+                    <option value="0" disabled selected>Choose your dataset</option>
+                    <option *ngFor="let dataset of datasets" value="{{dataset.id}}">{{dataset.name}}</option>
+                  </select>
+                  <label>Select the Dataset</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="algorithm" materialize="material_select" (change)="algorithmChange($event) " required >
+                    <option value="0" disabled selected>Choose your algorithm</option>
+                    <option *ngFor="let algorithm of algorithms" value="{{algorithm.id}}">{{algorithm.name}}</option>
+                  </select>
+                  <label>Select the Algorithm</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <p class="range-field">
+                      <span>Probe Interval</span>
+                      <input type="range" id="probe" min="0" max="100" ngControl="probe"/>
+                    </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <p class="range-field">
+                      <span>Timeout Interval</span>
+                      <input type="range" id="timeout" min="0" max="100" ngControl="timeout"/>
+                    </p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                    <p class="range-field">
+                      <span>Jobs</span>
+                      <input type="range" id="jobs" min="0" max="10" ngControl="jobs"/>
+                    </p>
+                </div>
+              </div>
+
+              <div class="row right-align">
+                <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Submit
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer></footer>

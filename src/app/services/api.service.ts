@@ -369,6 +369,19 @@ export class APIService {
     });
   }
 
+  createExperimentWithPOST(request:string): Observable<any>{
+    var url = this.baseUrl + "/api/experiment";
+    var content = request;
+
+    return this.http.request(url, {
+      body: content,
+      method: "post",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();

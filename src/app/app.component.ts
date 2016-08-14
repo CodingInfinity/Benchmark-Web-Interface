@@ -18,6 +18,8 @@ import {ProfileComponent} from "./components/account/profile/profile.component";
 import {UsersComponent} from "./components/users/users.component";
 import {CreateComponent} from "./components/users/create/create.component";
 import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
+import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
+
 import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.upload.component";
 import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ViewAllAlgorithmsComponent} from "./components/algorithm/view/all/algorithm.view.all.component";
@@ -46,7 +48,8 @@ import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset
     { path: '/report', component: ReportComponent },
     { path: '/profile', component: ProfileComponent },
     { path: '/users', component: UsersComponent },
-    { path: '/create', component: CreateComponent },
+    { path: '/create/user', component: CreateComponent },
+    { path: '/create/experiment', component: CreateExperimentComponent},
     { path: '/create/dataset', component: CreateDatasetComponent },
     { path: '/upload/algorithm', component: UploadAlgorithmComponent },
     { path: '/upload/dataset', component: UploadDatasetComponent },
