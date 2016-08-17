@@ -21,9 +21,11 @@ Most modern git clients support git flow. If you are however using the git CLI
 on *nix, please install the git flow plugin on your distribution.
 
 # General Description
-STUD
-
-For any additional information not covered here see pom.xml file or CONTRIBUTORS.md file.  
+This applicaiton serves as a web front end to a Benchmark Service applicaiton.
+The web application is written using Angular 2. The intent is that this web
+application is only one way for users to gain access to the Benchmark Service
+since this application connects to the backend through RESTful web services.
+  
 
 # Sponsorships
 ## ZenHub 
