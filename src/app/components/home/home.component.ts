@@ -1,34 +1,20 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { MaterializeDirective } from "angular2-materialize";
 
 import { APIService } from "../../services/api.service";
 import { SecureComponent } from "../../services/secure.component";
-
-import { NavigationComponent } from "../navigation/navigation.component";
-import { FooterComponent } from "../footer/footer.component";
-import { UploadComponent} from "../upload/upload.component";
-import { ControlGroup, FormBuilder, Validators} from "@angular/common";
-import { ValidatorsOwn} from "../validators.own";
+import { ValidatorService} from "../validators.service";
 import { FileUploadService} from "../../services/file.upload.service";
-import { FileBrowserComponent} from "../files/browser/file.browser.component";
-import { EditorComponent} from "../tinymce/tinymce";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'home',
   template: require('./home.component.html'),
   styles: [require('./home.component.css')],
-  directives: [
-    MaterializeDirective,
-    NavigationComponent,
-    FooterComponent,
-    UploadComponent,
-    EditorComponent,
-    FileBrowserComponent
-  ]
 })
 export class HomeComponent extends SecureComponent {
-    private form: ControlGroup;
+    private form:FormGroup;
     private fileList:FileList = null;
     private descriptionHtml: string;
     private uploadProgress: number = 0;
@@ -37,12 +23,11 @@ export class HomeComponent extends SecureComponent {
     private uploadedFileSize: any = 0;
     tinyModel="Default";
 
-    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorsOwn, private fileUpload: FileUploadService) {
+    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorService, private fileUpload: FileUploadService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-      this.form = fb.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
+      this.form = this.fb.group({
+        name: ['', Validators.required]
       });
     }
 

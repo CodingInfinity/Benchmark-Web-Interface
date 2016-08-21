@@ -1,32 +1,20 @@
 import { Component } from "@angular/core";
-import {Router, RouteSegment, RouteTree} from "@angular/router";
+import {Router} from "@angular/router";
 import {MaterializeDirective } from "angular2-materialize";
-
-import {UploadComponent} from "../../upload/upload.component";
-import {NavigationComponent} from "../../navigation/navigation.component";
-import {FooterComponent} from "../../footer/footer.component";
-import {EditorComponent} from "../../tinymce/tinymce";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService} from "../../../services/api.service";
-import {FormBuilder, Validators, ControlGroup, Control} from "@angular/common";
 import {FileUploadService} from "../../../services/file.upload.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'uploadalgorithm',
   template: require('./algorithm.upload.component.html'),
   styles: [require('./algorithm.upload.component.css')],
-  directives: [
-    MaterializeDirective,
-    NavigationComponent,
-    FooterComponent,
-    UploadComponent,
-    EditorComponent,
-  ]
 })
 
 export class UploadAlgorithmComponent extends SecureComponent {
 
-  private form: ControlGroup;
+  private form: FormGroup;
   private fileList:FileList = null;
   private descriptionHtml: string;
   private uploadProgress: number = 0;
@@ -110,8 +98,8 @@ export class UploadAlgorithmComponent extends SecureComponent {
     }
   }
 
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-    super.routerOnActivate(curr, prev, currTree, prevTree);
+  ngOnInit():void{
+    super.ngOnInit();
     //When the api call for all algorithm categories has been implemented, then we get the data here
     this.client.getAllAlgorithmCategoriesGET().subscribe((res) =>{
       this.categories = JSON.parse(res.text());

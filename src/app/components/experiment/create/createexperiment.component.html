@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class = "row">
-            <form [ngFormModel]="form" (submit)="form.valid && submitForm(form.value)" class="col s12">
+            <form [(formGroup)]="form" (submit)="form.valid && submitForm(form.value)" class="col s12">
               <div class="row">
                 <div class="input-field col s12">
                   <select name="measurement" multiple materialize="material_select" (change)="measurementChange($event)" required >
@@ -73,7 +73,7 @@
                 <div class="input-field col s12">
                     <p class="range-field">
                       <span>Probe Interval</span>
-                      <input type="range" id="probe" min="0" max="100" ngControl="probe"/>
+                      <input type="range" id="probe" min="0" max="100" formControlName="probe"/>
                     </p>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                 <div class="input-field col s12">
                     <p class="range-field">
                       <span>Timeout Interval</span>
-                      <input type="range" id="timeout" min="0" max="100" ngControl="timeout"/>
+                      <input type="range" id="timeout" min="0" max="100" formControlName="timeout"/>
                     </p>
                 </div>
               </div>
@@ -91,7 +91,7 @@
                 <div class="input-field col s12">
                     <p class="range-field">
                       <span>Jobs</span>
-                      <input type="range" id="jobs" min="0" max="10" ngControl="jobs"/>
+                      <input type="range" id="jobs" min="0" max="10" formControlName="jobs"/>
                     </p>
                 </div>
               </div>

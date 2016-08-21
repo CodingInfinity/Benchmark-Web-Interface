@@ -1,25 +1,17 @@
 import { Component } from "@angular/core";
-import {Router, RouteSegment, RouteTree} from "@angular/router";
-import { MaterializeDirective } from "angular2-materialize";
-import {NavigationComponent} from "../../navigation/navigation.component";
-import {FooterComponent} from "../../footer/footer.component";
+import {Router} from "@angular/router";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService, CreateManagedUserRequest} from "../../../services/api.service";
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'create',
   template: require('./create.component.html'),
   styles: [require('./create.component.css')],
-  directives: [
-    MaterializeDirective,
-    NavigationComponent,
-    FooterComponent
-  ]
 })
 
 export class CreateComponent extends SecureComponent {
-  private form: ControlGroup;
+  private form: FormGroup;
   private roles: Array<string> = [];
 
   constructor(router:Router, protected client: APIService, private fb: FormBuilder, private api: APIService){
@@ -33,11 +25,7 @@ export class CreateComponent extends SecureComponent {
     });
 
   }
-
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-    super.routerOnActivate(curr, prev, currTree, prevTree);
-  }
-
+  
 
   register(value: any){
     var user: CreateManagedUserRequest ={

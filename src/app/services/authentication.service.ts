@@ -1,19 +1,19 @@
-import {Injectable, provide} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {
   URLSearchParams, Headers, Response, Http, RequestOptionsArgs, RequestMethod, Request,
   RequestOptions, ConnectionBackend, XHRBackend
 } from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService extends Http {
 
-  constructor(backend:ConnectionBackend, defaultOptions:RequestOptions, private router: Router) {
+  constructor(backend:ConnectionBackend, defaultOptions:RequestOptions) {
     super(backend, defaultOptions);
   }
 
   static authenticatedAndIsNotTokenExpired() :boolean {
+
     if(!localStorage.getItem('token')){
       return false;
     }
@@ -26,6 +26,7 @@ export class AuthenticationService extends Http {
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    console.log("Called get");
     return this._request(RequestMethod.Get, url, null, options);
   }
   public post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -76,10 +77,3 @@ export class AuthenticationService extends Http {
   }
 }
 
-export const AUTH_PROVIDERS: any = [
-  provide(Http, {
-    useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router) =>
-      new AuthenticationService(xhrBackend, requestOptions, router),
-    deps: [XHRBackend, RequestOptions, Router]
-  })
-];

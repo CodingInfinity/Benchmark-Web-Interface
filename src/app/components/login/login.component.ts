@@ -1,26 +1,19 @@
-import { Component } from '@angular/core';
-import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
-import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router'
 
-import {MaterializeDirective} from 'angular2-materialize';
-import {AuthenticationService} from "../../services/authentication.service";
 import {Http, Response} from "@angular/http";
 import {APIService} from "../../services/api.service";
 import {BaseComponent} from "../base.component";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 
 @Component({
     selector: 'login',
     template: require('./login.component.html'),
-    directives: [
-      MaterializeDirective,
-      ROUTER_DIRECTIVES,
-      FORM_DIRECTIVES
-    ]
 })
-export class LoginComponent extends BaseComponent implements OnActivate {
+export class LoginComponent extends BaseComponent implements OnInit {
 
-  private form: ControlGroup;
+  private form: FormGroup;
 
   constructor(private router: Router, private client: APIService, private fb: FormBuilder) {
     super();
@@ -62,7 +55,7 @@ export class LoginComponent extends BaseComponent implements OnActivate {
     });
   }
 
-  routerOnActivate(curr:RouteSegment){
+  ngOnInit(){
     if(this.client.authenticated()){
       this.router.navigate(['/home']);
     }

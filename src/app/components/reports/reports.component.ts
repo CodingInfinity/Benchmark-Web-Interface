@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import {SecureComponent} from "../../services/secure.component";
 import {Router} from "@angular/router";
-import { MaterializeDirective } from 'angular2-materialize';
 import {APIService} from "../../services/api.service";
 
 @Component({
   selector: 'report',
   template: require('./reports.component.html'),
-  directives: [MaterializeDirective]
 })
 export class ReportComponent extends SecureComponent {
 

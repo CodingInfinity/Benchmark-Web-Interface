@@ -1,19 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import { MaterializeDirective } from "angular2-materialize/dist/index";
-import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+import { Router } from "@angular/router";
 import { EventEmitter} from "@angular/router-deprecated/src/facade/async";
-import { FileComponent} from "../file.component";
-import { FolderComponent} from "../folder.component";
 
 @Component({
   selector: "filebrowser",
   template: require('./file.browser.component.html'),
-  directives: [
-    MaterializeDirective,
-    FileComponent,
-    FolderComponent
-
-  ],
   inputs:["url"],
   outputs:["fileSelect: filesChange"]
 })

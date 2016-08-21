@@ -3,17 +3,16 @@
 import { Component } from '@angular/core';
 import { MaterializeDirective } from 'angular2-materialize';
 import {Router, ROUTER_DIRECTIVES} from '@angular/router'
-import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
 import {APIService, RequestPasswordResetRequest} from "../../../../services/api.service";
 import {BaseComponent} from "../../../base.component";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
     selector: 'resetRequest',
     template: require('./reset.request.component.html'),
-    directives: [MaterializeDirective]
 })
 export class ResetRequestComponent extends BaseComponent{
-  private form: ControlGroup;
+  private form: FormGroup;
   constructor(private router: Router, private fb: FormBuilder, private api: APIService) {
     super();
     this.showMessage = false;

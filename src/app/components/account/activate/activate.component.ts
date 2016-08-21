@@ -1,23 +1,18 @@
-'use strict';
 
-import { Component } from '@angular/core';
-import { MaterializeDirective } from 'angular2-materialize';
-import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute,} from '@angular/router'
 import {APIService} from "../../../services/api.service";
 import {BaseComponent} from "../../base.component";
 
 @Component({
     selector: 'registerAccount',
     template: require('./activate.component.html'),
-    directives: [
-      MaterializeDirective,
-      ROUTER_DIRECTIVES,]
 })
-export class ActivateAccountComponent extends BaseComponent implements OnActivate{
+export class ActivateAccountComponent extends BaseComponent implements OnInit{
   private key: string;
   private activated: number;
 
-  constructor(private router: Router, private api: APIService) {
+  constructor(private router: Router, private route: ActivatedRoute, private api: APIService) {
     super();
     this.activated = -1;
   }
@@ -35,8 +30,13 @@ export class ActivateAccountComponent extends BaseComponent implements OnActivat
       });
   }
 
-  routerOnActivate(curr:RouteSegment):void{
-    this.key = curr.getParam('key');
-    this.activate_account();
+  ngOnInit():void{
+    this.route.params.subscribe(params => {
+      let key = params['key'];
+      this.key = key;
+      console.log(this.key);
+      this.activate_account();
+    });
+
   }
 }

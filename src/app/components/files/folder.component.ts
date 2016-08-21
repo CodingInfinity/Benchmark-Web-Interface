@@ -1,12 +1,8 @@
-import {Component, OnInit} from "@angular/core";
-import { MaterializeDirective } from "angular2-materialize/dist/index";
+import {Component} from "@angular/core";
 
 @Component({
   selector: "folder",
   template: require('./folder.component.html'),
-  directives: [
-    MaterializeDirective
-  ],
   inputs:["inode_id", "name", "type"]
 })
 

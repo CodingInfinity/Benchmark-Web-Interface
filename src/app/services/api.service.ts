@@ -1,21 +1,19 @@
 ﻿import 'rxjs/Rx';
-import {Observable} from 'rxjs/Observable';
-import {Injectable, Inject, Optional, OpaqueToken} from '@angular/core';
-import {Http, Headers, Response, RequestOptionsArgs, URLSearchParams} from '@angular/http';
+import {OpaqueToken, Injectable, Inject, Optional} from "@angular/core";
+import {Http, Headers, URLSearchParams} from "@angular/http";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs/Rx";
 
 export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 export const JSON_PARSE_REVIVER = new OpaqueToken('JSON_PARSE_REVIVER');
 
 @Injectable()
 export class APIService {
-  private http: Http = null;
   private router: Router = null;
   private baseUrl: string = undefined;
   private jsonParseReviver: (key: string, value: any) => any = undefined;
 
-  constructor(@Inject(Http) http: Http, @Inject(Router) router: Router, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
-    this.http = http;
+  constructor(private http: Http, @Inject(Router) router: Router, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
     this.router = router;
     this.baseUrl = baseUrl ? baseUrl : "http://localhost:8081";
     this.jsonParseReviver = jsonParseReviver;

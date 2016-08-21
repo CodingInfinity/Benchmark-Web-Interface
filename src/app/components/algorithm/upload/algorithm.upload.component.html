@@ -22,10 +22,10 @@
             </div>
             <div class="row">
               <span class="card-title black-text">Upload algorithm</span>
-              <form [ngFormModel]="form" class="col s12" (submit)="onSubmit(form.value)">
+              <form [(formGroup)]="form" class="col s12" (submit)="onSubmit(form.value)">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="name" type="text" class="validate" ngControl="name">
+                    <input id="name" type="text" class="validate" formControlName="name">
                     <label for="name">Name</label>
                   </div>
                 </div>

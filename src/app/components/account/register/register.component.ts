@@ -1,24 +1,21 @@
-'use strict';
 
-import { Component } from '@angular/core';
-import { MaterializeDirective } from 'angular2-materialize';
-import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
-import {Router, ROUTER_DIRECTIVES, RouteSegment, OnActivate} from '@angular/router'
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router'
 import {APIService, CreateUnmanagedUserRequest} from "../../../services/api.service";
-import {ValidatorsOwn} from "../../validators.own";
-import {AuthenticationService} from "../../../services/authentication.service";
+import {ValidatorService} from "../../validators.service";
 import {BaseComponent} from "../../base.component";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {} from "@angular/common";
 
 @Component({
     selector: 'registerAccount',
     template: require('./register.component.html'),
-    directives: [MaterializeDirective]
 })
-export class RegisterAccountComponent extends BaseComponent implements OnActivate{
-  private form: ControlGroup;
+export class RegisterAccountComponent extends BaseComponent implements OnInit{
+  private form: FormGroup;
   private passwords: any;
 
-  constructor(private router: Router, private fb: FormBuilder, private api: APIService, private validators: ValidatorsOwn) {
+  constructor(private router: Router, private fb: FormBuilder, private api: APIService, private validators: ValidatorService) {
     super();
     this.form = fb.group({
       firstName: ['', Validators.required],
@@ -62,7 +59,7 @@ export class RegisterAccountComponent extends BaseComponent implements OnActivat
     });
   }
 
-  routerOnActivate(curr:RouteSegment){
+  ngOnInit(){
     if(this.api.authenticated()){
       this.router.navigate(['/home']);
     }

@@ -1,24 +1,15 @@
 import { Component } from "@angular/core";
-import {Router, RouteSegment, RouteTree} from "@angular/router";
-import { MaterializeDirective } from "angular2-materialize";
-import {NavigationComponent} from "../../navigation/navigation.component";
-import {EditorComponent} from "../../tinymce/tinymce";
-import {FooterComponent} from "../../footer/footer.component";
+import {Router} from "@angular/router";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService} from "../../../services/api.service";
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
 import {Response} from "@angular/http";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'createexperiment',
   template: require('./createexperiment.component.html'),
   styles: [require('./createexperiment.component.css')],
-  directives: [
-    MaterializeDirective,
-    NavigationComponent,
-    FooterComponent,
-    EditorComponent
-  ]
+
 })
 
 export class CreateExperimentComponent extends SecureComponent {
@@ -28,7 +19,7 @@ export class CreateExperimentComponent extends SecureComponent {
   private algorithmsChosen: Array<Object> = [];
   private measurementTypesChosen: Array<Object> = [];
   private languageChosen: Array<Object> = [];
-  private form: ControlGroup;
+  private form: FormGroup;
   constructor(router:Router, protected client: APIService, private fb: FormBuilder){
 
     super(router, client);
@@ -42,9 +33,8 @@ export class CreateExperimentComponent extends SecureComponent {
     });
   }
 
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-    super.routerOnActivate(curr, prev, currTree, prevTree);
-
+  ngOnInit():void{
+    super.ngOnInit();
   }
 
   measurementChange(value:any){

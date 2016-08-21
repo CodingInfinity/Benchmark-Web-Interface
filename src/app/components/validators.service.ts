@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class ValidatorsOwn {
+export class ValidatorService {
   constructor(){
   }
 

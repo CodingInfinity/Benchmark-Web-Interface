@@ -28,17 +28,17 @@
               </div>
             </div>
             <div class="row" *ngIf="nameChange">
-              <form [ngFormModel]="nameForm" (submit)="editName(nameForm.value)" class="col s12">
+              <form [(formGroup)]="nameForm" (submit)="editName(nameForm.value)" class="col s12">
                 <div class="row">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="firstName" type="text" class="validate" value="{{firstname}}" required ngControl="firstName">
+                      <input id="firstName" type="text" class="validate" value="{{firstname}}" required formControlName="firstName">
                       <label class="active" for="firstName">First Name</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="lastName" type="text" class="validate" value="{{lastname}}" required ngControl="lastName">
+                      <input id="lastName" type="text" class="validate" value="{{lastname}}" required formControlName="lastName">
                       <label class="active" for="lastName">Last Name</label>
                     </div>
                   </div>
@@ -49,11 +49,11 @@
               </form>
             </div>
             <div class="row" *ngIf="emailChange">
-              <form [ngFormModel]="emailForm" (submit)="editEmail(emailForm.value)" class="col s12">
+              <form [(formGroup)]="emailForm" (submit)="editEmail(emailForm.value)" class="col s12">
                 <div class="row">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate" value="{{email}}" ngControl="email">
+                      <input id="email" type="email" class="validate" value="{{email}}" formControlName="email">
                       <label class="active" for="email">Email</label>
                     </div>
                   </div>
@@ -64,17 +64,17 @@
               </form>
             </div>
             <div class="row" *ngIf="passwordChange">
-              <form [ngFormModel]="passwordForm" (submit)="passwordForm.valid && editPassword(passwordForm.value)" class="col s12">
+              <form [(formGroup)]="passwordForm" (submit)="passwordForm.valid && editPassword(passwordForm.value)" class="col s12">
                 <div class="row">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate" ngControl="password">
+                      <input id="password" type="password" class="validate" formControlName="password">
                       <label for="password">New Password</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="confirmPassword" type="password" [ngClass]="setPasswordClass()" ngControl="confirmPassword">
+                      <input id="confirmPassword" type="password" [ngClass]="setPasswordClass()" formControlName="confirmPassword">
                       <label for="confirmPassword" data-error="Passwords do not match!">Confirm New Password</label>
                     </div>
                   </div>

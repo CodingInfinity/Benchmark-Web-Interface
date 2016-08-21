@@ -22,29 +22,29 @@
               </div>
             </div>
             <div class="row">
-              <form [ngFormModel]="form" (submit)="form.valid && register(form.value)" class="col s12">
+              <form [(formGroup)]="form" (submit)="form.valid && register(form.value)" class="col s12">
                 <div class="row">
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="firstName" type="text" class="validate" ngControl="firstName">
+                      <input id="firstName" type="text" class="validate" formControlName="firstName">
                       <label for="firstName">First Name</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="lastName" type="text" class="validate" ngControl="lastName">
+                      <input id="lastName" type="text" class="validate" formControlName="lastName">
                       <label for="lastName">Last Name</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate" ngControl="email">
+                      <input id="email" type="email" class="validate" formControlName="email">
                       <label for="email">Email</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="username" type="text" class="validate" ngControl="username">
+                      <input id="username" type="text" class="validate" formControlName="username">
                       <label for="username">Username</label>
                     </div>
                   </div>

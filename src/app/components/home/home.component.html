@@ -23,20 +23,20 @@
             </div>
             <div class="card-panel row">
               <span class="card-title black-text">Upload File with Metadata Example</span>
-              <form [ngFormModel]="form" class="col s12" (submit)="onSubmit(form.value)">
+              <form [(formGroup)]="form" class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="name" type="text" class="validate" ngControl="name">
+                    <input id="name" type="text" class="validate" formControlName="name">
                     <label for="name">Name</label>
                   </div>
                 </div>
                 <div class="row">
                   <editor (contentChanged)="editorContentChanged($event)"></editor>
                 </div>
-                <upload type="multi" (filesChange)="onFilesSelect($event)"></upload>
+                <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->
 
                 <!--Multiple file upload-->
-                <!--<upload type="multi" (filesChange)="onFilesSelect($event)"></upload>-->
+                <upload type="multi" (filesChange)="onFilesSelect($event)"></upload>
 
                 <button class="btn waves-effect waves-light right" *ngIf="!uploadInProgress" type="submit">Submit
                   <i class="material-icons right">send</i>

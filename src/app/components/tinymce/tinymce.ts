@@ -6,7 +6,6 @@ declare var tinymce: any;
 
 @Component({
   selector: "editor",
-  moduleId: module.id,
   template: require("./view.html"),
   inputs: ["mceContent"],
   outputs: ["contentChanged"]

@@ -1,22 +1,20 @@
-'use strict';
 
-import { Component } from '@angular/core';
-import { MaterializeDirective } from 'angular2-materialize';
-import {Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment} from '@angular/router'
-import {FormBuilder, ControlGroup, Validators, FORM_DIRECTIVES} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router'
 import {APIService, CompletePasswordResetRequest} from "../../../../services/api.service";
-import {ValidatorsOwn} from "../../../validators.own";
+import {ValidatorService} from "../../../validators.service";
 import {BaseComponent} from "../../../base.component";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'resetRequest',
   template: require('./reset.finish.component.html'),
-  directives: [MaterializeDirective]
 })
-export class ResetFinishComponent extends BaseComponent implements OnActivate{
-  private key: string;
-  private form: ControlGroup;
-  constructor(private router: Router, private fb: FormBuilder, private api: APIService, private validators: ValidatorsOwn) {
+export class ResetFinishComponent extends BaseComponent implements OnInit{
+  private key: string = "";
+  private form: FormGroup;
+  constructor(private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private api: APIService, private validators: ValidatorService) {
     super();
     this.form = fb.group({
       password: ['', Validators.required],
@@ -31,7 +29,7 @@ export class ResetFinishComponent extends BaseComponent implements OnActivate{
     };
 
     this.api.finishPasswordResetUsingPOST(passResetFinish).subscribe(
-      (response)=>{        
+      (response)=>{
         this.router.navigate(['/login']);
       },(err)=>{
         this.errorMessage = err.json()["message"];
@@ -47,9 +45,13 @@ export class ResetFinishComponent extends BaseComponent implements OnActivate{
       valid: this.form.valid
     }
   }
-  routerOnActivate(curr:RouteSegment):void{
-    this.key = curr.getParam('key');
-    //console.log(this.key);
+
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      let key = params['key'];
+      this.key = key;
+      console.log(this.key);
+    });
   }
 
 }

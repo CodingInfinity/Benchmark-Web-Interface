@@ -1,12 +1,9 @@
 import { Component } from "@angular/core";
-import {Router, RouteSegment, RouteTree} from "@angular/router";
-import { MaterializeDirective } from "angular2-materialize";
-import {NavigationComponent} from "../../navigation/navigation.component";
-import {FooterComponent} from "../../footer/footer.component";
+import {Router} from "@angular/router";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService, UpdateUserRequest, ChangePasswordRequest} from "../../../services/api.service";
-import {ControlGroup, FormBuilder, Validators} from "@angular/common";
-import {ValidatorsOwn} from "../../validators.own";
+import {ValidatorService} from "../../validators.service";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 
 
@@ -14,11 +11,6 @@ import {ValidatorsOwn} from "../../validators.own";
   selector: 'profile',
   template: require('./profile.component.html'),
   styles: [require('./profile.component.css')],
-  directives: [
-    MaterializeDirective,
-    NavigationComponent,
-    FooterComponent
-  ]
 })
 export class ProfileComponent extends SecureComponent {
 
@@ -29,12 +21,12 @@ export class ProfileComponent extends SecureComponent {
     private emailChange: boolean = false;
     private passwordChange: boolean = false;
 
-    private nameForm: ControlGroup;
-    private emailForm: ControlGroup;
-    private passwordForm: ControlGroup;
+    private nameForm: FormGroup;
+    private emailForm: FormGroup;
+    private passwordForm: FormGroup;
 
 
-    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorsOwn) {
+    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
       this.nameForm = fb.group({
@@ -50,8 +42,8 @@ export class ProfileComponent extends SecureComponent {
       },{validator: this.validators.matchingPasswords('password', 'confirmPassword')});
     }
 
-    routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
-      super.routerOnActivate(curr, prev, currTree, prevTree);
+    ngOnInit():void{
+      super.ngOnInit();
       //Get the use profile from the server
       this.firstname =  JSON.parse(localStorage.getItem("user_token"))["firstName"];
       this.lastname =  JSON.parse(localStorage.getItem("user_token"))["lastName"];
@@ -77,6 +69,7 @@ export class ProfileComponent extends SecureComponent {
     }
 
     editName(value: any){
+      console.log("Edit Name");
       console.log(value);
       this.nameChange = false;
       if(this.firstname != value.firstName && value.firstName){
@@ -90,6 +83,7 @@ export class ProfileComponent extends SecureComponent {
     }
 
     editEmail(value:any){
+      console.log("Edit Email");
       console.log(value);
       this.emailChange = false;
       if(this.email != value.email && value.email){
@@ -128,6 +122,7 @@ export class ProfileComponent extends SecureComponent {
         lastName: this.lastname
       };
 
+      console.log("Send Update request");
       console.log(updatedUser);
 
       this.client.saveAccountUsingPOST(updatedUser).subscribe(

@@ -1,9 +1,9 @@
-import {Router, OnActivate, RouteSegment, RouteTree} from "@angular/router";
-import {AuthenticationService} from "./authentication.service";
+import {Router} from "@angular/router";
 import {BaseComponent} from "../components/base.component";
 import {APIService} from "./api.service";
+import {OnInit} from "@angular/core";
 
-export class SecureComponent extends BaseComponent implements OnActivate {
+export class SecureComponent extends BaseComponent implements OnInit{
 
   protected authorities: string[] = [];
 
@@ -11,14 +11,15 @@ export class SecureComponent extends BaseComponent implements OnActivate {
     super();
   }
   home() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void{
+  ngOnInit(){
     if (!this.client.authenticated()) {
       this.router.navigateByUrl('/login');
     } else if (!this.client.hasRoles(this.authorities)) {
       this.router.navigateByUrl('/');
     }
   }
+
 }

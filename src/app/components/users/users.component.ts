@@ -1,8 +1,5 @@
 import { Component } from "@angular/core";
-import {Router, RouteSegment, RouteTree} from "@angular/router";
-import { MaterializeDirective } from "angular2-materialize";
-import {NavigationComponent} from "../navigation/navigation.component";
-import {FooterComponent} from "../footer/footer.component";
+import {Router} from "@angular/router";
 import {SecureComponent} from "../../services/secure.component";
 import {APIService} from "../../services/api.service";
 
@@ -10,25 +7,22 @@ import {APIService} from "../../services/api.service";
   selector: 'users',
    template: require('./users.component.html'),
    styles: [require('./users.component.css')],
-   directives: [
-      MaterializeDirective,
-      NavigationComponent,
-      FooterComponent
-    ]
   })
 export class UsersComponent extends SecureComponent {
   private users: any;
+  private searchText:string;
   private filteredUsers: any = this.users;
   constructor(router:Router, protected client: APIService) {
     super(router, client);
     this.authorities = ["ROLE_ADMIN"];
   }
 
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
-    super.routerOnActivate(curr, prev, currTree, prevTree);
+  ngOnInit(){
+    super.ngOnInit();
     this.getAllUsers();
 
   }
+
 
   deleteUser(user:any){
     this.client.deleteUserUsingDELETE(user.login).subscribe(
@@ -61,7 +55,7 @@ export class UsersComponent extends SecureComponent {
       });
   }
 
-  public onKeypress(searchText:string):any {
+  onKeypress(searchText:string):any {
     this.filteredUsers = this.users;
     if (searchText=="") {
       this.filteredUsers = this.users;

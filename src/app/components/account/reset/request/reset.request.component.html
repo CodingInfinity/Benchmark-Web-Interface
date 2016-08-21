@@ -19,11 +19,11 @@
                     </div>
 
                     <div class="row">
-                        <form [ngFormModel]="form" (submit)="form.valid && reset_password_init(form.value)" class="col s12">
+                        <form [(formGroup)]="form" (submit)="form.valid && reset_password_init(form.value)" class="col s12">
                               <div class="row">
                                   <div class="row">
                                       <div class="input-field col s12">
-                                          <input id="email" type="email" class="validate" ngControl="email">
+                                          <input id="email" type="email" class="validate" formControlName="email">
                                           <label for="email">Email</label>
                                       </div>
                                   </div>
