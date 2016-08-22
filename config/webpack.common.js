@@ -11,9 +11,11 @@ module.exports = {
   },
 
   resolve: {
+    modulesDirectories: ["node_modules", "bower_components"],
     alias: {
       materializecss: 'materialize-css/dist/css/materialize.css',
       materialize: 'materialize-css/dist/js/materialize.js',
+      vaadincharts: 'bower_components/vaadin-charts/directives/vaadin-charts'
     },
     extensions: ['', '.js', '.ts']
   },

@@ -35,6 +35,8 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
+import {VaadinCharts, DataSeries} from '../../bower_components/vaadin-charts/directives/vaadin-charts';
+//import { PolymerElement } from '@vaadin/angular2-polymer';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import {ReportComponent} from "./components/reports/reports.component";
                   FormsModule,
                   routing,
                   ReactiveFormsModule
+                  //PolymerElement
                   ],
   declarations: [ AppComponent,
                   HomeComponent,
@@ -71,7 +74,9 @@ import {ReportComponent} from "./components/reports/reports.component";
                   ViewAllDatasetsComponent,
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
-                  ReportComponent
+                  ReportComponent,
+                  VaadinCharts,
+                  DataSeries
                 ],
   bootstrap:    [ AppComponent,
                 ],
