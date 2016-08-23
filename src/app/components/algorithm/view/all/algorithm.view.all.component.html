@@ -1,38 +1,36 @@
 <header>
-  <navigation ></navigation>
+  <navigation heading="Algorithms"></navigation>
 </header>
 <main>
   <div materialize class="flex-panel">
     <div class="row">
       <div class="col s12 m8 offset-m2 l8 offset-l2 ">
         <div class="card">
-          <div class="card-panel indigo darken-1">
+          <div class="card-panel blue-grey darken-2">
             <span class="card-title white-text">View All Algorithms</span>
           </div>
-          <div class="card-content">
-            <div class="row" *ngIf="hasError">
-              <div class="card-panel red">
-                <span class="white-text">{{errorMessage}}</span>
-              </div>
-            </div>
-            <div class="row" *ngIf="showMessage">
-              <div class="card-panel green">
-                <span class="white-text">{{message}}</span>
-              </div>
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+        <div class="row" *ngFor="let algorithm of algorithms">
+          <div class="card-panel row" >
+            <span class="card-title black-text">{{algorithm.name}}</span>
+            <p><strong>Filename: </strong>{{algorithm.filename}}</p>
+            <p><strong>Uploaded: </strong>{{algorithm.user.firstName}} {{algorithm.user.lastName}}</p>
+            <div class="card-panel pink lighten-1 white-text" [innerHTML]="algorithm.description">
             </div>
             <div class="row">
-              <div class="card-panel row" *ngFor="let algorithm of algorithms">
-                <span class="card-title black-text">{{algorithm.name}}</span>
-                <p><strong>Filename: </strong>{{algorithm.filename}}</p>
-                <p><strong>Uploaded: </strong>{{algorithm.user.firstName}} {{algorithm.user.lastName}}</p>
-                <div class="card-panel pink lighten-1 white-text" [innerHTML]="algorithm.description">
-                </div>
-                <div class="row">
-                  <button  class="btn waves-effect waves-light btn-large col" style="top: 20px;">View Algorithm
-                    <i class="material-icons right">send</i>
-                  </button>
-                </div>
-              </div>
+              <button  class="btn waves-effect waves-light btn-large col cyan darken-3" style="top: 20px;">View Algorithm
+                <i class="material-icons right">send</i>
+              </button>
             </div>
           </div>
         </div>

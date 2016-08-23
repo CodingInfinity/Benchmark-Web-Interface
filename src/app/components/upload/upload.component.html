@@ -1,7 +1,7 @@
 <div class="row">
   <form>
     <div class="file-field input-field">
-      <div class="btn">
+      <div class="btn cyan darken-3">
         <span *ngIf="type != 'multi'">File</span>
         <span *ngIf="type == 'multi'">Files</span>
         <input type="file" *ngIf="type != 'multi'" (change)="fileChangeEvent($event)">

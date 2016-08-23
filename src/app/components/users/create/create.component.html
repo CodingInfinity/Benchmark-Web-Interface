@@ -1,12 +1,12 @@
 <header>
-  <navigation ></navigation>
+  <navigation heading="Users"></navigation>
 </header>
 <main>
   <div materialize class="flex-panel">
     <div class="row">
       <div class="col s12 m8 offset-m2 l8 offset-l2">
         <div class="card">
-          <div class="card-panel indigo darken-1">
+          <div class="card-panel blue-grey darken-2">
             <span class="card-title white-text">Create User</span>
           </div>
           <div class="card-content">
@@ -54,13 +54,12 @@
                         <option value="0" disabled selected>Choose your option</option>
                         <option value="ROLE_ADMIN" >Admin</option>
                         <option value="ROLE_USER" >User</option>
-                        <option value="ROLE_ANONYMOUS" >Anonymous</option>
                       </select>
                       <label>Select the roles for the user</label>
                     </div>
                   </div>
                   <div class="row right-align">
-                    <button class="btn waves-effect waves-light btn-large" [disabled]='!form.valid' type="submit" name="action">Register
+                    <button class="btn waves-effect waves-light btn-large cyan darken-3" [disabled]='!form.valid' type="submit" name="action">Register
                       <i class="material-icons right">send</i>
                     </button>
                   </div>

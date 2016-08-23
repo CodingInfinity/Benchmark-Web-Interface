@@ -1,62 +1,70 @@
-<nav class="top-nav indigo">
-  <div class="nav-wrapper">
-    <div class="container"><a materialize="sideNav" href="#" data-activates="slide-out" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
-    <a [routerLink]="['/home']" class="brand-logo">Benchmark Service</a>
-    <!--<a [routerLink]="['/logout']" class="right brand-logo">Logout</a>-->
-  </div>
-</nav>
-<ul id="slide-out" class="side-nav fixed z-depth-3">
-  <li class="logo">
-    <a class="indigo white-text">Navigation</a>
+<div class="navbar-fixed">
+  <nav class="top-nav-help top-nav white">
+    <div class="nav-wrapper">
+      <div class="container"><a materialize="sideNav" href="#" data-activates="slide-out" class="button-collapse top-nav full hide-on-large-only blue-grey-text text-darken-4"><i class="material-icons">menu</i></a></div>
+      <a class="blue-grey-text text-darken-4 nav-text">{{heading}}</a>
+      <ul class="right">
+        <li><a class="blue-grey-text text-darken-4 right" style="margin-right: 30px" [routerLink]="['/profile']">{{username}}</a></li>
+        <li><a class="blue-grey-text text-darken-4 right" style="margin-right: 15px" [routerLink]="['/logout']"><i class="material-icons">power_settings_new</i></a></li>
+      </ul>
+      <!--<a [routerLink]="['/logout']" class="right brand-logo">Logout</a>-->
+    </div>
+  </nav>
+</div>
+<ul id="slide-out" style="width:225px;" class="side-nav fixed z-depth-1 blue-grey darken-3 grey-text text-lighten-2" >
+  <li>
+    <a [routerLink]="['/home']" class="grey-text text-lighten-4" style="font-size: 25px;padding-top: 10px; height: 64px; ">Benchmark</a>
   </li>
   <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
     <li *ngIf="isAdmin">
       <div class="collapsible-header"><i class="material-icons">contacts</i>Users</div>
       <div class="collapsible-body">
-        <ul>
-          <li><a [routerLink]="['/users']">View All Users</a></li>
-          <li><a [routerLink]="['/create/user']">Create User</a></li>
+        <ul class="blue-grey darken-3">
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/users']">View All Users</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/create/user']">Create User</a></li>
         </ul>
       </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">assignment</i>Experiments</div>
-      <div class="collapsible-body">
-        <ul>
-          <li><a [routerLink]="['/create/experiment']">Create Experiment</a></li>
-          <li><a href="#!">Retrieve Results</a></li>
+      <div class="collapsible-body ">
+        <ul class="blue-grey darken-3">
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/create/experiment']">Create Experiment</a></li>
+          <li><a class="grey-text text-lighten-2" href="#!">Retrieve Results</a></li>
         </ul>
       </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">folder</i>Data Set</div>
       <div class="collapsible-body">
-        <ul>
-          <li><a [routerLink]="['/upload/dataset']">Upload Data Set</a></li>
-          <li><a [routerLink]="['/create/dataset']">Create New Data Set</a></li>
-          <li><a [routerLink]="['/view/user/datasets']">View User Data Sets</a></li>
-          <li><a [routerLink]="['/view/all/datasets']">View All Data Sets</a></li>
+        <ul class="blue-grey darken-3">
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/upload/dataset']">Upload Data Set</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/create/dataset']">Create New Data Set</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/view/user/datasets']">View User Data Sets</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/view/all/datasets']">View All Data Sets</a></li>
         </ul>
       </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">code</i>Algorithms</div>
       <div class="collapsible-body">
-        <ul>
-          <li><a [routerLink]="['/upload/algorithm']">Upload Algorithm</a></li>
-          <li><a [routerLink]="['/view/user/algorithms']">View User Algorithms</a></li>
-          <li><a [routerLink]="['/view/all/algorithms']">View All Algorithms</a></li>
+        <ul class="blue-grey darken-3">
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/upload/algorithm']">Upload Algorithm</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/view/user/algorithms']">View User Algorithms</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/view/all/algorithms']">View All Algorithms</a></li>
         </ul>
       </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">perm_identity</i>Account</div>
       <div class="collapsible-body">
-        <ul>
-          <li><a [routerLink]="['/profile']" >Profile</a></li>
-          <li><a [routerLink]="['/logout']" >Logout</a></li>
+        <ul class="blue-grey darken-3">
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/profile']" >Profile</a></li>
+          <li><a class="grey-text text-lighten-2" [routerLink]="['/logout']" >Logout</a></li>
         </ul>
       </div>
     </li>
   </ul>
 </ul>
+
+

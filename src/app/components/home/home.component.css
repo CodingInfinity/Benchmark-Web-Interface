@@ -1,9 +1,19 @@
-header, main, footer {
-  padding-left: 275px;
+main, footer {
+  padding-left: 225px;
+}
+html {
+  height: 100%;
+}
+body, main {
+  min-height: 100%;
 }
 
 @media only screen and (max-width : 992px) {
   header, main, footer {
     padding-left: 0;
   }
+}
+
+.card-space{
+  padding: 25px;
 }
