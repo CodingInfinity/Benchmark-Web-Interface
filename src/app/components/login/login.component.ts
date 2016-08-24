@@ -10,6 +10,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: 'login',
     template: require('./login.component.html'),
+    styles: [require('./login.component.css')],
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
