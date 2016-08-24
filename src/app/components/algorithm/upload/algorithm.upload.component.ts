@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import {Router} from "@angular/router";
-import {MaterializeDirective } from "angular2-materialize";
 import {SecureComponent} from "../../../services/secure.component";
 import {APIService} from "../../../services/api.service";
 import {FileUploadService} from "../../../services/file.upload.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'uploadalgorithm',
@@ -23,6 +23,7 @@ export class UploadAlgorithmComponent extends SecureComponent {
   private uploadedFileSize: any = 0;
   private categoriesChosen: Array<number> = [];
   private categories: Array<Object>;
+  private loaded: boolean = false;
 
   tinyModel="Default";
 
@@ -100,8 +101,9 @@ export class UploadAlgorithmComponent extends SecureComponent {
 
   ngOnInit():void{
     super.ngOnInit();
-    //When the api call for all algorithm categories has been implemented, then we get the data here
+
     this.client.getAllAlgorithmCategoriesGET().subscribe((res) =>{
+      this.loaded = true;
       this.categories = JSON.parse(res.text());
       console.log(this.categories);
     },(err) =>{
@@ -109,6 +111,5 @@ export class UploadAlgorithmComponent extends SecureComponent {
       this.errorMessage = JSON.stringify(err.json());
     });
   }
-
 }
 

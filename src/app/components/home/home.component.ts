@@ -3,9 +3,7 @@ import { Router } from "@angular/router";
 
 import { APIService } from "../../services/api.service";
 import { SecureComponent } from "../../services/secure.component";
-import { ValidatorService} from "../validators.service";
-import { FileUploadService} from "../../services/file.upload.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -14,54 +12,42 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styles: [require('./home.component.css')],
 })
 export class HomeComponent extends SecureComponent {
-    private form:FormGroup;
-    private fileList:FileList = null;
-    private descriptionHtml: string;
-    private uploadProgress: number = 0;
-    private uploadInProgress: boolean = false;
-    private totalFileSize: any = 0;
-    private uploadedFileSize: any = 0;
-    tinyModel="Default";
 
-    constructor(router:Router, protected client: APIService, private fb: FormBuilder, private validators: ValidatorService, private fileUpload: FileUploadService) {
+    //Experiments
+    private totalExperiments: number = 0;
+    private newExperiments: number = 0;
+    private ownExperinents: number = 0;
+    private latestExperiment: number = 0;
+
+    //Jobs
+    private totalJobsCompleted: number = 0;
+    private ownJobsCompleted: number = 0;
+    private totalJobsOnQueue: number = 0;
+    private ownJobsOnQueue: number = 0;
+
+    //Algorithms
+    private totalAlgorithms: number = 0;
+    private newAlgorithms: number = 0;
+    private ownAlgorithms: number = 0;
+    private mostUsedAlgorithm: any = {};
+
+    //Datasets
+    private totalDatasets: number = 0;
+    private newDatasets: number = 0;
+    private ownDatasets: number = 0;
+    private mostUsedDataset: any = {};
+
+    constructor(router:Router, protected client: APIService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-      this.form = this.fb.group({
-        name: ['', Validators.required]
-      });
     }
 
-  onFilesSelect(value:FileList){
-    this.fileList = value;
-    for(var i=0; i < this.fileList.length; i++){
-      this.totalFileSize += this.fileList[i].size;
-    }
-    this.totalFileSize /= (1000*1000);
-    this.totalFileSize = this.totalFileSize.toFixed(2);
+  ngOnInit(){
+    super.ngOnInit();
+    this.mostUsedAlgorithm.name = "Bubble Sort";
+    this.mostUsedDataset.name = "Random Words";
   }
-
-  editorContentChanged(value:any){
-    this.descriptionHtml = value;
-  }
-
-  onSubmit(value:any){
-    this.uploadInProgress = true;
-    let categories: Array<number> = [1,2];
-    this.fileUpload.getObserver().subscribe(progress => {
-      this.uploadProgress = progress;
-      this.uploadedFileSize = (this.totalFileSize * (progress/100.0)).toFixed(2);
-      console.log(this.uploadedFileSize);
-      if(progress == 100){
-        this.showMessage = true;
-        this.message = "Your file has been successfully uploaded";
-        this.uploadInProgress = false;
-      }
-    });
-
-    try{
-      this.fileUpload.uploadFiles(value.name, this.descriptionHtml, categories, this.fileList, "http://localhost:8081/api/repo/algorithm");
-    }catch(error){
-      console.log(error);
-    }
+  foo(){
+    console.log("Hello");
   }
 }
