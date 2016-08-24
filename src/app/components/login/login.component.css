@@ -4,14 +4,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 220px;
   }
 
 .login-overlay:after {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 300px;
+  height: 220px;
   left: 0;
   right: 0;
   content: "";
@@ -21,7 +21,7 @@
 .login-overlay .form-container {
   position: relative;
   z-index: 1;
-  top: 100px;
+  top: 70px;
 }
 
 .login-overlay .header {
@@ -33,7 +33,7 @@
   color: white;
   font-size: 27px;
   letter-spacing: 1px;
-  top: 70px;
+  top: 50px;
   text-align: center;
 }
 
@@ -47,11 +47,23 @@
   color: white;
   font-size: 1.4rem;
   letter-spacing: 4px;
-  top: 70px;
+  top: 50px;
   text-align: center;
   font-weight: 200;
 }
 
-div.col.s12.logo i {
-  font-weight: 7rem; !important;
+.logo {
+  text-align: center;
+}
+
+.logo i {
+  font-size: 7rem;
+}
+
+.logo-subheading {
+  font-size: 2rem;
+  font-weight: 200;
+  text-align: center;
+  text-transform: uppercase;
+
 }
