@@ -1,6 +1,7 @@
 <div materialize class="flex-panel">
   <div class="row">
     <div class="col-md-6">
+      <h1>Chart</h1>
       <base-chart class="chart"
                   [datasets]="lineChartData"
                   [labels]="lineChartLabels"
@@ -9,7 +10,9 @@
                   [legend]="lineChartLegend"
                   [chartType]="lineChartType"
                   (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></base-chart>
+                  (chartClick)="chartClicked($event)">
+
+      </base-chart>
     </div>
     <div class="col-md-6" style="margin-bottom: 10px;">
       <table class="table table-responsive table-condensed">

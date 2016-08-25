@@ -1,20 +1,22 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass} from '@angular/common';
 import {SecureComponent} from "../../services/secure.component";
-
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import {APIService} from "../../services/api.service";
+import {Router} from "@angular/router";
 
 // webpack html imports
-let template = require('./ng2test.component.html');
 
 @Component({
   selector: 'ng2test',
-  template: template,
+  template: require('./ng2test.component.html'),
   styles: [require('./ng2test.component.css')],
-  directives: [CHART_DIRECTIVES]
 })
 export class LineChartDemoComponent extends SecureComponent{
   // lineChart
+  constructor(router:Router, protected client: APIService) {
+    super(router, client);
+    this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
+  }
+
   public lineChartData:Array<any> = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},

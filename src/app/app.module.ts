@@ -36,6 +36,7 @@ import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
 import {LineChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
+import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import {LineChartDemoComponent} from "./components/ng2-chartsTest/ng2test.compon
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
                   ReportComponent,
-                  LineChartDemoComponent
+                  LineChartDemoComponent,
+                  CHART_DIRECTIVES,
                 ],
   bootstrap:    [ AppComponent,
                 ],

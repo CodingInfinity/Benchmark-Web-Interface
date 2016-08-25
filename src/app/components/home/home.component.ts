@@ -47,7 +47,4 @@ export class HomeComponent extends SecureComponent {
     this.mostUsedAlgorithm.name = "Bubble Sort";
     this.mostUsedDataset.name = "Random Words";
   }
-  foo(){
-    console.log("Hello");
-  }
 }
