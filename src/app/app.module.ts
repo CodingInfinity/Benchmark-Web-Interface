@@ -35,6 +35,7 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
+import {LineChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import {ReportComponent} from "./components/reports/reports.component";
                   ViewAllDatasetsComponent,
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
-                  ReportComponent
+                  ReportComponent,
+                  LineChartDemoComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
