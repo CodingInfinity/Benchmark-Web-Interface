@@ -37,6 +37,7 @@ export class HomeComponent extends SecureComponent {
     private ownDatasets: number = 0;
     private mostUsedDataset: any = {};
 
+
     constructor(router:Router, protected client: APIService) {
       super(router, client);
       this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
@@ -46,8 +47,7 @@ export class HomeComponent extends SecureComponent {
     super.ngOnInit();
     this.mostUsedAlgorithm.name = "Bubble Sort";
     this.mostUsedDataset.name = "Random Words";
+
   }
-  foo(){
-    console.log("Hello");
-  }
+  
 }
