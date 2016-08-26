@@ -1,0 +1,35 @@
+<header>
+  <navigation heading="Experiments"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">Experiments</span>
+          </div>
+
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+       <div class="card-panel row" *ngIf="loaded">
+          <h3 class="black-text">Experiment - {{experiment.id}}</h3>
+          <p><strong>Uploaded:</strong> {{experiment.user.firstName}} {{experiment.user.lastName}}</p>
+          <p><strong>Language:</strong> {{experiment.languageType}}</p>
+          <p><strong>Number of Jobs:</strong> {{experiment.jobs.length}}</p>
+          <p><strong>Date:</strong> {{experiment.requestedDate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer></footer>

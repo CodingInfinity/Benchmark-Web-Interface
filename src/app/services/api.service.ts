@@ -396,6 +396,33 @@ export class APIService {
     });
   }
 
+  getAllExperimentsWithGET(): Observable<any>{
+    var url = this.baseUrl + "/api/experiments";
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  getExperimentByIdWithGET(id:number): Observable<any>{
+    var url = this.baseUrl + "/api/experiment/";
+    url += id;
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();
