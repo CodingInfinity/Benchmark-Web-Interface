@@ -14,6 +14,8 @@ import {APIService} from "../../../services/api.service";
 export class ViewExperiment extends SecureComponent {
   private experiment: any;
   private id:number;
+  private numberOfJobs:number = 0;
+  private numberOfJobsLoaded = 0;
   private loaded: boolean = false;
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
@@ -33,12 +35,33 @@ export class ViewExperiment extends SecureComponent {
   getExperiment(){
     this.client.getExperimentByIdWithGET(this.id).subscribe((res:Response)=>{
       this.experiment = JSON.parse(res.text())['experiment'];
-      this.loaded = true;
-      console.log(this.experiment);
+      this.numberOfJobs = this.experiment.jobs.length;
+      for(var job of this.experiment.jobs){
+        this.checkJobOnQueue(job);
+      }
     },(err)=>{
       this.hasError = true;
       this.errorMessage = JSON.parse(err)['message'];
     });
   }
 
+  checkJobOnQueue(job:any){
+    this.client.isJobOnQueue(job.id).subscribe((res:Response)=>{
+      var onQueue = JSON.parse(res.text());
+      job.onQueue = onQueue['onQueue'];
+      console.log(job);
+      this.numberOfJobsLoaded ++;
+      if(this.numberOfJobsLoaded == this.numberOfJobs){
+        this.loaded = true;
+      }
+    });
+  }
+
+  viewReport(job:any){
+    console.log("Report Here");
+  }
+
+  viewAverageReport(experiment:any){
+    console.log("Average report here");
+  }
 }
