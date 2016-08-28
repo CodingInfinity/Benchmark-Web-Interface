@@ -10,6 +10,7 @@ import {} from "@angular/common";
 @Component({
     selector: 'registerAccount',
     template: require('./register.component.html'),
+    styles: [require('./register.component.css')]
 })
 export class RegisterAccountComponent extends BaseComponent implements OnInit{
   private form: FormGroup;

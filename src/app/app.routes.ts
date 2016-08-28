@@ -18,7 +18,6 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
-import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 

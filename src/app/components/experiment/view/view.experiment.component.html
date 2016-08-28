@@ -36,7 +36,7 @@
 
         <div class="card-panel row" *ngIf="loaded">
           <h5 class="black-text">Jobs</h5>
-          <div  class="card-panel pink lighten-1" *ngFor="let job of experiment.jobs">
+          <div  class="card-panel teal lighten-4" *ngFor="let job of experiment.jobs">
             <div class="row">
               <p><strong>Algorithm: </strong> {{job.algorithm.name}}</p>
               <p *ngIf="job.dataset != null"><strong>Dataset: </strong> {{job.dataset.name}}</p>
