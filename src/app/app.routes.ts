@@ -18,7 +18,7 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
-import {LineChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
+import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 
 const routes:Routes =[
   {
@@ -45,7 +45,7 @@ const routes:Routes =[
   { path: 'view/all/datasets', component: ViewAllDatasetsComponent },
   { path: 'view/user/algorithms', component: ViewUsersAlgorithmsComponent },
   { path: 'view/user/datasets', component: ViewUsersDatasetsComponent },
-  { path: 'ng2test', component: LineChartDemoComponent },
+  { path: 'ng2test', component: BarChartDemoComponent },
 ];
 
 export const routing = RouterModule.forRoot(routes);

@@ -1,5 +1,6 @@
 import {NgModule }      from '@angular/core';
 import {BrowserModule } from '@angular/platform-browser';
+import {CORE_DIRECTIVES} from '@angular/common';
 import {AppComponent }  from './app.component';
 import {HomeComponent} from "./components/home/home.component";
 import {AuthenticationService} from "./services/authentication.service";
@@ -35,7 +36,7 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
-import {LineChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
+import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 
 
@@ -74,7 +75,7 @@ import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
                   ReportComponent,
-                  LineChartDemoComponent,
+                  BarChartDemoComponent,
                   CHART_DIRECTIVES,
                 ],
   bootstrap:    [ AppComponent,
