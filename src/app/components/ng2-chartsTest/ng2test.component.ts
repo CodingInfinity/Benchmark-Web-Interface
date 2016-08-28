@@ -3,7 +3,6 @@ import {SecureComponent} from "../../services/secure.component";
 import {APIService} from "../../services/api.service";
 import {Router} from "@angular/router";
 
-// webpack html imports
 
 @Component({
   selector: 'ng2test',
@@ -68,17 +67,7 @@ export class BarChartDemoComponent extends SecureComponent{
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
-
-  public randomize():void {
-    let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-      }
-    }
-    this.lineChartData = _lineChartData;
-  }
+  
 
   public chartClicked(e:any):void {
     console.log(e);
