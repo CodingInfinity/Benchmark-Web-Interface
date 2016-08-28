@@ -4,13 +4,6 @@
 <main>
   <div materialize class="flex-panel ">
     <div class="row">
-      <div class="col s8 m4 l4">
-        <div class="card-panel pink-quote">
-          <!--<h2><a [routerLink]="['/home']">{{latestExperiment}} - admin</a></h2>-->
-          <h2><a href="http://localhost:8081/api/job/1/results">{{latestExperiment}} - admin</a></h2>
-          <span class="card-title">Latest Experiment</span>
-        </div>
-      </div>
       <div class="col s4 m2 l2">
         <div class="card-panel pink-quote">
           <h2>{{totalExperiments}}</h2>
@@ -18,94 +11,43 @@
         </div>
       </div>
       <div class="col s4 m2 l2">
-        <div class="card-panel pink-quote">
-          <h2>{{newExperiments}}</h2>
-          <span class="card-title">New Experiments</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel pink-quote">
-          <h2>{{ownExperinents}}</h2>
+        <div class="card-panel orange-quote">
+          <h2>{{ownExperiments}}</h2>
           <span class="card-title">Your Experiments</span>
         </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col s4 m2 l2">
-        <div class="card-panel green-quote">
-          <h2>{{totalJobsCompleted}}</h2>
-          <span class="card-title">Total Jobs Benchmarked</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel green-quote">
+        <div class="card-panel blue-quote">
           <h2>{{ownJobsCompleted}}</h2>
           <span class="card-title">Your Jobs Benchmarked</span>
         </div>
       </div>
       <div class="col s4 m2 l2">
-        <div class="card-panel green-quote">
-          <h2>{{totalJobsOnQueue}}</h2>
-          <span class="card-title">Total Jobs on Queue</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel green-quote">
+        <div class="card-panel yellow-quote">
           <h2>{{ownJobsOnQueue}}</h2>
           <span class="card-title">Your Jobs on Queue</span>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s8 m4 l4">
-        <div class="card-panel blue-quote">
-          <h2>{{mostUsedAlgorithm.name}}</h2>
-          <span class="card-title">Most Used Algorithm</span>
-        </div>
-      </div>
       <div class="col s4 m2 l2">
-        <div class="card-panel blue-quote">
-          <h2>{{totalAlgorithms}}</h2>
-          <span class="card-title">Total Algorithms</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel blue-quote">
-          <h2>{{newAlgorithms}}</h2>
-          <span class="card-title">New Algorithms</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel blue-quote">
+        <div class="card-panel green-quote">
           <h2>{{ownAlgorithms}}</h2>
-          <span class="card-title">Own Algorithms</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="col s8 m4 l4">
-        <div class="card-panel yellow-quote">
-          <h2>{{mostUsedDataset.name}}</h2>
-          <span class="card-title">Most Used Dataset</span>
+          <span class="card-title">Your Algorithms</span>
         </div>
       </div>
       <div class="col s4 m2 l2">
-        <div class="card-panel yellow-quote">
-          <h2>{{totalDatasets}}</h2>
-          <span class="card-title">Total Datasets</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel yellow-quote">
-          <h2>{{newDatasets}}</h2>
-          <span class="card-title">New Datasets</span>
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <div class="card-panel yellow-quote">
+        <div class="card-panel purple-quote">
           <h2>{{ownDatasets}}</h2>
           <span class="card-title">Own Datasets</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="card-panel pink-quote" *ngIf="weeklyDataLoaded">
+          <!--<h2><a [routerLink]="['/home']">{{latestExperiment}} - admin</a></h2>-->
+          <!--<h2><a href="http://localhost:8081/api/job/1/results">{{latestExperiment}} - admin</a></h2>-->
+          <h3 class="card-title center">Experiments Weekly Report</h3>
+          <line-chart [lineChartData]="weeklyDataData" [lineChartLabels]="weeklyDataLabels" ></line-chart>
         </div>
       </div>
 

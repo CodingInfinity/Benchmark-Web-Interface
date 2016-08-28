@@ -423,9 +423,22 @@ export class APIService {
     });
   }
 
-  isJobOnQueue(id:number): Observable<any>{
+  isJobOnQueueWithGET(id:number): Observable<any>{
     var url = this.baseUrl + "/api/job/onQueue/";
     url += id;
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  getExperimentWeeklyReportWithGET(): Observable<any>{
+    var url = this.baseUrl + "/api/experiments/report/weekly";
     var content = "";
 
     return this.http.request(url, {

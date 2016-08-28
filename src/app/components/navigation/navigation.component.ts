@@ -16,12 +16,9 @@ export class NavigationComponent implements OnInit{
   }
 
   ngOnInit(){
-    console.log("Hello");
     this.loggedIn = this.api.authenticated();
-    console.log(this.loggedIn);
     if(this.loggedIn){
       this.username = JSON.parse(localStorage.getItem("user_token"))["username"];
-      console.log(this.username);
     }
   }
 }
