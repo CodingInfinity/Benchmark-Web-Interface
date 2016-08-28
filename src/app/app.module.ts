@@ -40,6 +40,7 @@ import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 import {LineChartComponent} from "./components/charts/line/line.chart.component";
+import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
 
 
 
@@ -82,7 +83,8 @@ import {LineChartComponent} from "./components/charts/line/line.chart.component"
                   CHART_DIRECTIVES,
                   ViewAllExperiments,
                   ViewExperiment,
-                  LineChartComponent
+                  LineChartComponent,
+                  BarChartComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
