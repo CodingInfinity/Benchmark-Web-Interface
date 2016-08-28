@@ -30,7 +30,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
-    "coveralls": "^2.11.9",
+    "coveralls": "^2.11.12",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
