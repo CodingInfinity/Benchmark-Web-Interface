@@ -253,3 +253,5 @@ local.properties
 src/**/*.js
 src/**/*.js.map
 
+# typings.d folder
+typings/

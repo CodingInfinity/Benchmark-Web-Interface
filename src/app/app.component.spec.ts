@@ -1,4 +1,3 @@
-/*
 import {Router} from "@angular/router";
 
 import { AppComponent } from './app.component';
@@ -16,4 +15,3 @@ describe('App', () => {
     expect(component).toBeDefined();
   });
 });
-*/
