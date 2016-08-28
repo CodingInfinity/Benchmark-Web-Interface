@@ -35,7 +35,6 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
-import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
@@ -79,7 +78,6 @@ import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
                   ReportComponent,
-                  BarChartDemoComponent,
                   CHART_DIRECTIVES,
                   ViewAllExperiments,
                   ViewExperiment,
