@@ -46,7 +46,7 @@ export class ViewExperiment extends SecureComponent {
   }
 
   checkJobOnQueue(job:any){
-    this.client.isJobOnQueue(job.id).subscribe((res:Response)=>{
+    this.client.isJobOnQueueWithGET(job.id).subscribe((res:Response)=>{
       var onQueue = JSON.parse(res.text());
       job.onQueue = onQueue['onQueue'];
       console.log(job);

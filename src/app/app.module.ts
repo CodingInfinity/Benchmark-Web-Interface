@@ -35,8 +35,12 @@ import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.vi
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
+import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
+import {LineChartComponent} from "./components/charts/line/line.chart.component";
+import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
+
 
 
 @NgModule({
@@ -74,8 +78,11 @@ import {ViewExperiment} from "./components/experiment/view/view.experiment.compo
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
                   ReportComponent,
+                  CHART_DIRECTIVES,
                   ViewAllExperiments,
-                  ViewExperiment
+                  ViewExperiment,
+                  LineChartComponent,
+                  BarChartComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
