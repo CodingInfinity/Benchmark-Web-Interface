@@ -1,6 +1,5 @@
 import {NgModule }      from '@angular/core';
 import {BrowserModule } from '@angular/platform-browser';
-import {CORE_DIRECTIVES} from '@angular/common';
 import {AppComponent }  from './app.component';
 import {HomeComponent} from "./components/home/home.component";
 import {AuthenticationService} from "./services/authentication.service";
@@ -38,6 +37,9 @@ import {CreateExperimentComponent} from "./components/experiment/create/createex
 import {ReportComponent} from "./components/reports/reports.component";
 import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
 import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
+import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
+import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
+
 
 
 @NgModule({
@@ -77,6 +79,8 @@ import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
                   ReportComponent,
                   BarChartDemoComponent,
                   CHART_DIRECTIVES,
+                  ViewAllExperiments,
+                  ViewExperiment
                 ],
   bootstrap:    [ AppComponent,
                 ],

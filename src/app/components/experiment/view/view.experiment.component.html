@@ -1,0 +1,62 @@
+<header>
+  <navigation heading="Experiments"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">Experiments</span>
+          </div>
+
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+        <div class="card-panel row" *ngIf="loaded">
+          <h3 class="black-text">Experiment - {{experiment.id}}</h3>
+          <p><strong>Uploaded:</strong> {{experiment.user.firstName}} {{experiment.user.lastName}}</p>
+          <p><strong>Language:</strong> {{experiment.languageType}}</p>
+          <p><strong>Number of Jobs:</strong> {{experiment.jobs.length}}</p>
+          <p><strong>Date:</strong> {{experiment.requestedDate}}</p>
+          <div class="row">
+            <button (click)="viewAverageReport(experiment)" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">View Average Report
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-panel row" *ngIf="loaded">
+          <h5 class="black-text">Jobs</h5>
+          <div  class="card-panel pink" *ngFor="let job of experiment.jobs">
+            <div class="row">
+              <p><strong>Algorithm: </strong> {{job.algorithm.name}}</p>
+              <p *ngIf="job.dataset != null"><strong>Dataset: </strong> {{job.dataset.name}}</p>
+              <p><strong>Measurement Type: </strong> {{job.measurementType}}</p>
+              <p *ngIf="!job.onQueue"><strong>Number of Measurements: </strong> {{job.measurements.length}}</p>
+            </div>
+            <div class="row">
+              <button *ngIf="job.onQueue" disabled class="btn waves-effect waves-light btn-large col m3 cyan darken-3" style="top: 20px;">Job Still in Queue
+              </button>
+              <button *ngIf="!job.onQueue" (click)="viewReport(job)" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">View Report
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<footer></footer>

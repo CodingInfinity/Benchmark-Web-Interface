@@ -19,6 +19,8 @@ import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
 import {ReportComponent} from "./components/reports/reports.component";
 import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.component";
+import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
+import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 
 const routes:Routes =[
   {
@@ -38,6 +40,8 @@ const routes:Routes =[
   { path: 'users', component: UsersComponent },
   { path: 'create/user', component: CreateComponent },
   { path: 'create/experiment', component: CreateExperimentComponent},
+  { path: 'view/experiments', component: ViewAllExperiments},
+  { path: 'view/experiment/:id', component: ViewExperiment },
   { path: 'create/dataset', component: CreateDatasetComponent },
   { path: 'upload/algorithm', component: UploadAlgorithmComponent },
   { path: 'upload/dataset', component: UploadDatasetComponent },

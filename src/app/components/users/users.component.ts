@@ -55,6 +55,7 @@ export class UsersComponent extends SecureComponent {
       });
   }
 
+
   onKeypress(searchText:string):any {
     this.filteredUsers = this.users;
     if (searchText=="") {
