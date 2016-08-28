@@ -39,6 +39,8 @@ import {BarChartDemoComponent} from "./components/ng2-chartsTest/ng2test.compone
 import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
+import {LineChartComponent} from "./components/charts/line/line.chart.component";
+import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
 
 
 
@@ -80,7 +82,9 @@ import {ViewExperiment} from "./components/experiment/view/view.experiment.compo
                   BarChartDemoComponent,
                   CHART_DIRECTIVES,
                   ViewAllExperiments,
-                  ViewExperiment
+                  ViewExperiment,
+                  LineChartComponent,
+                  BarChartComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
