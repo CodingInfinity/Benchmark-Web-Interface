@@ -16,6 +16,16 @@
                 <span class="white-text">{{errorMessage}}</span>
               </div>
             </div>
+            <div class="row" *ngIf="!datasetsLoaded">
+              <div class="card-panel red">
+                <span class="white-text">There are no datasets uploaded</span>
+              </div>
+            </div>
+            <div class="row" *ngIf="!algorithmsLoaded">
+              <div class="card-panel red">
+                <span class="white-text">There are no algorithms uploaded</span>
+              </div>
+            </div>
 
             <div class="row" *ngIf="showMessage">
               <div class="card-panel green">
@@ -49,7 +59,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" *ngIf="datasetsLoaded">
                 <div class="input-field col s12">
                   <select name="dataset" multiple materialize="material_select" (change)="datasetChange($event) " required >
                     <option value="0" disabled selected>Choose your dataset</option>
@@ -59,7 +69,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" *ngIf="algorithmsLoaded">
                 <div class="input-field col s12">
                   <select name="algorithm" materialize="material_select" (change)="algorithmChange($event) " required >
                     <option value="0" disabled selected>Choose your algorithm</option>

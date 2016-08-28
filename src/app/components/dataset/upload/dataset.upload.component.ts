@@ -22,6 +22,7 @@ export class UploadDatasetComponent extends SecureComponent {
   private uploadedFileSize: any = 0;
   private categoriesChosen: Array<number> = [];
   private categories: Array<Object>;
+  private loaded: boolean = false;
 
   tinyModel="Default";
 
@@ -100,6 +101,7 @@ export class UploadDatasetComponent extends SecureComponent {
     super.ngOnInit();
     //When the api call for all algorithm categories has been implemented, then we get the data here
     this.client.getAllDatasetCategoriesGET().subscribe((res) =>{
+      this.loaded = true;
       this.categories = res.json();
       console.log(this.categories);
     },(err) =>{

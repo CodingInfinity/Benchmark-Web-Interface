@@ -20,12 +20,12 @@ export class CreateExperimentComponent extends SecureComponent {
   private measurementTypesChosen: Array<Object> = [];
   private languageChosen: Array<Object> = [];
   private form: FormGroup;
+  private datasetsLoaded: boolean = false;
+  private algorithmsLoaded: boolean = false;
   constructor(router:Router, protected client: APIService, private fb: FormBuilder){
 
     super(router, client);
     this.authorities = ["ROLE_ADMIN", "ROLE_USER"];
-    this.getAllAlgorithms();
-    this.getAllDatasets();
     this.form = fb.group({
       probe: ['',Validators.required],
       jobs: ['',Validators.required],
@@ -35,6 +35,8 @@ export class CreateExperimentComponent extends SecureComponent {
 
   ngOnInit():void{
     super.ngOnInit();
+    this.getAllAlgorithms();
+    this.getAllDatasets();
   }
 
   measurementChange(value:any){
@@ -100,22 +102,24 @@ export class CreateExperimentComponent extends SecureComponent {
   getAllAlgorithms(){
     this.client.getAllAlgorithmsGET().subscribe((res)=>{
       this.algorithms = JSON.parse(res.text());
+      this.algorithmsLoaded = true;
       console.log(this.algorithms);
 
     },(err)=>{
-      this.hasError = true;
-      this.errorMessage = err.json();
+      //this.hasError = true;
+      //this.errorMessage = err.json()['message'];
     })
   }
 
   getAllDatasets(){
     this.client.getAllDatasetsGET().subscribe((res)=>{
       this.datasets = JSON.parse(res.text());
+      this.datasetsLoaded = true;
       console.log(this.datasets);
 
     },(err)=>{
-      this.hasError = true;
-      this.errorMessage = err.json();
+      //this.hasError = true;
+      //this.errorMessage = err.json()['message'];
     })
   }
 

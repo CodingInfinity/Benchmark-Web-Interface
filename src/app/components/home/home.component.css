@@ -17,3 +17,20 @@ body, main {
 .card-space{
   padding: 25px;
 }
+
+.green-quote{
+  border-left: 5px solid lawngreen;
+}
+
+.blue-quote{
+  border-left: 5px solid deepskyblue;
+}
+
+.yellow-quote{
+  border-left: 5px solid yellow;
+}
+
+.pink-quote{
+  border-left: 5px solid #ee6e73;
+}
+

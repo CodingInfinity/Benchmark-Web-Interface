@@ -44,7 +44,7 @@ export class EditorComponent {
     tinymce.init(
       {
         mode: "exact",
-        height: 500,
+        height: 250,
         theme: "modern",
         plugins: [
           "advlist autolink lists link image charmap print preview anchor",
