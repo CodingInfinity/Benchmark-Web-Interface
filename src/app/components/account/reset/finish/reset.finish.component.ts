@@ -10,6 +10,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 @Component({
   selector: 'resetRequest',
   template: require('./reset.finish.component.html'),
+  styles: [require('./reset.finish.component.css')]
 })
 export class ResetFinishComponent extends BaseComponent implements OnInit{
   private key: string = "";

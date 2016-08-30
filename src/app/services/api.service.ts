@@ -409,6 +409,19 @@ export class APIService {
     });
   }
 
+  getAllCurrentUserExperimentsWithGET(): Observable<any>{
+    var url = this.baseUrl + "/api/experiments/user";
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   getExperimentByIdWithGET(id:number): Observable<any>{
     var url = this.baseUrl + "/api/experiment/";
     url += id;

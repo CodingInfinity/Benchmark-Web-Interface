@@ -10,6 +10,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 @Component({
     selector: 'resetRequest',
     template: require('./reset.request.component.html'),
+    styles: [require('./reset.request.component.css')]
 })
 export class ResetRequestComponent extends BaseComponent{
   private form: FormGroup;

@@ -7,6 +7,7 @@ import {BaseComponent} from "../../base.component";
 @Component({
     selector: 'registerAccount',
     template: require('./activate.component.html'),
+    styles: [require('./activate.component.css')]
 })
 export class ActivateAccountComponent extends BaseComponent implements OnInit{
   private key: string;

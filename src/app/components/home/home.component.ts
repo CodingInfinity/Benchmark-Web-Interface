@@ -15,27 +15,19 @@ export class HomeComponent extends SecureComponent {
 
   //Experiments
   private totalExperiments: number = 0;
-  private newExperiments: number = 0;
   private ownExperiments: number = 0;
-  private latestExperiment: number = 0;
 
   //Jobs
-  private totalJobsCompleted: number = 0;
   private ownJobsCompleted: number = 0;
-  private totalJobsOnQueue: number = 0;
   private ownJobsOnQueue: number = 0;
 
+
   //Algorithms
-  private totalAlgorithms: number = 0;
-  private newAlgorithms: number = 0;
   private ownAlgorithms: number = 0;
-  private mostUsedAlgorithm: any = {};
 
   //Datasets
-  private totalDatasets: number = 0;
-  private newDatasets: number = 0;
   private ownDatasets: number = 0;
-  private mostUsedDataset: any = {};
+
 
   //Graphs
   private weeklyData :any = {};
@@ -67,9 +59,50 @@ export class HomeComponent extends SecureComponent {
 
   ngOnInit(){
     super.ngOnInit();
-    this.mostUsedAlgorithm.name = "Bubble Sort";
-    this.mostUsedDataset.name = "Random Words";
     this.getWeeklyData();
+    this.getSystemStats();
+    this.getRepoStats();
+  }
+
+  getSystemStats(){
+    let allExperiments:any;
+    let ownExperiments:any;
+    this.client.getAllExperimentsWithGET().subscribe((res:Response)=>{
+      allExperiments = JSON.parse(res.text());
+      this.client.getAllCurrentUserExperimentsWithGET().subscribe((res:Response)=>{
+        ownExperiments = JSON.parse(res.text());
+        this.totalExperiments = allExperiments['experiments'].length;
+        this.ownExperiments = ownExperiments['experiments'].length;
+
+        for(var experiment of ownExperiments['experiments']) {
+          for (var job of experiment['jobs']) {
+            if (job['measurements'].length != 0) {
+              this.ownJobsCompleted++;
+            } else {
+              this.ownJobsOnQueue++;
+            }
+          }
+        }
+      },(err)=>{
+        console.log(JSON.parse(err));
+      })
+    },(err)=>{
+      console.log(JSON.parse(err));
+    });
+  }
+
+  getRepoStats(){
+    this.client.getUsersAlgorithmsGET().subscribe((res:Response)=>{
+      this.ownAlgorithms = JSON.parse(res.text()).length;
+      this.client.getUsersDatasetsGET().subscribe((res:Response)=>{
+        this.ownDatasets = JSON.parse(res.text()).length;
+      },(err)=>{
+        console.log(JSON.parse(err));
+      });
+
+    },(err)=>{
+      console.log(JSON.parse(err));
+    });
   }
 
   getWeeklyData(){
@@ -77,8 +110,6 @@ export class HomeComponent extends SecureComponent {
     this.client.getExperimentWeeklyReportWithGET().subscribe((res:Response)=>{
       this.weeklyData = JSON.parse(res.text());
       var index = daysOfTheWeek.indexOf(this.weeklyData.startDate.toLowerCase());
-      console.log(this.weeklyData);
-
       for(var i=index+1; i < 7; i++){
         this.weeklyDataLabels.push(this.capitilise(daysOfTheWeek[i]));
       }
