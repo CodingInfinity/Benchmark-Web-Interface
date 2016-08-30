@@ -480,9 +480,7 @@ export class APIService {
   }
 
   refresh(){
-    console.log("Calling refresh");
     var refreshToken = JSON.parse(localStorage.getItem('token'))['refresh_token'];
-    console.log(refreshToken);
 
     let headers: Headers = new Headers();
     let body: URLSearchParams = new URLSearchParams();
@@ -497,13 +495,11 @@ export class APIService {
         localStorage.setItem('token', JSON.stringify(res.json()));
 
         var expiresIn = Number.parseFloat(res.json()["expires_in"]);
-        console.log(expiresIn);
         var dateNow = Date.now();
         var expiryDate = dateNow + (expiresIn * 1000);
 
         localStorage.setItem('token_expires', expiryDate.toString());
       },(err)=>{
-        console.log(err);
         this.router.navigate(['/logout']);
       }
     );
@@ -513,6 +509,8 @@ export class APIService {
     localStorage.removeItem('token');
     localStorage.removeItem('user_token');
     localStorage.removeItem('token_expires');
+
+    this.http.get("http://localhost:8081/api/logout");
   }
 
   authenticated() :boolean {

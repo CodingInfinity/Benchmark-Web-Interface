@@ -27,7 +27,6 @@ export class ViewUsersAlgorithmsComponent extends SecureComponent {
   getUserAlgorithms(){
     this.client.getUsersAlgorithmsGET().subscribe((res)=>{
       this.algorithms = JSON.parse(res.text());
-      console.log(this.algorithms);
 
     },(err)=>{
       this.hasError = true;

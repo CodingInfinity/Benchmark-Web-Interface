@@ -51,7 +51,6 @@ export class ResetFinishComponent extends BaseComponent implements OnInit{
     this.route.params.subscribe(params => {
       let key = params['key'];
       this.key = key;
-      console.log(this.key);
     });
   }
 

@@ -33,7 +33,6 @@ export class UsersComponent extends SecureComponent {
         this.getAllUsers();
       },
       (err)=>{
-        console.log(err.json());
         this.errorMessage = err.json()["message"];
         this.hasError = true;
         this.showMessage = false;
@@ -48,7 +47,6 @@ export class UsersComponent extends SecureComponent {
         this.hasError = false;
       },
       (err)=>{
-        console.log(err.json());
         this.errorMessage = err.json()["message"];
         this.hasError = true;
         this.showMessage = false;

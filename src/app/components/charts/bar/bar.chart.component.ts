@@ -55,6 +55,12 @@ export class BarChartComponent{
   ];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
+
+  public chartClicked(e:any):void {
+  }
+
+  public chartHovered(e:any):void {
+  }
 }
 
 

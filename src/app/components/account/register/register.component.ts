@@ -5,7 +5,6 @@ import {APIService, CreateUnmanagedUserRequest} from "../../../services/api.serv
 import {ValidatorService} from "../../validators.service";
 import {BaseComponent} from "../../base.component";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {} from "@angular/common";
 
 @Component({
     selector: 'registerAccount',

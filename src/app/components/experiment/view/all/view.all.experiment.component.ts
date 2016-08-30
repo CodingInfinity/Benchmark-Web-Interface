@@ -42,7 +42,6 @@ export class ViewAllExperiments extends SecureComponent {
       this.filteredExperiments = this.experiments;
     } else {
       this.filteredExperiments = this.experiments.filter((experiment:any) => {
-        console.log(experiment);
         return experiment.user.firstName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
           experiment.user.lastName.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||
           experiment.user.email.toLowerCase().indexOf(searchText.toLowerCase()) != -1 ||

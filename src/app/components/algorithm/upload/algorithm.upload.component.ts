@@ -68,7 +68,6 @@ export class UploadAlgorithmComponent extends SecureComponent {
     this.fileUpload.getObserver().subscribe(progress => {
       this.uploadProgress = progress;
       this.uploadedFileSize = (this.totalFileSize * (progress/100.0)).toFixed(2);
-      console.log(this.uploadedFileSize);
       if(progress == 100){
         this.showMessage = true;
         this.message = "Your file has been successfully uploaded";
@@ -79,7 +78,6 @@ export class UploadAlgorithmComponent extends SecureComponent {
     try{
       this.fileUpload.uploadFile(value.name, this.descriptionHtml, this.categoriesChosen, this.fileList[0], "http://localhost:8081/api/repo/algorithm");
     }catch(error){
-      console.log(error);
     }
   }
 
@@ -105,7 +103,6 @@ export class UploadAlgorithmComponent extends SecureComponent {
     this.client.getAllAlgorithmCategoriesGET().subscribe((res) =>{
       this.loaded = true;
       this.categories = JSON.parse(res.text());
-      console.log(this.categories);
     },(err) =>{
       this.hasError = true;
       this.errorMessage = JSON.stringify(err.json());

@@ -84,10 +84,8 @@ export class HomeComponent extends SecureComponent {
           }
         }
       },(err)=>{
-        console.log(JSON.parse(err));
       })
     },(err)=>{
-      console.log(JSON.parse(err));
     });
   }
 
@@ -97,11 +95,9 @@ export class HomeComponent extends SecureComponent {
       this.client.getUsersDatasetsGET().subscribe((res:Response)=>{
         this.ownDatasets = JSON.parse(res.text()).length;
       },(err)=>{
-        console.log(JSON.parse(err));
       });
 
     },(err)=>{
-      console.log(JSON.parse(err));
     });
   }
 

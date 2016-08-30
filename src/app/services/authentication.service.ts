@@ -26,7 +26,6 @@ export class AuthenticationService extends Http {
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    console.log("Called get");
     return this._request(RequestMethod.Get, url, null, options);
   }
   public post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {

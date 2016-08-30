@@ -37,7 +37,25 @@ export class ViewExperiment extends SecureComponent {
       this.experiment = JSON.parse(res.text())['experiment'];
       this.numberOfJobs = this.experiment.jobs.length;
       for(var job of this.experiment.jobs){
+        console.log(job);
+        let data: Array<number> = [];
+        for(var measurement of job['measurements']){
+          data.push(measurement.value);
+        }
         this.checkJobOnQueue(job);
+        job.barChartData = [{data:data, label:'Execution ('+job.id+')'}];
+        switch(job.measurementType){
+          case "TIME":
+            job.labels = ["Wall Time (ms)"];
+            break;
+          case "CPU":
+            job.labels = ["CPU (%)"];
+            break;
+          case "MEM":
+            job.labels = ["Memory (mb)"];
+            break;
+        }
+
       }
     },(err)=>{
       this.hasError = true;
@@ -49,7 +67,6 @@ export class ViewExperiment extends SecureComponent {
     this.client.isJobOnQueueWithGET(job.id).subscribe((res:Response)=>{
       var onQueue = JSON.parse(res.text());
       job.onQueue = onQueue['onQueue'];
-      console.log(job);
       this.numberOfJobsLoaded ++;
       if(this.numberOfJobsLoaded == this.numberOfJobs){
         this.loaded = true;
@@ -57,11 +74,14 @@ export class ViewExperiment extends SecureComponent {
     });
   }
 
-  viewReport(job:any){
-    console.log("Report Here");
+  downloadCSV(job_id: number){
+    this.client.getJobCSVWithGET(job_id).subscribe((res:Response)=>{
+      var blob = new Blob([res.text()],{type:'text/csv'});
+      var url = window.URL.createObjectURL(blob);
+      window.open(url);
+    })
   }
 
   viewAverageReport(experiment:any){
-    console.log("Average report here");
   }
 }

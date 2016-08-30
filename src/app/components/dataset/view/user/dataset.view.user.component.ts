@@ -28,7 +28,6 @@ export class ViewUsersDatasetsComponent extends SecureComponent {
   getUserDatasets(){
     this.client.getUsersDatasetsGET().subscribe((res)=>{
       this.datasets = JSON.parse(res.text());
-      console.log(this.datasets);
 
     },(err)=>{
       this.hasError = true;

@@ -28,7 +28,6 @@ export class ViewAllAlgorithmsComponent extends SecureComponent {
   getAllAlgorithms(){
     this.client.getAllAlgorithmsGET().subscribe((res)=>{
       this.algorithms = JSON.parse(res.text());
-      console.log(this.algorithms);
 
     },(err)=>{
       this.hasError = true;

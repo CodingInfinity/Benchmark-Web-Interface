@@ -28,7 +28,6 @@ export class ViewAllDatasetsComponent extends SecureComponent {
   getAllDatasets(){
     this.client.getAllDatasetsGET().subscribe((res)=>{
       this.datasets = JSON.parse(res.text());
-      console.log(this.datasets);
 
     },(err)=>{
       this.hasError = true;

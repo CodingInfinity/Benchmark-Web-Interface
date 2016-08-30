@@ -69,8 +69,6 @@ export class ProfileComponent extends SecureComponent {
     }
 
     editName(value: any){
-      console.log("Edit Name");
-      console.log(value);
       this.nameChange = false;
       if(this.firstname != value.firstName && value.firstName){
         this.firstname = value.firstName;
@@ -83,8 +81,6 @@ export class ProfileComponent extends SecureComponent {
     }
 
     editEmail(value:any){
-      console.log("Edit Email");
-      console.log(value);
       this.emailChange = false;
       if(this.email != value.email && value.email){
         this.email = value.email;
@@ -98,7 +94,6 @@ export class ProfileComponent extends SecureComponent {
         password: value.password
       };
 
-      console.log(password);
 
       this.client.changePasswordUsingPOST(password).subscribe(
         (response)=>{
@@ -107,7 +102,6 @@ export class ProfileComponent extends SecureComponent {
           this.message = "You have successfully changed your password!";
         },
         (err)=>{
-          console.log(err.json());
           this.errorMessage = err.json()["message"];
           this.hasError = true;
           this.showMessage = false;
@@ -122,8 +116,6 @@ export class ProfileComponent extends SecureComponent {
         lastName: this.lastname
       };
 
-      console.log("Send Update request");
-      console.log(updatedUser);
 
       this.client.saveAccountUsingPOST(updatedUser).subscribe(
         (response)=>{
@@ -141,7 +133,6 @@ export class ProfileComponent extends SecureComponent {
           });
         },
         (err)=>{
-          console.log(err.json());
           this.errorMessage = err.json()["message"];
           this.hasError = true;
           this.showMessage = false;

@@ -103,7 +103,6 @@ export class CreateExperimentComponent extends SecureComponent {
     this.client.getAllAlgorithmsGET().subscribe((res)=>{
       this.algorithms = JSON.parse(res.text());
       this.algorithmsLoaded = true;
-      console.log(this.algorithms);
 
     },(err)=>{
       //this.hasError = true;
@@ -115,7 +114,6 @@ export class CreateExperimentComponent extends SecureComponent {
     this.client.getAllDatasetsGET().subscribe((res)=>{
       this.datasets = JSON.parse(res.text());
       this.datasetsLoaded = true;
-      console.log(this.datasets);
 
     },(err)=>{
       //this.hasError = true;
@@ -133,10 +131,8 @@ export class CreateExperimentComponent extends SecureComponent {
     request.quantity = value.jobs;
     request.languageType = this.languageChosen[0];
 
-    console.log(JSON.stringify(request));
 
     this.client.createExperimentWithPOST(JSON.stringify(request)).subscribe((res:Response)=>{
-      console.log(res.json());
     },(err:any)=>{
       this.hasError = true;
       this.errorMessage = err.json()["message"];

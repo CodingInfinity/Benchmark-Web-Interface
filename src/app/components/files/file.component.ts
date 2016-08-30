@@ -12,7 +12,6 @@ export class FileComponent{
   public fileType: string;
 
   fileClicked(){
-    console.log("File Clicked");
   }
 
 }

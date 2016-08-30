@@ -35,7 +35,6 @@ export class ActivateAccountComponent extends BaseComponent implements OnInit{
     this.route.params.subscribe(params => {
       let key = params['key'];
       this.key = key;
-      console.log(this.key);
       this.activate_account();
     });
 

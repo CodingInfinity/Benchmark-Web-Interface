@@ -1,7 +1,6 @@
-import {ControlGroup} from "@angular/common";
 import {Injectable} from "@angular/core";
 import 'rxjs/Rx';
-import {Observable} from 'rxjs/Observable';
+import {FormGroup} from "@angular/forms";
 
 @Injectable()
 export class ValidatorService {
@@ -9,7 +8,7 @@ export class ValidatorService {
   }
 
   matchingPasswords(passwordKey:string, confirmPasswordKey:string) {
-    return (group:ControlGroup) => {
+    return (group:FormGroup) => {
       let passwordInput = group.controls[passwordKey];
       let passwordConfirmationInput = group.controls[confirmPasswordKey];
       if (passwordInput.value !== passwordConfirmationInput.value) {

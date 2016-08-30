@@ -38,15 +38,21 @@
           <h5 class="black-text">Jobs</h5>
           <div  class="card-panel teal lighten-4" *ngFor="let job of experiment.jobs">
             <div class="row">
-              <p><strong>Algorithm: </strong> {{job.algorithm.name}}</p>
-              <p *ngIf="job.dataset != null"><strong>Dataset: </strong> {{job.dataset.name}}</p>
-              <p><strong>Measurement Type: </strong> {{job.measurementType}}</p>
-              <p *ngIf="!job.onQueue"><strong>Number of Measurements: </strong> {{job.measurements.length}}</p>
+              <div class="col s12 m6 l3">
+                <p><strong>Algorithm: </strong> {{job.algorithm.name}}</p>
+                <p *ngIf="job.dataset != null"><strong>Dataset: </strong> {{job.dataset.name}}</p>
+                <p><strong>Measurement Type: </strong> {{job.measurementType}}</p>
+                <p *ngIf="!job.onQueue"><strong>Number of Measurements: </strong> {{job.measurements.length}}</p>
+              </div>
+              <div class="col s12 m6 l9" *ngIf="!job.onQueue">
+                <bar-chart [barChartData]="job.barChartData" [barChartLabels]="job.labels"></bar-chart>
+              </div>
+
             </div>
             <div class="row">
               <button *ngIf="job.onQueue" disabled class="btn waves-effect waves-light btn-large col m3 cyan darken-3" style="top: 20px;">Job Still in Queue
               </button>
-              <button *ngIf="!job.onQueue" (click)="viewReport(job)" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">View Report
+              <button *ngIf="!job.onQueue" (click)="downloadCSV(job.id)" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">Download CSV
                 <i class="material-icons right">send</i>
               </button>
             </div>
