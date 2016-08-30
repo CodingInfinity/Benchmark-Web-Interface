@@ -20,6 +20,8 @@ import {CreateExperimentComponent} from "./components/experiment/create/createex
 import {ReportComponent} from "./components/reports/reports.component";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
+import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view.component";
+import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
 
 const routes:Routes =[
   {
@@ -48,6 +50,8 @@ const routes:Routes =[
   { path: 'view/all/datasets', component: ViewAllDatasetsComponent },
   { path: 'view/user/algorithms', component: ViewUsersAlgorithmsComponent },
   { path: 'view/user/datasets', component: ViewUsersDatasetsComponent },
+  { path: 'view/algorithm/:id', component: ViewAlgorithmComponent },
+  { path: 'view/dataset/:id', component: ViewDatasetComponent },
 ];
 
 export const routing = RouterModule.forRoot(routes);

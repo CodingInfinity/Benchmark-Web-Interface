@@ -463,6 +463,32 @@ export class APIService {
     });
   }
 
+  getAlgorithmByIdWithGET(id:number): Observable<any>{
+    var url = this.baseUrl + "/api/repo/algorithm/" + id;
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  getDatasetByIdWithGET(id:number): Observable<any>{
+    var url = this.baseUrl + "/api/repo/dataset/" + id;
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();

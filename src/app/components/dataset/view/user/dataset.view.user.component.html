@@ -28,7 +28,7 @@
             <div class="card-panel pink lighten-1 white-text" [innerHTML]="dataset.description">
             </div>
             <div class="row">
-              <button  class="btn waves-effect waves-light btn-large col cyan darken-3" style="top: 20px;">View Dataset
+              <button [routerLink]="['/view/dataset/', dataset.id]" class="btn waves-effect waves-light btn-large col cyan darken-3" style="top: 20px;">View Dataset
                 <i class="material-icons right">send</i>
               </button>
             </div>

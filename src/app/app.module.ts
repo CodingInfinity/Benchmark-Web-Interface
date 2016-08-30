@@ -40,6 +40,8 @@ import {ViewAllExperiments} from "./components/experiment/view/all/view.all.expe
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 import {LineChartComponent} from "./components/charts/line/line.chart.component";
 import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
+import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view.component";
+import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
 
 
 
@@ -82,7 +84,9 @@ import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
                   ViewAllExperiments,
                   ViewExperiment,
                   LineChartComponent,
-                  BarChartComponent
+                  BarChartComponent,
+                  ViewAlgorithmComponent,
+                  ViewDatasetComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],

@@ -69,22 +69,22 @@ export class HomeComponent extends SecureComponent {
     let ownExperiments:any;
     this.client.getAllExperimentsWithGET().subscribe((res:Response)=>{
       allExperiments = JSON.parse(res.text());
-      this.client.getAllCurrentUserExperimentsWithGET().subscribe((res:Response)=>{
-        ownExperiments = JSON.parse(res.text());
-        this.totalExperiments = allExperiments['experiments'].length;
-        this.ownExperiments = ownExperiments['experiments'].length;
+      this.totalExperiments = allExperiments['experiments'].length;
+    },(err)=>{
+    });
+    this.client.getAllCurrentUserExperimentsWithGET().subscribe((res:Response)=>{
+      ownExperiments = JSON.parse(res.text());
+      this.ownExperiments = ownExperiments['experiments'].length;
 
-        for(var experiment of ownExperiments['experiments']) {
-          for (var job of experiment['jobs']) {
-            if (job['measurements'].length != 0) {
-              this.ownJobsCompleted++;
-            } else {
-              this.ownJobsOnQueue++;
-            }
+      for(var experiment of ownExperiments['experiments']) {
+        for (var job of experiment['jobs']) {
+          if (job['measurements'].length != 0) {
+            this.ownJobsCompleted++;
+          } else {
+            this.ownJobsOnQueue++;
           }
         }
-      },(err)=>{
-      })
+      }
     },(err)=>{
     });
   }
@@ -92,11 +92,10 @@ export class HomeComponent extends SecureComponent {
   getRepoStats(){
     this.client.getUsersAlgorithmsGET().subscribe((res:Response)=>{
       this.ownAlgorithms = JSON.parse(res.text()).length;
-      this.client.getUsersDatasetsGET().subscribe((res:Response)=>{
-        this.ownDatasets = JSON.parse(res.text()).length;
-      },(err)=>{
-      });
-
+    },(err)=>{
+    });
+    this.client.getUsersDatasetsGET().subscribe((res:Response)=>{
+      this.ownDatasets = JSON.parse(res.text()).length;
     },(err)=>{
     });
   }

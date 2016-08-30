@@ -43,7 +43,7 @@ export class ViewExperiment extends SecureComponent {
           data.push(measurement.value);
         }
         this.checkJobOnQueue(job);
-        job.barChartData = [{data:data, label:'Execution ('+job.id+')'}];
+        job.barChartData = [{data:data, label:'Job ('+job.id+')'}];
         switch(job.measurementType){
           case "TIME":
             job.labels = ["Wall Time (ms)"];
@@ -84,4 +84,22 @@ export class ViewExperiment extends SecureComponent {
 
   viewAverageReport(experiment:any){
   }
+
+  getJobClass(type:string):any{
+    switch(type){
+      case "TIME":
+            return {
+              teal: true
+            }
+      case "CPU":
+            return{
+              amber:true
+            }
+      case "MEM":
+            return {
+              red:true
+            }
+    }
+  }
+  
 }

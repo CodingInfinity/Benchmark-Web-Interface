@@ -133,6 +133,8 @@ export class CreateExperimentComponent extends SecureComponent {
 
 
     this.client.createExperimentWithPOST(JSON.stringify(request)).subscribe((res:Response)=>{
+      this.showMessage = true;
+      this.message = "Your Experiment was Succesfully Created!"
     },(err:any)=>{
       this.hasError = true;
       this.errorMessage = err.json()["message"];

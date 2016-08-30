@@ -5,13 +5,13 @@ import { EventEmitter} from "@angular/router-deprecated/src/facade/async";
 @Component({
   selector: "filebrowser",
   template: require('./file.browser.component.html'),
-  inputs:["url"],
-  outputs:["fileSelect: filesChange"]
+  outputs:["fileSelect: filesChange"],
+  inputs:["archive"]
 })
 
 export class FileBrowserComponent implements OnInit{
 
-  public url: string;
+  public archive: string;
   private currentInode: any;
   private fileStructure: any;
   private selectedFile: any;
@@ -29,45 +29,29 @@ export class FileBrowserComponent implements OnInit{
 
   //Takes the URL given and generates a file structure in angular
   ngOnInit(){
-    var response = '' +
-      '{"id": 0, "name": "root", "nodeList": ' +
-        '[ ' +
-          '{ "id": 1, "name": "src", "nodeList": ' +
-            '[' +
-              '{"id": 57914, "name": "images", "nodeList": ' +
-                '[' +
-                  '{"id": 234, "name": "fabio.png", "fileType": "image/png", "contents": "QEFCQ0RFRkc="}' +
-                ']},' +
-              '{"id": 5748, "name": "main.cpp", "fileType": "application/pdf","contents": "QEFCQ0RFRkc="},' +
-              '{"id": 4567, "name": "index.html", "fileType": "text/html","contents": "QEFCQ0RFRkc=" },' +
-              '{"id": 134467,"name": "/var5","nodeList": []}' +
-            ']},' +
-          '{"id": 78, "name": "public", "nodeList": ' +
-            '[' +
-              '{ "id": 12,"name": "readme.pdf","fileType": "application/pdf", "contents": "QEFCQ0RFRkc=" }' +
-            ']},' +
-          '{"id": 9963,"name": "tmp","nodeList": ' +
-            '[' +
-              '{"id": 890,"name": "temp.dat","fileType": "text/plain","contents": "QEFCQ0RFRkc=" }' +
-            ']},' +
-          '{"id": 124457,"name": "/var","nodeList": []}' +
-        ']' +
-      '}';
+    var response2 = '{"name":"BubbleSort.tar.tar.gz","nodeList":[{"name":"makefile","nodeList":[]},{"name":"main.cpp","nodeList":[]}],"id":"Alg-1_BubbleSort.tar.tar.gz"}';
 
-    var response2 = '{"id":1, "name": "test.java", "fileType": "text/java", "contents": "helloworld"}';
-
-    this.fileStructure = JSON.parse(response);
+    this.fileStructure = this.archive;
+    this.buildID(this.fileStructure);
+    console.log(this.fileStructure);
     this.currentInode = this.fileStructure;
     this.selectedFile = null;
     this.home = this.fileStructure;
     this.breadcrumbs = [this.home];
   }
 
-  changeDir(inodeId: number){
+  private buildID(fileStructure:any){
+    for(var node of fileStructure.nodeList){
+      node.id = fileStructure.id + "_" + node.name;
+    }
+  }
+
+  changeDir(inodeId: string){
     for(var inode of this.currentInode.nodeList){
       if(inode.id == inodeId){
         var previous = this.currentInode;
         this.currentInode = inode;
+        this.buildID(this.currentInode);
         this.currentInode.previous = previous;
       }
     }
