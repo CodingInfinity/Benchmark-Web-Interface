@@ -11,3 +11,5 @@ import 'rxjs';
 // You can import js, ts, css, sass, ...
 
 import "angular2-materialize";
+import "tinymce/tinymce.js"
+import "chart.js/src/chart.js"
