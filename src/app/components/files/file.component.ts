@@ -8,6 +8,7 @@ import {Component, OnInit} from "@angular/core";
 
 export class FileComponent implements OnInit{
   public inode_id: string;
+  public html_id:string;
   public name: string;
   public fileType: string;
 
@@ -16,15 +17,13 @@ export class FileComponent implements OnInit{
   }
 
   ngOnInit(){
-    //this.escapeFilname(this.inode_id);
-    console.log(this.inode_id);
+    this.escapeFilname();
   }
-
-  fileClicked(){
-  }
-
-  escapeFilname(filename:string){
-    //this.inode_id = filename.replace('.', '');
+  
+  escapeFilname(){
+    this.html_id = this.inode_id.split('.').join('');
+    this.html_id = this.html_id.split('_').join('');
+    this.html_id = this.html_id.split('-').join('');
   }
 }
 
