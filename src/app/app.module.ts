@@ -42,6 +42,8 @@ import {LineChartComponent} from "./components/charts/line/line.chart.component"
 import {BarChartComponent} from "./components/charts/bar/bar.chart.component";
 import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view.component";
 import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
+import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/algorithmcategories.component";
+import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
 
 
 
@@ -86,7 +88,9 @@ import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.compo
                   LineChartComponent,
                   BarChartComponent,
                   ViewAlgorithmComponent,
-                  ViewDatasetComponent
+                  ViewDatasetComponent,
+                  AlgorithmCategoriesComponent,
+                  DatasetCategoriesComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
