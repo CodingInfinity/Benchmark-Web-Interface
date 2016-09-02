@@ -315,6 +315,32 @@ export class APIService {
     });
   }
 
+  createAlgorithmCategoryWithPOST(request:string): Observable<any>{
+    var url = this.baseUrl + "/api/repo/category/algorithm/all";
+    var content = request;
+
+    return this.http.request(url, {
+      body: content,
+      method: "post",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  createDatasetCategoryWithPOST(request:string): Observable<any>{
+    var url = this.baseUrl + "/api/repo/category/dataset/all";
+    var content = request;
+
+    return this.http.request(url, {
+      body: content,
+      method: "post",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   getAllDatasetsGET(): Observable<any>{
     var url = this.baseUrl + "/api/repo/datasets";
     var content = "";

@@ -24,6 +24,8 @@ import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view
 import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
 import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/algorithmcategories.component";
 import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
+import {CreateAlgorithmCategoryComponent} from "./components/categories/Create/Algorithm/createalgorithmcategory.component";
+import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dataset/createdatasetcategory.component";
 
 const routes:Routes =[
   {
@@ -56,6 +58,8 @@ const routes:Routes =[
   { path: 'view/dataset/:id', component: ViewDatasetComponent },
   { path: 'view/all/algorithmcategories', component: AlgorithmCategoriesComponent},
   { path: 'view/all/datasetcategories', component: DatasetCategoriesComponent},
+  { path: 'create/algorithmcategory', component: CreateAlgorithmCategoryComponent},
+  { path: 'create/datasetcategory', component: CreateDatasetCategoryComponent}
 ];
 
 export const routing = RouterModule.forRoot(routes);
