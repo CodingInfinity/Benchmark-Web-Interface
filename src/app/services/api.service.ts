@@ -289,6 +289,10 @@ export class APIService {
     });
   }
 
+  /**
+   * getAllAlgorithmCategories
+   * @return OK
+   */
   getAllAlgorithmCategoriesGET(): Observable<any>{
     var url = this.baseUrl + "/api/repo/category/algorithm/all";
     var content = "";
@@ -302,6 +306,10 @@ export class APIService {
     });
   }
 
+  /**
+   * getAllDatasetCategories
+   * @return OK
+   */
   getAllDatasetCategoriesGET(): Observable<any>{
     var url = this.baseUrl + "/api/repo/category/dataset/all";
     var content = "";
@@ -315,6 +323,11 @@ export class APIService {
     });
   }
 
+  /**
+   * createAlgorithmCategory
+   * @request request
+   * @return OK
+   */
   createAlgorithmCategoryWithPOST(request:string): Observable<any>{
     var url = this.baseUrl + "/api/repo/category/algorithm/all";
     var content = request;
@@ -328,6 +341,11 @@ export class APIService {
     });
   }
 
+  /**
+   * createDatasetCategory
+   * @request request
+   * @return OK
+   */
   createDatasetCategoryWithPOST(request:string): Observable<any>{
     var url = this.baseUrl + "/api/repo/category/dataset/all";
     var content = request;
