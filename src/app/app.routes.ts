@@ -22,6 +22,8 @@ import {ViewAllExperiments} from "./components/experiment/view/all/view.all.expe
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view.component";
 import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
+import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/algorithmcategories.component";
+import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
 
 const routes:Routes =[
   {
@@ -52,6 +54,8 @@ const routes:Routes =[
   { path: 'view/user/datasets', component: ViewUsersDatasetsComponent },
   { path: 'view/algorithm/:id', component: ViewAlgorithmComponent },
   { path: 'view/dataset/:id', component: ViewDatasetComponent },
+  { path: 'view/all/algorithmcategories', component: AlgorithmCategoriesComponent},
+  { path: 'view/all/datasetcategories', component: DatasetCategoriesComponent},
 ];
 
 export const routing = RouterModule.forRoot(routes);

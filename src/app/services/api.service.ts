@@ -489,6 +489,44 @@ export class APIService {
     });
   }
 
+  deleteAlgorithmCategoryUsingDelete(name: string) : Observable<any>
+  {
+    var url = this.baseUrl + "/api/repo/category/algorithm/{name}?";
+
+    if (name === undefined || name === null)
+      throw new Error("The parameter 'login' must be defined.");
+    url = url.replace("{login}", encodeURIComponent("" + name));
+
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "delete",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  deleteDatasetCategoryUsingDelete(name: string) : Observable<any>
+  {
+    var url = this.baseUrl + "/api/repo/category/dataset/{name}?";
+
+    if (name === undefined || name === null)
+      throw new Error("The parameter 'login' must be defined.");
+    url = url.replace("{login}", encodeURIComponent("" + name));
+
+    var content = "";
+
+    return this.http.request(url, {
+      body: content,
+      method: "delete",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();

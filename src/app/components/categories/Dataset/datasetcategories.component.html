@@ -1,5 +1,5 @@
 <header>
-  <navigation heading="Users"></navigation>
+  <navigation heading="Categories"></navigation>
 </header>
 <main>
   <div materialize class="flex-panel">
@@ -7,7 +7,7 @@
       <div class="col s12 m8 offset-m2 l8 offset-l2">
         <div class="card">
           <div class="card-panel blue-grey darken-2">
-            <span class="card-title white-text">All Users</span>
+            <span class="card-title white-text">All Dataset Categories</span>
             <form class="form-inline">
               <input class="white-text" placeholder="Search..." type="text" [ngModel]="searchText" (ngModelChange)="onKeypress($event)" name="searchText">
             </form>
@@ -23,15 +23,13 @@
             <span class="white-text">{{message}}</span>
           </div>
         </div>
-        <div class="card-panel row" *ngFor="let user of filteredUsers">
-          <span class="card-title black-text">{{user.firstName}} {{user.lastName}}</span>
-          <p><strong>Username:</strong> {{user.login}}</p>
-          <p><strong>Email:</strong> {{user.email}}</p>
+        <div class="card-panel row" *ngFor="let category of filteredCategories">
+          <p><strong>Name: </strong>{{category.name}}</p>
           <div class="row">
-            <button (click)="deleteUser(user)" class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Delete User
+            <button (click)="deleteUser(user)" class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Delete Category
               <i class="material-icons right">send</i>
             </button>
-            <a class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Edit User
+            <a class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Edit Category
               <i class="material-icons right">send</i>
             </a>
           </div>
@@ -40,4 +38,3 @@
     </div>
   </div>
 </main>
-<footer></footer>
