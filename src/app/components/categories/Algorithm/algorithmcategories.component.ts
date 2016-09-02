@@ -26,7 +26,7 @@ export class AlgorithmCategoriesComponent extends SecureComponent {
 
   deleteCategory(category:any)
   {
-    this.client.deleteAlgorithmCategoryUsingDelete(category.name).subscribe(
+    this.client.deleteAlgorithmCategoryUsingDelete(category.id).subscribe(
       (response)=>{
         this.hasError = false;
         this.showMessage = true;

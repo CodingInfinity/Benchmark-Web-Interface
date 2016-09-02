@@ -489,15 +489,14 @@ export class APIService {
     });
   }
 
-  deleteAlgorithmCategoryUsingDelete(name: string) : Observable<any>
+  deleteAlgorithmCategoryUsingDelete(id_cat:number) : Observable<any>
   {
-    var url = this.baseUrl + "/api/repo/category/algorithm/{name}?";
+    var url = this.baseUrl + "/api/repo/category/algorithm";
 
-    if (name === undefined || name === null)
-      throw new Error("The parameter 'login' must be defined.");
-    url = url.replace("{login}", encodeURIComponent("" + name));
+    var content : DeleteCategory ={
+      id:id_cat,
+    };
 
-    var content = "";
 
     return this.http.request(url, {
       body: content,
@@ -508,15 +507,13 @@ export class APIService {
     });
   }
 
-  deleteDatasetCategoryUsingDelete(name: string) : Observable<any>
+  deleteDatasetCategoryUsingDelete(id_cat:number) : Observable<any>
   {
-    var url = this.baseUrl + "/api/repo/category/dataset/{name}?";
+    var url = this.baseUrl + "/api/repo/category/dataset";
 
-    if (name === undefined || name === null)
-      throw new Error("The parameter 'login' must be defined.");
-    url = url.replace("{login}", encodeURIComponent("" + name));
-
-    var content = "";
+    var content : DeleteCategory ={
+      id:id_cat,
+    };
 
     return this.http.request(url, {
       body: content,
@@ -646,4 +643,8 @@ export interface CreateManagedUserRequest {
   firstName: string;
   lastName: string;
   username: string;
+}
+
+export interface DeleteCategory{
+  id: number;
 }
