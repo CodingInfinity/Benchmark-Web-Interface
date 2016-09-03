@@ -25,11 +25,11 @@ export class FileComponent implements OnInit{
 
     this.escapeFilname();
     if(this.inode_id.substring(0,3) == "Alg"){
-      this.api.getAlgorithmContentWithGET(this.inode_id).subscribe((res:Response)=>{
+      this.api.getAlgorithmContentWithGET(this.inode_id+".").subscribe((res:Response)=>{
         this.content = JSON.parse(res.text()).content;
       });
     }else{
-      this.api.getDatasetContentWithGET(this.inode_id).subscribe((res:Response)=>{
+      this.api.getDatasetContentWithGET(this.inode_id+".").subscribe((res:Response)=>{
         this.content = JSON.parse(res.text()).content;
       });
     }
