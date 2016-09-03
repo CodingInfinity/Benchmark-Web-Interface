@@ -44,9 +44,9 @@ import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view
 import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
 import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/algorithmcategories.component";
 import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
-import {HighlightJsModule, HighlightJsService} from "angular2-highlight-js/lib/highlight-js.module";
 import {CreateAlgorithmCategoryComponent} from "./components/categories/Create/Algorithm/createalgorithmcategory.component";
 import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dataset/createdatasetcategory.component";
+import {HighlightCodeDirective} from "./directives/highlight.directive";
 
 
 
@@ -56,7 +56,6 @@ import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dat
                   FormsModule,
                   routing,
                   ReactiveFormsModule,
-                  HighlightJsModule
                   ],
   declarations: [ AppComponent,
                   HomeComponent,
@@ -96,7 +95,8 @@ import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dat
                   AlgorithmCategoriesComponent,
                   DatasetCategoriesComponent,
                   CreateAlgorithmCategoryComponent,
-                  CreateDatasetCategoryComponent
+                  CreateDatasetCategoryComponent,
+                  HighlightCodeDirective
                 ],
   bootstrap:    [ AppComponent,
                 ],
@@ -107,7 +107,6 @@ import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dat
                     provide: Http,  useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions) => new AuthenticationService(xhrBackend, requestOptions),
                     deps: [XHRBackend, RequestOptions]
                   },
-                  HighlightJsService
                 ]
 })
 export class AppModule { }

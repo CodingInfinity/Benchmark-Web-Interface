@@ -1,6 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, EventEmitter} from "@angular/core";
 import { Router } from "@angular/router";
-import { EventEmitter} from "@angular/router-deprecated/src/facade/async";
 
 @Component({
   selector: "filebrowser",
