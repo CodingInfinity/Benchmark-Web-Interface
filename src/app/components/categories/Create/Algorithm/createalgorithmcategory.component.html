@@ -20,7 +20,7 @@
             <span class="white-text">{{message}}</span>
           </div>
         </div>
-        <div class="row">
+        <div class="row card-panel">
           <form [(formGroup)]="form" (submit)="form.valid && register(form.value)" class="col s12">
             <div class="row">
               <div class="row">
@@ -30,8 +30,8 @@
                 </div>
               </div>
               <div class="row right-align">
-                <button class="btn waves-effect waves-light btn-large cyan darken-3" [disabled]='!form.valid' type="submit" name="action">Register
-                  <i class="material-icons right">Submit</i>
+                <button class="btn waves-effect waves-light btn-large cyan darken-3" [disabled]='!form.valid' type="submit" name="action">Submit
+                  <i class="material-icons right">send</i>
                 </button>
               </div>
             </div>

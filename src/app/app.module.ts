@@ -44,6 +44,9 @@ import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view
 import {ViewDatasetComponent} from "./components/dataset/view/dataset.view.component";
 import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/algorithmcategories.component";
 import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
+import {HighlightJsModule, HighlightJsService} from "angular2-highlight-js/lib/highlight-js.module";
+import {CreateAlgorithmCategoryComponent} from "./components/categories/Create/Algorithm/createalgorithmcategory.component";
+import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dataset/createdatasetcategory.component";
 
 
 
@@ -52,7 +55,8 @@ import {DatasetCategoriesComponent} from "./components/categories/Dataset/datase
                   HttpModule,
                   FormsModule,
                   routing,
-                  ReactiveFormsModule
+                  ReactiveFormsModule,
+                  HighlightJsModule
                   ],
   declarations: [ AppComponent,
                   HomeComponent,
@@ -90,7 +94,9 @@ import {DatasetCategoriesComponent} from "./components/categories/Dataset/datase
                   ViewAlgorithmComponent,
                   ViewDatasetComponent,
                   AlgorithmCategoriesComponent,
-                  DatasetCategoriesComponent
+                  DatasetCategoriesComponent,
+                  CreateAlgorithmCategoryComponent,
+                  CreateDatasetCategoryComponent
                 ],
   bootstrap:    [ AppComponent,
                 ],
@@ -101,6 +107,7 @@ import {DatasetCategoriesComponent} from "./components/categories/Dataset/datase
                     provide: Http,  useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions) => new AuthenticationService(xhrBackend, requestOptions),
                     deps: [XHRBackend, RequestOptions]
                   },
+                  HighlightJsService
                 ]
 })
 export class AppModule { }

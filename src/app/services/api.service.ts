@@ -329,7 +329,7 @@ export class APIService {
    * @return OK
    */
   createAlgorithmCategoryWithPOST(request:string): Observable<any>{
-    var url = this.baseUrl + "/api/repo/category/algorithm/all";
+    var url = this.baseUrl + "/api/repo/category/algorithm/";
     var content = request;
 
     return this.http.request(url, {
@@ -347,8 +347,8 @@ export class APIService {
    * @return OK
    */
   createDatasetCategoryWithPOST(request:string): Observable<any>{
-    var url = this.baseUrl + "/api/repo/category/dataset/all";
-    var content = request;
+    var url = this.baseUrl + "/api/repo/category/dataset/";
+    var content= request;
 
     return this.http.request(url, {
       body: content,
@@ -568,6 +568,34 @@ export class APIService {
     });
   }
 
+  getAlgorithmContentWithGET(id:string){
+    var url = this.baseUrl + "/api/repo/algorithm/content/";
+    url += id;
+    var content ="";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  getDatasetContentWithGET(id:string){
+    var url = this.baseUrl + "/api/repo/dataset/content/";
+    url += id;
+    var content ="";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();
@@ -691,4 +719,8 @@ export interface CreateManagedUserRequest {
 
 export interface DeleteCategory{
   id: number;
+}
+
+export interface CreateCategory{
+  name:string;
 }

@@ -56,8 +56,8 @@
         </ul>
       </div>
     </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">work</i>Categories</div>
+    <li *ngIf="isAdmin">
+      <div class="collapsible-header"><i class="material-icons">code</i>Categories</div>
       <div class="collapsible-body">
         <ul class="blue-grey darken-3">
           <li><a class="grey-text text-lighten-2" [routerLink]="['/view/all/algorithmcategories']" >View Algorithm Categories</a></li>
