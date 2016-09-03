@@ -65,5 +65,9 @@ export class AlgorithmCategoriesComponent extends SecureComponent {
       });
     }
   }
+
+  viewAlgorithmCategory(category:any){
+    this.router.navigate(['/view/category/algorithm/'+category.id]);
+  }
 }
 
