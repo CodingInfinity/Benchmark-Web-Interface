@@ -11,5 +11,7 @@ import 'rxjs';
 
 import "angular2-materialize";
 import "chart.js/src/chart.js";
+import "highlight.js/lib/highlight.js";
+import "highlight.js/styles/googlecode.css";
 
 

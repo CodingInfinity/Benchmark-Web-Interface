@@ -8,6 +8,7 @@ export class HighlightCodeDirective {
   }
 
   ngAfterViewInit() {
-    hljs.highlightBlock(this.eltRef.nativeElement);
+    console.log(hljs);
+    //hljs.highlightBlock(this.eltRef.nativeElement);
   }
 }
