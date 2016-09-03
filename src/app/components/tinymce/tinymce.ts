@@ -1,5 +1,4 @@
-import {bind, Component, ElementRef, OnInit, EventEmitter, Output, Inject, ComponentRef} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, ElementRef, OnInit, EventEmitter, Output, Inject, ComponentRef} from '@angular/core';
 import {Http} from '@angular/http';
 
 declare var tinymce: any;

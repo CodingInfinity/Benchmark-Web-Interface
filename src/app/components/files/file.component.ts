@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {APIService} from "../../services/api.service";
 import {Response} from "@angular/http";
+import "highlight.js/lib/highlight.js";
+import {SafeHtml, DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: "file",
@@ -13,22 +15,22 @@ export class FileComponent implements OnInit{
   public html_id:string;
   public name: string;
   public fileType: string;
-  public content:string="";
+  public content:SafeHtml="";
 
-  constructor(private api:APIService){
+  constructor(private api:APIService, private dom:DomSanitizer){
 
   }
 
   ngOnInit(){
+
     this.escapeFilname();
     if(this.inode_id.substring(0,3) == "Alg"){
       this.api.getAlgorithmContentWithGET(this.inode_id).subscribe((res:Response)=>{
-        this.content = JSON.parse(res.text());
-        console.log(this.content);
+        this.content = JSON.parse(res.text()).content;
       });
     }else{
       this.api.getDatasetContentWithGET(this.inode_id).subscribe((res:Response)=>{
-        this.content = JSON.parse(res.text());
+        this.content = JSON.parse(res.text()).content;
       });
     }
 

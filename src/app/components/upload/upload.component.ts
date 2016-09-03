@@ -1,6 +1,5 @@
-import { Component } from "@angular/core";
+import {Component, EventEmitter} from "@angular/core";
 import { Router } from "@angular/router";
-import { EventEmitter} from "@angular/router-deprecated/src/facade/async";
 
 @Component({
   selector: "upload",
