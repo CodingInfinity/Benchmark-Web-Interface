@@ -46,6 +46,8 @@ import {AlgorithmCategoriesComponent} from "./components/categories/Algorithm/al
 import {DatasetCategoriesComponent} from "./components/categories/Dataset/datasetcategories.component";
 import {CreateAlgorithmCategoryComponent} from "./components/categories/Create/Algorithm/createalgorithmcategory.component";
 import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dataset/createdatasetcategory.component";
+import {EditAlgorithmCategoryComponent} from "./components/categories/Algorithm/Edit/editalgorithmcategory.component";
+import {EditDatasetCategoryComponent} from "./components/categories/Dataset/Edit/editdatasetcategory.component";
 import {HighlightCodeDirective} from "./directives/highlight.directive";
 
 
@@ -96,6 +98,8 @@ import {HighlightCodeDirective} from "./directives/highlight.directive";
                   DatasetCategoriesComponent,
                   CreateAlgorithmCategoryComponent,
                   CreateDatasetCategoryComponent,
+                  EditAlgorithmCategoryComponent,
+                  EditDatasetCategoryComponent,
                   HighlightCodeDirective
                 ],
   bootstrap:    [ AppComponent,
