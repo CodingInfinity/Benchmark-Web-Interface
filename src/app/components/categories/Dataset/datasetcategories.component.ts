@@ -65,4 +65,8 @@ export class DatasetCategoriesComponent extends SecureComponent {
       });
     }
   }
+
+  viewDatasetCategory(category:any){
+    this.router.navigate(['/view/category/datasets/'+category.id]);
+  }
 }
