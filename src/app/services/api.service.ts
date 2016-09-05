@@ -624,6 +624,47 @@ export class APIService {
     });
   }
 
+  getNodeSumaryWithGET():Observable<any>{
+    var url = this.baseUrl + "/api/nodes";
+    var content ="";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  getNodeByIdWithGet(id:string):Observable<any>{
+    var url = this.baseUrl + "/api/node/";
+    url+=id
+    var content ="";
+
+    return this.http.request(url, {
+      body: content,
+      method: "get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
+  deleteNodeByIdWithDelete(id:string):Observable<any>{
+    var url = this.baseUrl + "/api/node/";
+    url+=id
+    var content ="";
+
+    return this.http.request(url, {
+      body: content,
+      method: "delete",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8"
+      })
+    });
+  }
+
   authenticate(username: string, password: string): Observable<any> {
 
     let headers: Headers = new Headers();

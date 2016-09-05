@@ -37,22 +37,26 @@ export class ViewExperiment extends SecureComponent {
       this.experiment = JSON.parse(res.text())['experiment'];
       this.numberOfJobs = this.experiment.jobs.length;
       for(var job of this.experiment.jobs){
-        console.log(job);
+        job.labels = [];
         let data: Array<number> = [];
+        var probeCount = 1;
         for(var measurement of job['measurements']){
           data.push(measurement.value);
+          job.labels.push("Probe("+probeCount*this.experiment.probeInterval+"s)");
+          probeCount++;
         }
         this.checkJobOnQueue(job);
-        job.barChartData = [{data:data, label:'Job ('+job.id+')'}];
+        console.log(job);
         switch(job.measurementType){
           case "TIME":
-            job.labels = ["Wall Time (ms)"];
+            job.barChartData = [{data:data, label:'Wall Time (ms)'}];
+            job.labels = ["Probe"];
             break;
           case "CPU":
-            job.labels = ["CPU (%)"];
+            job.barChartData = [{data:data, label:'CPU (%)'}];
             break;
           case "MEM":
-            job.labels = ["Memory (mb)"];
+            job.barChartData = [{data:data, label:'Memory (mb)'}];
             break;
         }
 
@@ -101,5 +105,5 @@ export class ViewExperiment extends SecureComponent {
             }
     }
   }
-  
+
 }

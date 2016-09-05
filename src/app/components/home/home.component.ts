@@ -13,6 +13,8 @@ import {Response} from "@angular/http";
 })
 export class HomeComponent extends SecureComponent {
 
+  private admin:boolean = false;
+
   //Experiments
   private totalExperiments: number = 0;
   private ownExperiments: number = 0;
@@ -59,6 +61,7 @@ export class HomeComponent extends SecureComponent {
 
   ngOnInit(){
     super.ngOnInit();
+    this.admin = this.client.hasRole("ROLE_ADMIN");
     this.getWeeklyData();
     this.getSystemStats();
     this.getRepoStats();

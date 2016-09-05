@@ -3,6 +3,9 @@
 </header>
 <main>
   <div materialize class="flex-panel ">
+    <div class="row" *ngIf="admin">
+      <nodemonitor></nodemonitor>
+    </div>
     <div class="row">
       <div class="col s4 m2 l2">
         <div class="card-panel pink-quote">

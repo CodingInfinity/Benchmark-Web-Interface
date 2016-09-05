@@ -49,6 +49,7 @@ import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dat
 import {EditAlgorithmCategoryComponent} from "./components/categories/Algorithm/Edit/editalgorithmcategory.component";
 import {EditDatasetCategoryComponent} from "./components/categories/Dataset/Edit/editdatasetcategory.component";
 import {HighlightCodeDirective} from "./directives/highlight.directive";
+import {NodeMonitor} from "./components/admin/node/monitor/node.monitor.component";
 
 
 
@@ -100,7 +101,8 @@ import {HighlightCodeDirective} from "./directives/highlight.directive";
                   CreateDatasetCategoryComponent,
                   EditAlgorithmCategoryComponent,
                   EditDatasetCategoryComponent,
-                  HighlightCodeDirective
+                  HighlightCodeDirective,
+                  NodeMonitor
                 ],
   bootstrap:    [ AppComponent,
                 ],
