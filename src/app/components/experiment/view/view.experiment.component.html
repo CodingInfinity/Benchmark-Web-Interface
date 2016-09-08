@@ -33,10 +33,28 @@
             </button>
           </div>
         </div>
-
         <div class="card-panel row" *ngIf="loaded">
           <h5 class="black-text">Jobs</h5>
-          <table  [mfData]="experiment.jobs" #mf="mfDataTable" [mfRowsOnPage]="25" class="row">
+          <div class="card-panel blue-grey white-text row">
+            <p>Filters</p>
+            <div class="input-field col l4">
+              <select name="measurement" multiple materialize="material_select" (change)="typeChange($event) " required >
+                <option value="0" disabled selected>Choose your Measurement Type</option>
+                <option value="TIME" selected>WALL TIME</option>
+                <option value="CPU" selected>CPU</option>
+                <option value="MEM" selected>MEMORY</option>
+                <label>Select the Measurement Type</label>
+              </select>
+            </div>
+            <div class="input-field col l4">
+              <select name="measurement" multiple materialize="material_select" [materializeSelectOptions]="datasets" (change)="datasetChange($event) " required >
+                <option value="0" disabled selected>Choose your Dataset</option>
+                <option *ngFor="let dataset of datasets" selected value="{{dataset}}">{{dataset}}</option>
+                <label>Select the Datasets</label>
+              </select>
+            </div>
+          </div>
+          <table [mfData]="filteredData" #mf="mfDataTable" [mfRowsOnPage]="25" class="row">
             <thead>
               <tr>
                 <th>
