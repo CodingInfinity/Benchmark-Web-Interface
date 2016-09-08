@@ -33,7 +33,6 @@ import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload
 import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
-import {ReportComponent} from "./components/reports/reports.component";
 import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
@@ -87,7 +86,6 @@ import {MaterializePaginator} from "./components/dataTable/materializePaginator.
                   ViewAllDatasetsComponent,
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
-                  ReportComponent,
                   CHART_DIRECTIVES,
                   ViewAllExperiments,
                   ViewExperiment,

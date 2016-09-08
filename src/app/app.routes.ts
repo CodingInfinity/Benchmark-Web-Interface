@@ -16,7 +16,6 @@ import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload
 import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
-import {ReportComponent} from "./components/reports/reports.component";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 import {ViewAlgorithmComponent} from "./components/algorithm/view/algorithm.view.component";
@@ -41,7 +40,6 @@ const routes:Routes =[
   { path: 'register', component: RegisterAccountComponent },
   { path: 'reset', component: ResetRequestComponent },
   { path: 'reset_finish/:key', component: ResetFinishComponent },
-  { path: 'report', component: ReportComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UsersComponent },
   { path: 'create/user', component: CreateComponent },
