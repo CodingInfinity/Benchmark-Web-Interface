@@ -17,6 +17,9 @@ export class ViewExperiment extends SecureComponent {
   private numberOfJobs:number = 0;
   private numberOfJobsLoaded = 0;
   private loaded: boolean = false;
+  private measurementTypeFilter:Array<any> = [];
+  private datasetFilter:Array<any> = [];
+  private datasets:Array<any> = [];
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
     super(router, client);
@@ -30,13 +33,21 @@ export class ViewExperiment extends SecureComponent {
       this.id = id;
       this.getExperiment();
     });
+    this.measurementTypeFilter.push("CPU");
+    this.measurementTypeFilter.push("TIME");
+    this.measurementTypeFilter.push("MEM");
   }
 
   getExperiment(){
     this.client.getExperimentByIdWithGET(this.id).subscribe((res:Response)=>{
       this.experiment = JSON.parse(res.text())['experiment'];
+      console.log(this.experiment);
       this.numberOfJobs = this.experiment.jobs.length;
       for(var job of this.experiment.jobs){
+        if(!this.datasets.includes(job.dataset.name)){
+          this.datasets.push(job.dataset.name);
+          this.datasetFilter.push(job.dataset.name);
+        }
         job.labels = [];
         let data: Array<number> = [];
         var probeCount = 1;
@@ -53,10 +64,16 @@ export class ViewExperiment extends SecureComponent {
             job.labels = ["Probe"];
             break;
           case "CPU":
+            for(var i=0; i < data.length; i++){
+              data[i] = data[i]/100;
+            }
             job.barChartData = [{data:data, label:'CPU (%)'}];
             break;
           case "MEM":
-            job.barChartData = [{data:data, label:'Memory (mb)'}];
+            for(var i=0; i < data.length; i++){
+              data[i] = data[i]/1024/1024;
+            }
+            job.barChartData = [{data:data, label:'Memory (MB)'}];
             break;
         }
 
@@ -103,6 +120,36 @@ export class ViewExperiment extends SecureComponent {
             return {
               red:true
             }
+    }
+  }
+
+  typeChange(value:any){
+    for(var option of value.target){
+      if(option.selected && !option.disabled){
+        if(!this.measurementTypeFilter.includes(option.value)){
+          this.measurementTypeFilter.push(option.value);
+        }
+      }else if(!option.selected && !option.disabled){
+        if(this.measurementTypeFilter.includes(option.value)){
+          var index = this.measurementTypeFilter.indexOf(option.value)
+          this.measurementTypeFilter.splice(index,1);
+        }
+      }
+    }
+  }
+
+  datasetChange(value:any){
+    for(var option of value.target){
+      if(option.selected && !option.disabled){
+        if(!this.datasetFilter.includes(option.value)){
+          this.datasetFilter.push(option.value);
+        }
+      }else if(!option.selected && !option.disabled){
+        if(this.datasetFilter.includes(option.value)){
+          var index = this.datasetFilter.indexOf(option.value)
+          this.datasetFilter.splice(index,1);
+        }
+      }
     }
   }
 
