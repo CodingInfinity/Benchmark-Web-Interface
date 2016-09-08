@@ -50,6 +50,8 @@ import {EditAlgorithmCategoryComponent} from "./components/categories/Algorithm/
 import {EditDatasetCategoryComponent} from "./components/categories/Dataset/Edit/editdatasetcategory.component";
 import {HighlightCodeDirective} from "./directives/highlight.directive";
 import {NodeMonitor} from "./components/admin/node/monitor/node.monitor.component";
+import {DataTableDirectives} from "angular2-datatable/datatable";
+import {MaterializePaginator} from "./components/dataTable/materializePaginator.component";
 
 
 
@@ -102,7 +104,9 @@ import {NodeMonitor} from "./components/admin/node/monitor/node.monitor.componen
                   EditAlgorithmCategoryComponent,
                   EditDatasetCategoryComponent,
                   HighlightCodeDirective,
-                  NodeMonitor
+                  NodeMonitor,
+                  DataTableDirectives,
+                  MaterializePaginator
                 ],
   bootstrap:    [ AppComponent,
                 ],

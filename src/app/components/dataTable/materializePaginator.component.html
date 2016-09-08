@@ -1,0 +1,41 @@
+<mfPaginator #p [mfTable]="mfTable">
+  <div class="row">
+    <div class="col s12">
+      <ul class="pagination center-align" *ngIf="p.dataLength > p.rowsOnPage">
+        <li [class.disabled]="p.activePage <= 1" (click)="p.setPage(1)">
+          <a style="cursor: pointer"><i class="material-icons">chevron_left</i></a>
+        </li>
+        <li *ngIf="p.activePage > 4 && p.activePage + 1 > p.lastPage" (click)="p.setPage(p.activePage - 4)">
+          <a style="cursor: pointer">{{p.activePage-4}}</a>
+        </li>
+        <li *ngIf="p.activePage > 3 && p.activePage + 2 > p.lastPage" (click)="p.setPage(p.activePage - 3)">
+          <a style="cursor: pointer">{{p.activePage-3}}</a>
+        </li>
+        <li *ngIf="p.activePage > 2" (click)="p.setPage(p.activePage - 2)">
+          <a style="cursor: pointer">{{p.activePage-2}}</a>
+        </li>
+        <li *ngIf="p.activePage > 1" (click)="p.setPage(p.activePage - 1)">
+          <a style="cursor: pointer">{{p.activePage-1}}</a>
+        </li>
+        <li class="active blue-grey">
+          <a style="cursor: pointer">{{p.activePage}}</a>
+        </li>
+        <li *ngIf="p.activePage + 1 <= p.lastPage" (click)="p.setPage(p.activePage + 1)">
+          <a style="cursor: pointer">{{p.activePage+1}}</a>
+        </li>
+        <li *ngIf="p.activePage + 2 <= p.lastPage" (click)="p.setPage(p.activePage + 2)">
+          <a style="cursor: pointer">{{p.activePage+2}}</a>
+        </li>
+        <li *ngIf="p.activePage + 3 <= p.lastPage && p.activePage < 3" (click)="p.setPage(p.activePage + 3)">
+          <a style="cursor: pointer">{{p.activePage+3}}</a>
+        </li>
+        <li *ngIf="p.activePage + 4 <= p.lastPage && p.activePage < 2" (click)="p.setPage(p.activePage + 4)">
+          <a style="cursor: pointer">{{p.activePage+4}}</a>
+        </li>
+        <li [class.disabled]="p.activePage >= p.lastPage" (click)="p.setPage(p.lastPage)">
+          <a style="cursor: pointer"><i class="material-icons">chevron_right</i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</mfPaginator>
