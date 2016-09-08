@@ -12,7 +12,6 @@ import {CreateComponent} from "./components/users/create/create.component";
 import {UploadAlgorithmComponent} from "./components/algorithm/upload/algorithm.upload.component";
 import {ViewAllAlgorithmsComponent} from "./components/algorithm/view/all/algorithm.view.all.component";
 import {ViewUsersAlgorithmsComponent} from "./components/algorithm/view/user/algorithm.view.user.component";
-import {CreateDatasetComponent} from "./components/dataset/create/createdataset.component";
 import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload.component";
 import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
@@ -49,7 +48,6 @@ const routes:Routes =[
   { path: 'create/experiment', component: CreateExperimentComponent},
   { path: 'view/experiments', component: ViewAllExperiments},
   { path: 'view/experiment/:id', component: ViewExperiment },
-  { path: 'create/dataset', component: CreateDatasetComponent },
   { path: 'upload/algorithm', component: UploadAlgorithmComponent },
   { path: 'upload/dataset', component: UploadDatasetComponent },
   { path: 'view/all/algorithms', component: ViewAllAlgorithmsComponent },
