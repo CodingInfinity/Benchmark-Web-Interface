@@ -80,29 +80,19 @@
               </div>
 
               <div class="row">
-                <div class="input-field col s12">
-                    <p class="range-field">
-                      <span>Probe Interval</span>
-                      <input type="range" id="probe" min="0" max="100" formControlName="probe"/>
-                    </p>
+                <div class="input-field col s4">
+                  <input type="number" id="probe" min="1" formControlName="probe"/>
+                  <label for="probe">Probe Interval</label>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="input-field col s12">
-                    <p class="range-field">
-                      <span>Timeout Interval</span>
-                      <input type="range" id="timeout" min="0" max="120" formControlName="timeout"/>
-                    </p>
+                <div class="input-field col s4">
+                  <input type="number" id="timeout" min="1" formControlName="timeout"/>
+                  <label for="timeout">Timeout Interval</label>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="input-field col s12">
-                    <p class="range-field">
-                      <span>Jobs</span>
-                      <input type="range" id="jobs" min="1" max="10" formControlName="jobs"/>
-                    </p>
+                <div class="input-field col s4">
+                  <input type="number" id="jobs" min="1" formControlName="jobs"/>
+                  <label for="jobs">Number of Jobs per Pairing</label>
                 </div>
               </div>
 
