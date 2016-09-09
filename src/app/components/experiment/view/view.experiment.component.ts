@@ -18,9 +18,11 @@ export class ViewExperiment extends SecureComponent {
   private numberOfJobs:number = 0;
   private numberOfJobsLoaded = 0;
   private loaded: boolean = false;
+  private average: boolean = true;
   private measurementTypeFilter:Array<any> = [];
   private datasetFilter:Array<any> = [];
   private datasets:Array<any> = [];
+  private summaryJobs:Array<any>=[];
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
     super(router, client);
@@ -42,7 +44,6 @@ export class ViewExperiment extends SecureComponent {
   getExperiment(){
     this.client.getExperimentByIdWithGET(this.id).subscribe((res:Response)=>{
       this.experiment = JSON.parse(res.text())['experiment'];
-      console.log(this.experiment);
       this.numberOfJobs = this.experiment.jobs.length;
       for(var job of this.experiment.jobs){
         if(!this.datasets.includes(job.dataset.name)){
@@ -58,10 +59,10 @@ export class ViewExperiment extends SecureComponent {
           probeCount++;
         }
         this.checkJobOnQueue(job);
-        console.log(job);
         switch(job.measurementType){
           case "TIME":
-            job.barChartData = [{data:data, label:'Wall Time (ms)'}];
+            data[0] = data[0]/1000;
+            job.barChartData = [{data:data, label:'Wall Time (s)'}];
             job.labels = ["Probe"];
             break;
           case "CPU":
@@ -78,6 +79,7 @@ export class ViewExperiment extends SecureComponent {
             break;
         }
         this.updateFilteredData();
+        this.addJobToSummaryJobs(job);
       }
     },(err)=>{
       this.hasError = true;
@@ -104,7 +106,8 @@ export class ViewExperiment extends SecureComponent {
     })
   }
 
-  viewAverageReport(experiment:any){
+  changeReport(){
+    this.average = !this.average;
   }
 
   getJobClass(type:string):any{
@@ -169,4 +172,57 @@ export class ViewExperiment extends SecureComponent {
     this.filteredData = newFilteredData;
   }
 
+  checkIfJobExists(incoming_job:any):any{
+    for(var job of this.summaryJobs){
+      if(job.dataset.name == incoming_job.dataset.name && job.measurementType == incoming_job.measurementType){
+        return job;
+      }
+    }
+    return null;
+  }
+
+  addJobToSummaryJobs(incoming_job:any){
+    let job:any = this.checkIfJobExists(incoming_job);
+    if(job == null){
+      job = {};
+      job.dataset = incoming_job.dataset;
+      job.algorithm = incoming_job.algorithm;
+      job.measurementType = incoming_job.measurementType;
+      job.barChartData = [];
+      job.barChartData.push(incoming_job.barChartData[0]);
+      job.labels = incoming_job.labels;
+      this.createJobStats(job);
+      this.summaryJobs.push(job);
+    }else{
+      if(!incoming_job.onQueue){
+        job.barChartData.push(incoming_job.barChartData[0]);
+        this.createJobStats(job);
+      }
+
+    }
+  }
+
+  createJobStats(job:any){
+    let min:number = 9999999999;
+    let max:number = -1;
+    let average:number = 0;
+    let total:number = 0;
+    let count:number = 0;
+    for(var data of job.barChartData){
+      for(var i=0; i<data.data.length; i++){
+        if(data.data[i] > max){
+          max = data.data[i];
+        }
+        if(data.data[i] < min){
+          min = data.data[i];
+        }
+        total += data.data[i];
+        count ++;
+      }
+    }
+    average = total/count;
+    job.min = min;
+    job.max = max;
+    job.average = average;
+  }
 }

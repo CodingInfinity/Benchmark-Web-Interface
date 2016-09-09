@@ -28,32 +28,32 @@
           <p><strong>Number of Jobs:</strong> {{experiment.jobs.length}}</p>
           <p><strong>Date:</strong> {{experiment.requestedDate}}</p>
           <div class="row">
-            <button (click)="viewAverageReport(experiment)" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">View Average Report
+            <button (click)="changeReport()" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">Change Report
               <i class="material-icons right">send</i>
             </button>
           </div>
         </div>
-        <div class="card-panel row" *ngIf="loaded">
-          <h5 class="black-text">Jobs</h5>
-          <div class="card-panel blue-grey white-text row">
-            <p>Filters</p>
-            <div class="input-field col l4">
-              <select name="measurement" multiple materialize="material_select" (change)="typeChange($event) " required >
-                <option value="0" disabled selected>Choose your Measurement Type</option>
-                <option value="TIME" selected>WALL TIME</option>
-                <option value="CPU" selected>CPU</option>
-                <option value="MEM" selected>MEMORY</option>
-                <label>Select the Measurement Type</label>
-              </select>
-            </div>
-            <div class="input-field col l4">
-              <select name="measurement" multiple materialize="material_select" [materializeSelectOptions]="datasets" (change)="datasetChange($event) " required >
-                <option value="0" disabled selected>Choose your Dataset</option>
-                <option *ngFor="let dataset of datasets" selected value="{{dataset}}">{{dataset}}</option>
-                <label>Select the Datasets</label>
-              </select>
-            </div>
+        <div class="card-panel blue-grey white-text row">
+          <p>Filters</p>
+          <div class="input-field col l4">
+            <select name="measurement" multiple materialize="material_select" (change)="typeChange($event) " required >
+              <option value="0" disabled selected>Choose your Measurement Type</option>
+              <option value="TIME" selected>WALL TIME</option>
+              <option value="CPU" selected>CPU</option>
+              <option value="MEM" selected>MEMORY</option>
+              <label>Select the Measurement Type</label>
+            </select>
           </div>
+          <div class="input-field col l4">
+            <select name="measurement" multiple materialize="material_select" [materializeSelectOptions]="datasets" (change)="datasetChange($event) " required >
+              <option value="0" disabled selected>Choose your Dataset</option>
+              <option *ngFor="let dataset of datasets" selected value="{{dataset}}">{{dataset}}</option>
+              <label>Select the Datasets</label>
+            </select>
+          </div>
+        </div>
+        <div class="card-panel row" *ngIf="loaded && !average">
+          <h5 class="black-text">All Jobs</h5>
           <table [mfData]="filteredData" #mf="mfDataTable" [mfRowsOnPage]="25" class="row">
             <thead>
               <tr>
@@ -99,6 +99,28 @@
             </tr>
             </tfoot>
           </table>
+        </div>
+        <div class="card-panel row" *ngIf="loaded && average">
+          <h5>Summary</h5>
+          <div *ngFor="let job of summaryJobs">
+            <div *ngIf="measurementTypeFilter.indexOf(job.measurementType)>-1 && datasetFilter.indexOf(job.dataset.name) >-1" class="card-panel lighten-4"  [ngClass]="getJobClass(job.measurementType)">
+              <div class="row">
+                <div class="col s12 m6 l3">
+                  <p *ngIf="job.algorithm"><strong>Algorithm: </strong> {{job.algorithm.name}}</p>
+                  <p *ngIf="job.dataset != null"><strong>Dataset: </strong> {{job.dataset.name}}</p>
+                  <p *ngIf="job.measurementType"><strong>Measurement Type: </strong> {{job.measurementType}}</p>
+                  <hr>
+                  <p *ngIf="job.min !=null"><strong>Min: </strong> {{job.min}}</p>
+                  <p *ngIf="job.max !=null"><strong>Max: </strong> {{job.max}}</p>
+                  <p *ngIf="job.average !=null"><strong>Average: </strong> {{job.average}}</p>
+                </div>
+                <div class="col s12 m6 l9" *ngIf="job.barChartData && job.labels">
+                  <bar-chart  [barChartData]="job.barChartData" [barChartLabels]="job.labels"></bar-chart>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

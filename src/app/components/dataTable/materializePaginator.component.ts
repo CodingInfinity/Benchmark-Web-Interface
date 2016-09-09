@@ -8,7 +8,7 @@ import * as _ from "lodash"
   template: require('./materializePaginator.component.html'),
 })
 export class MaterializePaginator implements OnChanges {
-  @Input("rowsOnPageSet") private rowsOnPageSet = [];
+  @Input("rowsOnPageSet") private rowsOnPageSet:any[] = [];
   @Input("mfTable") private mfTable: DataTable;
 
   private minRowsOnPage = 0;
