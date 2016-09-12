@@ -1,6 +1,6 @@
-import {NgModule }      from '@angular/core';
-import {BrowserModule } from '@angular/platform-browser';
-import {AppComponent }  from './app.component';
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {AppComponent} from "./app.component";
 import {HomeComponent} from "./components/home/home.component";
 import {AuthenticationService} from "./services/authentication.service";
 import {APIService} from "./services/api.service";
@@ -33,7 +33,7 @@ import {UploadDatasetComponent} from "./components/dataset/upload/dataset.upload
 import {ViewAllDatasetsComponent} from "./components/dataset/view/all/dataset.view.all.component";
 import {ViewUsersDatasetsComponent} from "./components/dataset/view/user/dataset.view.user.component";
 import {CreateExperimentComponent} from "./components/experiment/create/createexperiment.component";
-import {CHART_DIRECTIVES} from "ng2-charts/ng2-charts";
+import {ChartsModule} from "ng2-charts/ng2-charts";
 import {ViewAllExperiments} from "./components/experiment/view/all/view.all.experiment.component";
 import {ViewExperiment} from "./components/experiment/view/view.experiment.component";
 import {LineChartComponent} from "./components/charts/line/line.chart.component";
@@ -52,13 +52,13 @@ import {DataTableDirectives} from "angular2-datatable/datatable";
 import {MaterializePaginator} from "./components/dataTable/materializePaginator.component";
 
 
-
 @NgModule({
   imports:      [ BrowserModule,
                   HttpModule,
                   FormsModule,
                   routing,
                   ReactiveFormsModule,
+                  ChartsModule
                   ],
   declarations: [ AppComponent,
                   HomeComponent,
@@ -86,7 +86,6 @@ import {MaterializePaginator} from "./components/dataTable/materializePaginator.
                   ViewAllDatasetsComponent,
                   ViewUsersDatasetsComponent,
                   CreateExperimentComponent,
-                  CHART_DIRECTIVES,
                   ViewAllExperiments,
                   ViewExperiment,
                   LineChartComponent,
