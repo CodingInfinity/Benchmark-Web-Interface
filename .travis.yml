@@ -16,6 +16,7 @@ after_succes:
 - coveralls
 
 after_script:
+- npm build
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - export REPO=codinginfinity/benchmark-web
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
