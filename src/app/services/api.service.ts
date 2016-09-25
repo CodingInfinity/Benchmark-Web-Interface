@@ -15,7 +15,7 @@ export class APIService {
 
   constructor(private http: Http, @Inject(Router) router: Router, @Optional() @Inject(API_BASE_URL) baseUrl?: string, @Optional() @Inject(JSON_PARSE_REVIVER) jsonParseReviver?: (key: string, value: any) => any) {
     this.router = router;
-    this.baseUrl = baseUrl ? baseUrl : "http://localhost:8081";
+    this.baseUrl = process.env.API_URL;
     this.jsonParseReviver = jsonParseReviver;
   }
 
@@ -677,7 +677,7 @@ export class APIService {
     body.append('password', password);
     body.append('scope', 'read write');
 
-    return this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers});
+    return this.http.post(this.baseUrl + '/oauth/token', body.toString(), {headers: headers});
 
   }
 
@@ -692,7 +692,7 @@ export class APIService {
     body.append('grant_type', 'refresh_token');
     body.append('refresh_token', refreshToken);
 
-    this.http.post('http://localhost:8081/oauth/token', body.toString(), {headers: headers}).subscribe(
+    this.http.post(this.baseUrl + '/oauth/token', body.toString(), {headers: headers}).subscribe(
       (res)=>{
         localStorage.setItem('token', JSON.stringify(res.json()));
 
@@ -712,7 +712,7 @@ export class APIService {
     localStorage.removeItem('user_token');
     localStorage.removeItem('token_expires');
 
-    this.http.get("http://localhost:8081/api/logout");
+    this.http.get(this.baseUrl + '/api/logout');
   }
 
   authenticated() :boolean {
