@@ -1,0 +1,12 @@
+<style> .chart {display: block; width: 100%;} </style>
+<base-chart class="chart"
+            [datasets]="radarChartData"
+            [labels]="radarChartLabels"
+            [colors]="radarChartColours"
+            [chartType]="radarChartType"
+            [options]="radarChartOptions"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+</base-chart>
+
+

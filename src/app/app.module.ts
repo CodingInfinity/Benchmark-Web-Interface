@@ -50,6 +50,7 @@ import {HighlightCodeDirective} from "./directives/highlight.directive";
 import {NodeMonitor} from "./components/admin/node/monitor/node.monitor.component";
 import {DataTableDirectives} from "angular2-datatable/datatable";
 import {MaterializePaginator} from "./components/dataTable/materializePaginator.component";
+import {RadarChartComponent} from "./components/charts/radar/radar.chart.component";
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import {MaterializePaginator} from "./components/dataTable/materializePaginator.
                   ViewAllExperiments,
                   ViewExperiment,
                   LineChartComponent,
+                  RadarChartComponent,
                   BarChartComponent,
                   ViewAlgorithmComponent,
                   ViewDatasetComponent,

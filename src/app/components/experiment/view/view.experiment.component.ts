@@ -23,6 +23,11 @@ export class ViewExperiment extends SecureComponent {
   private datasetFilter:Array<any> = [];
   private datasets:Array<any> = [];
   private summaryJobs:Array<any>=[];
+  private showCompare:boolean = false;
+  private compareLoaded: boolean = true;
+  private compareExperiments:Array<any>=[];
+  private compareExperimentsSelected:Array<any>=[];
+  
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
     super(router, client);
@@ -35,10 +40,15 @@ export class ViewExperiment extends SecureComponent {
       let id = params['id'];
       this.id = id;
       this.getExperiment();
+      this.getCompareExperiments();
     });
     this.measurementTypeFilter.push("CPU");
     this.measurementTypeFilter.push("TIME");
     this.measurementTypeFilter.push("MEM");
+  }
+
+  getCompareExperiments(){
+    
   }
 
   getExperiment(){
@@ -159,6 +169,21 @@ export class ViewExperiment extends SecureComponent {
     }
 
     this.updateFilteredData();
+  }
+
+  private experimentChange(value:any){
+    for(var option of value.target){
+      if(option.selected && !option.disabled){
+        if(!this.compareExperimentsSelected.includes(option.value)){
+          this.compareExperimentsSelected.push(option.value);
+        }
+      }else if(!option.selected && !option.disabled){
+        if(this.compareExperimentsSelected.includes(option.value)){
+          var index = this.compareExperimentsSelected.indexOf(option.value)
+          this.compareExperimentsSelected.splice(index,1);
+        }
+      }
+    }
   }
 
   private updateFilteredData() {

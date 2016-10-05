@@ -31,9 +31,25 @@
             <button (click)="changeReport()" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">Change Report
               <i class="material-icons right">send</i>
             </button>
+            <button (click)="this.showCompare = !this.showCompare;" class="btn waves-effect waves-light btn-small m3 cyan darken-3 right" style="top: 20px;">Compare Experiment
+              <i class="material-icons right">send</i>
+            </button>
           </div>
         </div>
-        <div class="card-panel blue-grey white-text row">
+        <div class="card-panel amber darken-2 white-text row" *ngIf="compareLoaded && showCompare">
+          <p>Compare Experiments</p>
+          <div class="input-field col l4">
+            <select name="measurement" multiple materialize="material_select" (change)="experimentChange($event) " required >
+              <option value="0" disabled selected>Choose your Experiments</option>
+              <option *ngFor="let experiment of compareExperiments" value="{{experiment.id}}">Experiment - {{experiment.name}}</option>
+              <label>Select the Experiments to compare</label>
+            </select>
+          </div>
+          <button  class="btn waves-effect waves-light btn-small m3 amber darken-4 right" style="top: 20px;">Compare
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="card-panel blue-grey white-text row" *ngIf="loaded">
           <p>Filters</p>
           <div class="input-field col l4">
             <select name="measurement" multiple materialize="material_select" (change)="typeChange($event) " required >
