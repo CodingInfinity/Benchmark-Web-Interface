@@ -27,7 +27,7 @@ export class ViewExperiment extends SecureComponent {
   private compareLoaded: boolean = true;
   private compareExperiments:Array<any>=[];
   private compareExperimentsSelected:Array<any>=[];
-  
+
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
     super(router, client);
@@ -48,7 +48,13 @@ export class ViewExperiment extends SecureComponent {
   }
 
   getCompareExperiments(){
-    
+    this.client.getCompareExperimentsWithGET(this.id).subscribe((res:Response)=>{
+      this.compareExperiments = JSON.parse(res.text())["experiments"];
+      console.log(this.compareExperiments);
+    },(err)=>{
+      this.hasError = true;
+      this.errorMessage = "Could not get compare experiments!";
+    });
   }
 
   getExperiment(){

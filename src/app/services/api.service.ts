@@ -665,7 +665,7 @@ export class APIService {
     });
   }
 
-  getCompareExperimentsWithGET(id:string):Observable<any>{
+  getCompareExperimentsWithGET(id:number):Observable<any>{
     var url = this.baseUrl + "/api/experiments/compare/";
     url+=id
     var content ="";
