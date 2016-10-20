@@ -31,7 +31,7 @@ export class ViewUsersDatasetsComponent extends SecureComponent {
 
     },(err)=>{
       this.hasError = true;
-      this.errorMessage = err.json();
+      this.errorMessage = err.json()["message"];
     })
   }
 

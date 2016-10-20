@@ -26,6 +26,7 @@ import {CreateAlgorithmCategoryComponent} from "./components/categories/Create/A
 import {CreateDatasetCategoryComponent} from "./components/categories/Create/Dataset/createdatasetcategory.component";
 import {EditDatasetCategoryComponent} from "./components/categories/Dataset/Edit/editdatasetcategory.component";
 import {EditAlgorithmCategoryComponent} from "./components/categories/Algorithm/Edit/editalgorithmcategory.component";
+import {CompareExeriment} from "./components/experiment/compare/compare.experiment.component";
 
 const routes:Routes =[
   {
@@ -59,7 +60,8 @@ const routes:Routes =[
   { path: 'create/algorithmcategory', component: CreateAlgorithmCategoryComponent},
   { path: 'create/datasetcategory', component: CreateDatasetCategoryComponent},
   { path: 'view/category/datasets/:id', component: EditDatasetCategoryComponent},
-  { path: 'view/category/algorithm/:id', component: EditAlgorithmCategoryComponent}
+  { path: 'view/category/algorithm/:id', component: EditAlgorithmCategoryComponent},
+  { path: 'compare/experiment/', component: CompareExeriment}
 ];
 
 export const routing = RouterModule.forRoot(routes);

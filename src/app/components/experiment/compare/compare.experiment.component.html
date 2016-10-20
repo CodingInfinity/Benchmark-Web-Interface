@@ -27,16 +27,16 @@
           <p><strong>Language:</strong> {{experiment.languageType}}</p>
           <p><strong>Number of Jobs:</strong> {{experiment.jobs.length}}</p>
           <p><strong>Date:</strong> {{experiment.requestedDate}}</p>
-          <div *ngIf="!showCompare" class="row">
+          <div class="row">
             <button (click)="changeReport()" class="btn waves-effect waves-light btn-small m3 cyan darken-3" style="top: 20px;">Change Report
               <i class="material-icons right">send</i>
             </button>
-            <button (click)="this.showCompareMenu = !this.showCompareMenu;" class="btn waves-effect waves-light btn-small m3 cyan darken-3 right" style="top: 20px;">Compare Experiment
+            <button (click)="this.showCompare = !this.showCompare;" class="btn waves-effect waves-light btn-small m3 cyan darken-3 right" style="top: 20px;">Compare Experiment
               <i class="material-icons right">send</i>
             </button>
           </div>
         </div>
-        <div class="card-panel amber darken-2 white-text row" *ngIf="compareLoaded && (showCompareMenu || showCompare)">
+        <div class="card-panel amber darken-2 white-text row" *ngIf="compareLoaded && showCompare">
           <p>Compare Experiments</p>
           <div class="input-field col l4">
             <select name="measurement" multiple materialize="material_select" (change)="experimentChange($event) " required >
@@ -45,7 +45,7 @@
               <label>Select the Experiments to compare</label>
             </select>
           </div>
-          <button (click)="this.compare()" class="btn waves-effect waves-light btn-small m3 amber darken-4 right" style="top: 20px;">Compare
+          <button  class="btn waves-effect waves-light btn-small m3 amber darken-4 right" style="top: 20px;">Compare
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -68,7 +68,7 @@
             </select>
           </div>
         </div>
-        <div class="card-panel row" *ngIf="loaded && !average && !showCompare">
+        <div class="card-panel row" *ngIf="loaded && !average">
           <h5 class="black-text">All Jobs</h5>
           <table [mfData]="filteredData" #mf="mfDataTable" [mfRowsOnPage]="25" class="row">
             <thead>
@@ -116,7 +116,7 @@
             </tfoot>
           </table>
         </div>
-        <div class="card-panel row" *ngIf="loaded && average && !showCompare">
+        <div class="card-panel row" *ngIf="loaded && average">
           <h5>Summary</h5>
           <div *ngFor="let job of summaryJobs">
             <div *ngIf="measurementTypeFilter.indexOf(job.measurementType)>-1 && datasetFilter.indexOf(job.dataset.name) >-1" class="card-panel lighten-4"  [ngClass]="getJobClass(job.measurementType)">
@@ -134,20 +134,6 @@
                   <bar-chart  [barChartData]="job.barChartData" [barChartLabels]="job.labels"></bar-chart>
                 </div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-panel row" *ngIf="showCompare">
-          <h3>Compare</h3>
-          <div *ngFor="let datasetCompare of compareData.datasetCompare">
-            <div *ngIf="datasetFilter.indexOf(datasetCompare.name) >-1">
-              <h5>{{datasetCompare.name}}</h5>
-              <div  *ngFor="let measurementData of datasetCompare.measurementData" >
-                <div *ngIf="measurementTypeFilter.indexOf(measurementData.type) >-1" class="card-panel lighten-4" [ngClass]="getJobClass(measurementData.type)">
-                  <h5>{{measurementData.type}}</h5>
-                  <radar-chart [radarChartData]="measurementData.data" [radarChartLabels]="measurementData.labels"></radar-chart>
-                </div>
               </div>
             </div>
           </div>

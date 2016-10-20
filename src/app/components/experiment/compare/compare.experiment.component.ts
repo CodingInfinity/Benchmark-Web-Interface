@@ -5,13 +5,13 @@ import {SecureComponent} from "../../../services/secure.component";
 import {APIService} from "../../../services/api.service";
 
 @Component({
-  selector: 'viewexperiment',
-  template: require('./view.experiment.component.html'),
-  styles: [require('./view.experiment.component.css')],
+  selector: 'compareexperiment',
+  template: require('./compare.experiment.component.html'),
+  styles: [require('./compare.experiment.component.css')],
 
 })
 
-export class ViewExperiment extends SecureComponent {
+export class CompareExeriment extends SecureComponent {
   private filteredData: any;
   private experiment: any;
   private id:number;
@@ -23,13 +23,10 @@ export class ViewExperiment extends SecureComponent {
   private datasetFilter:Array<any> = [];
   private datasets:Array<any> = [];
   private summaryJobs:Array<any>=[];
-  private showCompareMenu:boolean = false;
   private showCompare:boolean = false;
   private compareLoaded: boolean = true;
   private compareExperiments:Array<any>=[];
-  private compareExperimentAverages:Array<any>=[];
   private compareExperimentsSelected:Array<any>=[];
-  private compareData:any= {}
 
   constructor(router:Router, protected client: APIService, private route: ActivatedRoute){
 
@@ -50,82 +47,10 @@ export class ViewExperiment extends SecureComponent {
     this.measurementTypeFilter.push("MEM");
   }
 
-  compare(){
-    this.compareExperimentAverages = [];
-    this.compareData = {};
-    this.compareData.datasetCompare = [];
-    //console.log(this.summaryJobs);
-    this.showCompare = !this.showCompare;
-    for(var experimentId of this.compareExperimentsSelected){
-      for(var experiment of this.compareExperiments){
-        if(experiment.id == experimentId){
-          let compareExerimentAverage: any = {};
-          compareExerimentAverage.id = experiment.id;
-          compareExerimentAverage.data = [];
-          this.generateExperimentDataForCompare(experiment, compareExerimentAverage.data);
-          this.compareExperimentAverages.push(compareExerimentAverage);
-        }
-      }
-    }
-    //console.log(this.compareExperimentAverages);
-
-    let datasetCompare:Array<any>=[];
-    for(var averageData of this.summaryJobs){
-      this.addSummaryDataToCompareData(averageData, this.experiment.id);
-    }
-
-    for(var compareExperimentData of this.compareExperimentAverages){
-      for(var averageData of compareExperimentData.data){
-        this.addSummaryDataToCompareData(averageData, compareExperimentData.id);
-      }
-    }
-    console.log(this.compareData);
-  }
-
-  addSummaryDataToCompareData(avgData:any, experiment_id:number){
-    //console.log(avgData);
-    let datasetCompare:any = null;
-    for(var dc of this.compareData.datasetCompare){
-      if(dc.name == avgData.dataset.name){
-        datasetCompare = dc;
-      }
-    }
-    if(datasetCompare == null){
-      datasetCompare = {};
-      datasetCompare.name = avgData.dataset.name;
-      datasetCompare.measurementData = [];
-      this.compareData.datasetCompare.push(datasetCompare);
-    }
-    this.addDataToDatasetCompare(avgData, experiment_id, datasetCompare);
-  }
-
-  addDataToDatasetCompare(avgData:any, experiment_id:number, datasetCompare:any){
-    let measurementData:any = null;
-    for(var md of datasetCompare.measurementData){
-      if(md.type == avgData.measurementType){
-        measurementData = md;
-      }
-    }
-
-    if(measurementData == null){
-      measurementData = {};
-      measurementData.type = avgData.measurementType;
-      measurementData.data = [];
-      measurementData.labels = ["Min", "Max", "Avg"];
-      datasetCompare.measurementData.push(measurementData);
-    }
-    this.addDataToMeasurementData(avgData, experiment_id, measurementData);
-  }
-
-  addDataToMeasurementData(avgData:any, experiment_id:any, measurementData:any){
-    var data = {data: [avgData.min, avgData.max, avgData.average], label:experiment_id};
-    measurementData.data.push(data);
-  }
-
   getCompareExperiments(){
     this.client.getCompareExperimentsWithGET(this.id).subscribe((res:Response)=>{
       this.compareExperiments = JSON.parse(res.text())["experiments"];
-      //console.log(this.compareExperiments);
+      console.log(this.compareExperiments);
     },(err)=>{
       this.hasError = true;
       this.errorMessage = "Could not get compare experiments!";
@@ -141,9 +66,34 @@ export class ViewExperiment extends SecureComponent {
           this.datasets.push(job.dataset.name);
           this.datasetFilter.push(job.dataset.name);
         }
-
+        job.labels = [];
+        let data: Array<number> = [];
+        var probeCount = 1;
+        for(var measurement of job['measurements']){
+          data.push(measurement.value);
+          job.labels.push("Probe("+probeCount*this.experiment.probeInterval+"s)");
+          probeCount++;
+        }
         this.checkJobOnQueue(job);
-        this.generateJobData(job);
+        switch(job.measurementType){
+          case "TIME":
+            data[0] = data[0]/1000;
+            job.barChartData = [{data:data, label:'Wall Time (s)'}];
+            job.labels = ["Probe"];
+            break;
+          case "CPU":
+            for(var i=0; i < data.length; i++){
+              data[i] = data[i]/100;
+            }
+            job.barChartData = [{data:data, label:'CPU (%)'}];
+            break;
+          case "MEM":
+            for(var i=0; i < data.length; i++){
+              data[i] = data[i]/1024/1024;
+            }
+            job.barChartData = [{data:data, label:'Memory (MB)'}];
+            break;
+        }
         this.updateFilteredData();
         this.addJobToSummaryJobs(job);
       }
@@ -151,44 +101,6 @@ export class ViewExperiment extends SecureComponent {
       this.hasError = true;
       this.errorMessage = JSON.parse(err)['message'];
     });
-  }
-
-  generateExperimentDataForCompare(experiment:any, experimentAverage:Array<any>){
-    for(var job of experiment.jobs){
-      this.generateJobData(job);
-      this.addJobToCompareAverage(job, experimentAverage);
-    }
-  }
-
-
-  generateJobData(job:any){
-    job.labels = [];
-    let data: Array<number> = [];
-    var probeCount = 1;
-    for(var measurement of job['measurements']){
-      data.push(measurement.value);
-      job.labels.push("Probe("+probeCount*this.experiment.probeInterval+"s)");
-      probeCount++;
-    }
-    switch(job.measurementType){
-      case "TIME":
-        data[0] = data[0]/1000;
-        job.barChartData = [{data:data, label:'Wall Time (s)'}];
-        job.labels = ["Probe"];
-        break;
-      case "CPU":
-        for(var i=0; i < data.length; i++){
-          data[i] = data[i]/100;
-        }
-        job.barChartData = [{data:data, label:'CPU (%)'}];
-        break;
-      case "MEM":
-        for(var i=0; i < data.length; i++){
-          data[i] = data[i]/1024/1024;
-        }
-        job.barChartData = [{data:data, label:'Memory (MB)'}];
-        break;
-    }
   }
 
   checkJobOnQueue(job:any){
@@ -215,7 +127,7 @@ export class ViewExperiment extends SecureComponent {
   }
 
   getJobClass(type:string):any{
-    switch(type.toUpperCase()){
+    switch(type){
       case "TIME":
             return {
               teal: true
@@ -300,15 +212,6 @@ export class ViewExperiment extends SecureComponent {
     return null;
   }
 
-  checkIfJobExistsCompare(incoming_job:any, compareList:any):any{
-    for(var job of compareList){
-      if(job.dataset.name == incoming_job.dataset.name && job.measurementType == incoming_job.measurementType){
-        return job;
-      }
-    }
-    return null;
-  }
-
   addJobToSummaryJobs(incoming_job:any){
     let job:any = this.checkIfJobExists(incoming_job);
     if(job == null){
@@ -330,24 +233,6 @@ export class ViewExperiment extends SecureComponent {
     }
   }
 
-  addJobToCompareAverage(incoming_job:any, experimentAverage:Array<any>){
-    let job:any = this.checkIfJobExistsCompare(incoming_job, experimentAverage);
-    if(job == null){
-      job = {};
-      job.dataset = incoming_job.dataset;
-      job.algorithm = incoming_job.algorithm;
-      job.measurementType = incoming_job.measurementType;
-      job.barChartData = [];
-      job.barChartData.push(incoming_job.barChartData[0]);
-      job.labels = incoming_job.labels;
-      this.createJobStats(job);
-      experimentAverage.push(job);
-    }else{
-        job.barChartData.push(incoming_job.barChartData[0]);
-        this.createJobStats(job);
-    }
-  }
-
   createJobStats(job:any){
     let min:number = 9999999999;
     let max:number = -1;
@@ -355,7 +240,7 @@ export class ViewExperiment extends SecureComponent {
     let total:number = 0;
     let count:number = 0;
     for(var data of job.barChartData){
-      for(var i=0; i < data.data.length; i++){
+      for(var i=0; i<data.data.length; i++){
         if(data.data[i] > max){
           max = data.data[i];
         }

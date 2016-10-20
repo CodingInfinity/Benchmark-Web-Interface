@@ -51,6 +51,7 @@ import {NodeMonitor} from "./components/admin/node/monitor/node.monitor.componen
 import {DataTableDirectives} from "angular2-datatable/datatable";
 import {MaterializePaginator} from "./components/dataTable/materializePaginator.component";
 import {RadarChartComponent} from "./components/charts/radar/radar.chart.component";
+import {CompareExeriment} from "./components/experiment/compare/compare.experiment.component";
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import {RadarChartComponent} from "./components/charts/radar/radar.chart.compone
                   HighlightCodeDirective,
                   NodeMonitor,
                   DataTableDirectives,
-                  MaterializePaginator
+                  MaterializePaginator,
+                  CompareExeriment
                 ],
   bootstrap:    [ AppComponent,
                 ],
