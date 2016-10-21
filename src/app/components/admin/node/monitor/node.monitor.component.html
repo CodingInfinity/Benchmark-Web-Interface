@@ -7,7 +7,7 @@
         <i *ngIf="node.state == 'ONLINE'" class="material-icons center-align large green-text">sentiment_satisfied</i>
         <i *ngIf="node.state == 'OFFLINE'" class="material-icons center-align large red-text">sentiment_dissatisfied</i>
         <i *ngIf="node.state == 'BUSY'" class="material-icons center-align large orange-text">sentiment_neutral</i>
-        <i *ngIf="node.state == 'DEAD'" class="material-icons center-align large">sentiment_very_dissatisfied</i>
+        <i  class="material-icons center-align large">sentiment_very_dissatisfied</i>
 
       </div>
 
@@ -17,7 +17,12 @@
         <p><strong>ID: </strong>{{node.details.id}}</p>
         <p><strong>Description: </strong>{{node.details.description}}</p>
       </div>
-
+      <div class="col l4" *ngIf="node.state == 'DEAD'">
+        <p>
+          <button class="btn waves-effect waves-light blue-grey" type="button" (onclick)="deleteNode(node.id)" >Delete Node
+          </button>
+        </p>
+      </div>
     </div>
   </div>
 </div>
