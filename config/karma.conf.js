@@ -9,7 +9,8 @@ module.exports = function (config) {
     exclude: [],
 
     files: [
-      {pattern: './config/karma-test-shim.js', watched: false}
+      {pattern: './config/karma-test-shim.js', watched: false},
+      
     ],
 
     preprocessors: {
