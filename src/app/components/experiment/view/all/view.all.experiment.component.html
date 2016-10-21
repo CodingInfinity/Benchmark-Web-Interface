@@ -1,0 +1,43 @@
+<header>
+  <navigation heading="Experiments"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">All Experiments</span>
+            <form class="form-inline">
+              <input class="white-text" placeholder="Search..." type="text" [ngModel]="searchText" (ngModelChange)="onKeypress($event)" name="searchText">
+            </form>
+          </div>
+
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+        <div class="card-panel row" *ngFor="let experiment of filteredExperiments">
+          <h3 class="black-text">Experiment - {{experiment.id}}</h3>
+          <p><strong>Uploaded:</strong> {{experiment.user.firstName}} {{experiment.user.lastName}}</p>
+          <p><strong>Language:</strong> {{experiment.languageType}}</p>
+          <p><strong>Number of Jobs:</strong> {{experiment.jobs.length}}</p>
+          <p><strong>Date:</strong> {{experiment.requestedDate}}</p>
+          <div class="row">
+            <button (click)="viewExperiment(experiment)" class="btn waves-effect waves-light btn-large col m3 cyan darken-3" style="top: 20px;">View Experiment
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer></footer>

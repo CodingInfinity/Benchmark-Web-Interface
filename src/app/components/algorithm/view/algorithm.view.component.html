@@ -1,0 +1,43 @@
+<header>
+  <navigation heading="Algorithms"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2 ">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">View Algorithm</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card-panel row" *ngIf="loaded">
+            <h3 class="card-title black-text">{{algorithm.name}}</h3>
+            <p><strong>Filename: </strong>{{algorithm.archive.id}}</p>
+            <p><strong>Uploaded: </strong>{{algorithm.user.firstName}} {{algorithm.user.lastName}}</p>
+            <div class="card-panel pink lighten-1 white-text" [innerHTML]="algorithm.description">
+            </div>
+            <div class="row">
+              <filebrowser [archive]="algorithm.archive"></filebrowser>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+
+</footer>
+
+

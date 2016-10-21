@@ -1,0 +1,17 @@
+<div class="row">
+  <form>
+    <div class="file-field input-field">
+      <div class="btn cyan darken-3">
+        <span *ngIf="type != 'multi'">File</span>
+        <span *ngIf="type == 'multi'">Files</span>
+        <input type="file" *ngIf="type != 'multi'" (change)="fileChangeEvent($event)">
+        <input type="file" *ngIf="type == 'multi'" multiple (change)="fileChangeEvent($event)">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" *ngIf="type != 'multi'" type="text" ngControl="filename" placeholder="Upload a file">
+        <input class="file-path validate" *ngIf="type == 'multi'" type="text" ngControl="filename" placeholder="Upload one or more files">
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,40 @@
+<header>
+  <navigation heading="Categories"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">All Dataset Categories</span>
+            <form class="form-inline">
+              <input class="white-text" placeholder="Search..." type="text" [ngModel]="searchText" (ngModelChange)="onKeypress($event)" name="searchText">
+            </form>
+          </div>
+        </div>
+        <div class="row" *ngIf="hasError">
+          <div class="card-panel red">
+            <span class="white-text">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div class="row" *ngIf="showMessage">
+          <div class="card-panel green">
+            <span class="white-text">{{message}}</span>
+          </div>
+        </div>
+        <div class="card-panel row" *ngFor="let category of filteredCategories">
+          <p><strong>Name: </strong>{{category.name}}</p>
+          <div class="row">
+            <button (click)="deleteCategory(category)" class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Delete Category
+              <i class="material-icons right">send</i>
+            </button>
+            <button (click)="viewDatasetCategory(category)" class="btn waves-effect waves-light btn-large col m3 offset-m2 cyan darken-3" style="top: 20px;">Edit Category
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

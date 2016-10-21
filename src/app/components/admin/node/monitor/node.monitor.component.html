@@ -1,0 +1,24 @@
+<div class="col l12">
+<div class="card-panel">
+  <h4>Node Monitor</h4>
+  <div class="row">
+    <div *ngFor="let node of nodes" class="card-panel row col l4">
+      <div class="col l2">
+        <i *ngIf="node.state == 'ONLINE'" class="material-icons center-align large green-text">sentiment_satisfied</i>
+        <i *ngIf="node.state == 'OFFLINE'" class="material-icons center-align large red-text">sentiment_dissatisfied</i>
+        <i *ngIf="node.state == 'BUSY'" class="material-icons center-align large orange-text">sentiment_neutral</i>
+        <i *ngIf="node.state == 'DEAD'" class="material-icons center-align large">sentiment_very_dissatisfied</i>
+
+      </div>
+
+
+      <div class="col l4">
+        <p><strong>Name: </strong>{{node.details.name}}</p>
+        <p><strong>ID: </strong>{{node.details.id}}</p>
+        <p><strong>Description: </strong>{{node.details.description}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

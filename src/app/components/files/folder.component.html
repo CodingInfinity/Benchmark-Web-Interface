@@ -1,0 +1,16 @@
+<a href="javascript:">
+  <div *ngIf="!type">
+    <i class="material-icons large">folder_open</i>
+    <p class="center">{{name}}</p>
+  </div>
+  <div *ngIf="type=='back'">
+    <i class="material-icons large">arrow_back</i>
+    <p class="center">{{name}}</p>
+  </div>
+
+  <div *ngIf="type=='home'">
+    <i class="material-icons large">home</i>
+  </div>
+
+</a>
+

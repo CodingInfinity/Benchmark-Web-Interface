@@ -1,0 +1,64 @@
+<header>
+  <navigation heading="Home"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel ">
+    <div class="row" *ngIf="admin">
+      <nodemonitor></nodemonitor>
+    </div>
+    <div class="row">
+      <div class="col s4 m2 l2">
+        <div class="card-panel pink-quote">
+          <h2>{{totalExperiments}}</h2>
+          <span class="card-title">Total Experiments</span>
+        </div>
+      </div>
+      <div class="col s4 m2 l2">
+        <div class="card-panel orange-quote">
+          <h2>{{ownExperiments}}</h2>
+          <span class="card-title">Your Experiments</span>
+        </div>
+      </div>
+      <div class="col s4 m2 l2">
+        <div class="card-panel blue-quote">
+          <h2>{{ownJobsCompleted}}</h2>
+          <span class="card-title">Your Jobs Benchmarked</span>
+        </div>
+      </div>
+      <div class="col s4 m2 l2">
+        <div class="card-panel yellow-quote">
+          <h2>{{ownJobsOnQueue}}</h2>
+          <span class="card-title">Your Jobs on Queue</span>
+        </div>
+      </div>
+      <div class="col s4 m2 l2">
+        <div class="card-panel green-quote">
+          <h2>{{ownAlgorithms}}</h2>
+          <span class="card-title">Your Algorithms</span>
+        </div>
+      </div>
+      <div class="col s4 m2 l2">
+        <div class="card-panel purple-quote">
+          <h2>{{ownDatasets}}</h2>
+          <span class="card-title">Own Datasets</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="card-panel pink-quote" *ngIf="weeklyDataLoaded">
+          <!--<h2><a [routerLink]="['/home']">{{latestExperiment}} - admin</a></h2>-->
+          <!--<h2><a href="http://localhost:8081/api/job/1/results">{{latestExperiment}} - admin</a></h2>-->
+          <h3 class="card-title center">Experiments Weekly Report</h3>
+          <line-chart [lineChartData]="weeklyDataData" [lineChartLabels]="weeklyDataLabels" ></line-chart>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<footer>
+
+</footer>
+
+

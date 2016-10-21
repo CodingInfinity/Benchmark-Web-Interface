@@ -1,0 +1,75 @@
+<header>
+  <navigation heading="Users"></navigation>
+</header>
+<main>
+  <div materialize class="flex-panel">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+          <div class="card-panel blue-grey darken-2">
+            <span class="card-title white-text">Create User</span>
+          </div>
+          <div class="card-content">
+            <div class="row" *ngIf="hasError">
+              <div class="card-panel red">
+                <span class="white-text">{{errorMessage}}</span>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showMessage">
+              <div class="card-panel green">
+                <span class="white-text">{{message}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <form [(formGroup)]="form" (submit)="form.valid && register(form.value)" class="col s12">
+                <div class="row">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="firstName" type="text" class="validate" formControlName="firstName">
+                      <label for="firstName">First Name</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="lastName" type="text" class="validate" formControlName="lastName">
+                      <label for="lastName">Last Name</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate" formControlName="email">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="username" type="text" class="validate" formControlName="username">
+                      <label for="username">Username</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <select multiple materialize="material_select" (change)="roleChange($event) " required>
+                        <option value="0" disabled selected>Choose your option</option>
+                        <option value="ROLE_ADMIN" >Admin</option>
+                        <option value="ROLE_USER" >User</option>
+                      </select>
+                      <label>Select the roles for the user</label>
+                    </div>
+                  </div>
+                  <div class="row right-align">
+                    <button class="btn waves-effect waves-light btn-large cyan darken-3" [disabled]='!form.valid' type="submit" name="action">Register
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer></footer>
