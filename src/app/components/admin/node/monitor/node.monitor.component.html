@@ -7,7 +7,7 @@
         <i *ngIf="node.state == 'ONLINE'" class="material-icons center-align large green-text">sentiment_satisfied</i>
         <i *ngIf="node.state == 'OFFLINE'" class="material-icons center-align large red-text">sentiment_dissatisfied</i>
         <i *ngIf="node.state == 'BUSY'" class="material-icons center-align large orange-text">sentiment_neutral</i>
-        <i  class="material-icons center-align large">sentiment_very_dissatisfied</i>
+        <i *ngIf="node.state == 'DEAD'" class="material-icons center-align large">sentiment_very_dissatisfied</i>
 
       </div>
 
